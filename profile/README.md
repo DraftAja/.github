@@ -269,51 +269,6 @@ Aturan lengkap ada di 🔒 [`TEAM_CONTRACT.md`](https://github.com/DraftAja/Back
 
 ---
 
-## MVP
-
-MVP DraftAja adalah **fase 0 sampai 2** roadmap. Ukurannya sederhana: seorang sekretaris bisa membuat notula atau surat dari catatan rapatnya sendiri, tanpa bantuan, sampai mengunduh berkas yang siap dicetak. Semua yang dibutuhkan untuk perjalanan itu masuk MVP. Hal yang hanya berguna bagi instansi dengan banyak anggota ditunda ke fase berikutnya.
-
-### Yang bisa dilakukan pengguna di MVP
-
-| Kemampuan | Status per 3 Nov 2026 | Milestone |
-|---|---|---|
-| Daftar, masuk, keluar, reset kata sandi | Sudah ada | |
-| Verifikasi email wajib | Sebagian | CORE-3 |
-| Memilih template dari 64 template bawaan, 8 per kategori | Sebagian (baru 3 template) | CORE-4, WEB-4 |
-| Mengunggah DOCX instansi dan menyimpan polanya secara berversi | Sudah ada | |
-| Menempel catatan mentah per bagian, AI merapikan, pengguna menerima atau menolak per bagian | Sudah ada | |
-| Penanda `[perlu dilengkapi]` untuk informasi yang tidak ada di catatan | Sebagian (belum disorot di editor) | WEB-3 |
-| Melihat sisa kuota AI | Rencana | AI-3, WEB-3 |
-| Menandai dokumen final dan membuat revisi | Sebagian (belum ada endpoint) | CORE-3, WEB-3 |
-| Mengekspor DOCX dan PDF dengan tata letak sesuai kategori | Sebagian (selalu memakai sampul) | CORE-3 |
-| Dokumen aman: gambar privat, HTML dibersihkan, error berbahasa Indonesia | Sebagian | CORE-1, CORE-2 |
-
-### Aturan dasar AI
-
-AI hanya merapikan fakta yang ditulis pengguna. Nama, angka, tanggal, nominal, dan nomor dokumen tidak boleh dibuat oleh AI. Bila catatan tidak menyebut sesuatu yang dibutuhkan template, AI menulis `[perlu dilengkapi]`. Aturan ini diuji lewat regresi prompt dengan ambang nol fakta tambahan (AI-5, QA-4).
-
-### Di luar MVP
-
-| Fase | Isi |
-|---|---|
-| 3 | Ruang kerja instansi: anggota, empat peran, undangan, kop surat, template resmi |
-| 4 | Tinjau dan setujui, catatan per bagian, penomoran surat otomatis |
-| 5, setelah masa proyek | Paket berbayar, Azure Blob Storage, login Google, dokumen turunan, unduhan seluruh data |
-
-Sengaja tidak dikerjakan: penulisan akademik, tanda tangan elektronik tersertifikasi, arsip surat masuk, penyuntingan bersama real-time, dan AI yang menulis dari nol tanpa catatan.
-
-### Kriteria rilis MVP
-
-1. Semua tes lulus di SQLite, dan rangkaian tes sudah dijalankan sekali di PostgreSQL 16 dengan hasil tercatat.
-2. Risiko R1 sampai R9 dan temuan P0 selesai atau diterima tertulis oleh PM.
-3. Tidak ada istilah dari kolom "Hindari" di teks antarmuka.
-4. Regresi prompt lulus dengan nol fakta tambahan untuk Groq dan Gemini.
-5. Skenario peramban P1 dan "P2 bagian template" lulus di 360 px dan 1440 px.
-6. Label status di dokumentasi sesuai kode.
-7. `.env.example` memuat semua variabel baru tanpa nilai.
-
----
-
 ## Arsitektur sistem end-to-end
 
 ### Runtime
