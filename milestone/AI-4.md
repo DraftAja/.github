@@ -7,7 +7,7 @@
 | Pemilik | Hamid · BE 2 · `be-ai` |
 | Fase | Fase 2 · Katalog 64 template |
 | Repo | Backend-Laravel (dokumentasi) |
-| Contoh branch | `docs/be-ai-hasil-smoke-test` |
+| Contoh branch | `docs/be-ai-ai4-hasil-smoke-test` |
 | Mulai setelah | [AI-3](AI-3.md) selesai, menerima H16 |
 | Lanjut ke | [AI-5](AI-5.md) |
 

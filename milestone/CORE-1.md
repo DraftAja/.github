@@ -7,7 +7,7 @@
 | Pemilik | Octaf · BE 1 · `be-core` |
 | Fase | Fase 0 · Keamanan dan stabilisasi pasca-split |
 | Repo | Backend-Laravel |
-| Contoh branch | `fix/be-core-policy-ekspor` |
+| Contoh branch | `fix/be-core-core1-policy-ekspor` |
 | Mulai setelah | Repo dipisah, 3 November 2026 |
 | Lanjut ke | [CORE-2](CORE-2.md) |
 

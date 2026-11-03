@@ -7,7 +7,7 @@
 | Pemilik | Louis · QA · `qa` |
 | Fase | Fase 2 · Katalog 64 template |
 | Repo | uji terhadap pasangan commit `develop` |
-| Contoh branch | `test/qa-katalog-dan-regresi` |
+| Contoh branch | `test/qa-qa4-katalog-dan-regresi` |
 | Mulai setelah | [QA-3](QA-3.md) selesai, menerima H18, H19 |
 | Lanjut ke | [QA-5](QA-5.md) |
 

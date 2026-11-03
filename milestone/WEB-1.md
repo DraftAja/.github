@@ -7,7 +7,7 @@
 | Pemilik | Alvira · FE · `fe` |
 | Fase | Fase 0 · Keamanan dan stabilisasi pasca-split |
 | Repo | Frontend-Nextjs |
-| Contoh branch | `fix/fe-status-bawaan` |
+| Contoh branch | `fix/fe-web1-status-bawaan` |
 | Mulai setelah | Repo dipisah, 3 November 2026 |
 | Lanjut ke | [WEB-2](WEB-2.md) |
 

@@ -7,7 +7,7 @@
 | Pemilik | Alvira · FE · `fe` |
 | Fase | Fase 2 · Katalog 64 template |
 | Repo | Frontend-Nextjs |
-| Contoh branch | `feat/fe-katalog-template` |
+| Contoh branch | `feat/fe-web4-katalog-template` |
 | Mulai setelah | [WEB-3](WEB-3.md) selesai, menerima H17 |
 | Lanjut ke | [WEB-5](WEB-5.md) |
 

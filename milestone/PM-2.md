@@ -7,7 +7,7 @@
 | Pemilik | Raja · PM · `pm` |
 | Fase | Fase 1 · Penyelarasan persona |
 | Repo | Backend-Laravel (dokumentasi) |
-| Contoh branch | `docs/pm-keputusan-fase-1` |
+| Contoh branch | `docs/pm-pm2-keputusan-fase-1` |
 | Mulai setelah | [PM-1](PM-1.md) selesai |
 | Lanjut ke | [PM-3](PM-3.md) |
 

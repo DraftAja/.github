@@ -7,7 +7,7 @@
 | Pemilik | Alvira · FE · `fe` |
 | Fase | Fase 0 · Keamanan dan stabilisasi pasca-split |
 | Repo | Frontend-Nextjs |
-| Contoh branch | `refactor/fe-tipe-dari-kontrak` |
+| Contoh branch | `refactor/fe-web2-tipe-dari-kontrak` |
 | Mulai setelah | [WEB-1](WEB-1.md) selesai, menerima H6, H7 |
 | Lanjut ke | [WEB-3](WEB-3.md) |
 

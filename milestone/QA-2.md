@@ -7,7 +7,7 @@
 | Pemilik | Louis · QA · `qa` |
 | Fase | Fase 0 · Keamanan dan stabilisasi pasca-split |
 | Repo | uji terhadap pasangan commit `develop` |
-| Contoh branch | `test/qa-fase-0` |
+| Contoh branch | `test/qa-qa2-fase-0` |
 | Mulai setelah | [QA-1](QA-1.md) selesai, menerima H4, H5 |
 | Lanjut ke | [QA-3](QA-3.md) |
 

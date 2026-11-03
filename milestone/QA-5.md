@@ -7,7 +7,7 @@
 | Pemilik | Louis · QA · `qa` |
 | Fase | Fase 2 · Katalog 64 template |
 | Repo | uji terhadap pasangan commit `develop` |
-| Contoh branch | `test/qa-gerbang-rilis` |
+| Contoh branch | `test/qa-qa5-gerbang-rilis` |
 | Mulai setelah | [QA-4](QA-4.md) selesai, menerima H20 |
 | Lanjut ke | selesai |
 

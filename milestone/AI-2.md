@@ -7,7 +7,7 @@
 | Pemilik | Hamid · BE 2 · `be-ai` |
 | Fase | Fase 0 · Keamanan dan stabilisasi pasca-split |
 | Repo | Backend-Laravel |
-| Contoh branch | `test/be-ai-stub-provider` |
+| Contoh branch | `test/be-ai-ai2-stub-provider` |
 | Mulai setelah | [AI-1](AI-1.md) selesai |
 | Lanjut ke | [AI-3](AI-3.md) |
 

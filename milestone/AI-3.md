@@ -7,7 +7,7 @@
 | Pemilik | Hamid · BE 2 · `be-ai` |
 | Fase | Fase 1 · Penyelarasan persona |
 | Repo | Backend-Laravel |
-| Contoh branch | `feat/be-ai-persona-kuota` |
+| Contoh branch | `feat/be-ai-ai3-persona-kuota` |
 | Mulai setelah | [AI-2](AI-2.md) selesai, menerima H10 |
 | Lanjut ke | [AI-4](AI-4.md) |
 

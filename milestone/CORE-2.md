@@ -7,7 +7,7 @@
 | Pemilik | Octaf · BE 1 · `be-core` |
 | Fase | Fase 0 · Keamanan dan stabilisasi pasca-split |
 | Repo | Backend-Laravel |
-| Contoh branch | `feat/be-core-error-code` |
+| Contoh branch | `feat/be-core-core2-error-code` |
 | Mulai setelah | [CORE-1](CORE-1.md) selesai, menerima H1, H2 |
 | Lanjut ke | [CORE-3](CORE-3.md) |
 

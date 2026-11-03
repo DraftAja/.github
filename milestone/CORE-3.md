@@ -7,7 +7,7 @@
 | Pemilik | Octaf · BE 1 · `be-core` |
 | Fase | Fase 1 · Penyelarasan persona |
 | Repo | Backend-Laravel |
-| Contoh branch | `feat/be-core-kategori-dokumen` |
+| Contoh branch | `feat/be-core-core3-kategori-dokumen` |
 | Mulai setelah | [CORE-2](CORE-2.md) selesai, menerima H9 |
 | Lanjut ke | [CORE-4](CORE-4.md) |
 

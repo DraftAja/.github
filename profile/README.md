@@ -243,66 +243,29 @@ Cara membaca: cari label panah di diagram, lalu cari label yang sama di tabel in
 | **H21 · CORE-5 → PM-4 · hasil tes PostgreSQL 16** | Octaf (BE 1)<br>[CORE-5](https://github.com/DraftAja/.github/blob/main/milestone/CORE-5.md) | Raja (PM)<br>[PM-4](https://github.com/DraftAja/.github/blob/main/milestone/PM-4.md) | Hasil seluruh rangkaian tes di PostgreSQL 16 | Doc 10 bagian verifikasi | Kriteria rilis butir 1 |
 | **H22 · QA-5 → PM-4 · label siap-rilis** | Louis (QA)<br>[QA-5](https://github.com/DraftAja/.github/blob/main/milestone/QA-5.md) | Raja (PM)<br>[PM-4](https://github.com/DraftAja/.github/blob/main/milestone/PM-4.md) | Label `siap-rilis` pada pasangan commit API dan web | Issue di repo gabungan DraftAja | Membuat `release/*` dan tag pasangan versi |
 
-### Siklus satu fitur lintas repo
+### Cara kerja
 
-Milestone di atas dikerjakan lewat siklus yang sama untuk setiap fitur yang menyentuh API dan antarmuka. Siklus lengkap ada di 🔒 [API doc 17](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/17-kolaborasi-dan-serah-terima.md#siklus-satu-fitur-lintas-repo).
+Nama branch memuat peran dan milestone yang sedang dikerjakan:
 
-```mermaid
-sequenceDiagram
-    autonumber
-    actor PM as Raja (pm)
-    actor BE as Octaf / Hamid (be-*)
-    actor FE as Alvira (fe)
-    actor QA as Louis (qa)
-    PM->>BE: Issue fitur dengan requirement KF-*
-    BE->>FE: Proposal kontrak di issue, label kontrak
-    FE-->>BE: Setuju bentuk respons
-    QA-->>BE: Setuju kasus error, label kontrak-disetujui
-    par Paralel
-        BE->>BE: PR API, tes, openapi.json baru
-    and
-        FE->>FE: Layar dengan tipe sementara (draft PR)
-    end
-    BE->>FE: PR API merge, label butuh-fe
-    FE->>FE: api:sync, api:types, buang tipe sementara
-    FE->>QA: PR web merge, daftar periksa serah terima
-    QA-->>PM: Label siap-rilis atau issue bug
+```text
+<tipe>/<alias>-<milestone>-<deskripsi>
 ```
 
-### Aturan main harian
+`<tipe>` salah satu dari `feat`, `fix`, `docs`, `test`, `refactor`, `chore`. `<milestone>` ditulis huruf kecil tanpa strip, misalnya `core1` atau `web3`.
 
-Diringkas dari 🔒 [`TEAM_CONTRACT.md`](https://github.com/DraftAja/Backend-Laravel/blob/develop/TEAM_CONTRACT.md) dan 🔒 [doc 17](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/17-kolaborasi-dan-serah-terima.md).
+| Peran | Alias | Milestone | Contoh branch |
+|---|---|---|---|
+| Raja · PM | `pm` | [PM-1](https://github.com/DraftAja/.github/blob/main/milestone/PM-1.md) sampai [PM-5](https://github.com/DraftAja/.github/blob/main/milestone/PM-5.md) | `docs/pm-pm1-kontrak-tim-v1.1` |
+| Octaf · BE 1 | `be-core` | [CORE-1](https://github.com/DraftAja/.github/blob/main/milestone/CORE-1.md) sampai [CORE-5](https://github.com/DraftAja/.github/blob/main/milestone/CORE-5.md) | `fix/be-core-core1-policy-ekspor` |
+| Hamid · BE 2 | `be-ai` | [AI-1](https://github.com/DraftAja/.github/blob/main/milestone/AI-1.md) sampai [AI-5](https://github.com/DraftAja/.github/blob/main/milestone/AI-5.md) | `feat/be-ai-ai1-tipe-respons` |
+| Alvira · FE | `fe` | [WEB-1](https://github.com/DraftAja/.github/blob/main/milestone/WEB-1.md) sampai [WEB-5](https://github.com/DraftAja/.github/blob/main/milestone/WEB-5.md) | `fix/fe-web1-status-bawaan` |
+| Louis · QA | `qa` | [QA-1](https://github.com/DraftAja/.github/blob/main/milestone/QA-1.md) sampai [QA-5](https://github.com/DraftAja/.github/blob/main/milestone/QA-5.md) | `docs/qa-qa1-rencana-uji` |
 
-| Hal | Aturan |
-|---|---|
-| Mulai kerja | Setiap pekerjaan berawal dari issue yang terhubung ke satu milestone. Issue dipecah supaya selesai dalam 1 sampai 3 hari kerja. |
-| Branch | `<tipe>/<alias>-<deskripsi>`, contoh `feat/be-core-export-docx`, `fix/fe-editor-tabel-hilang`. Dibuat dari `develop`, umur ideal 2 sampai 3 hari. |
-| Commit | Conventional Commits dengan scope `auth`, `template`, `laporan`, `editor`, `ai`, `export`, `db`, `ui`, `api`, `test`, `docs`, `ci`, `deps`, `config`. |
-| Push | Minimal sekali sehari. Dilarang push langsung ke `main` dan `develop`, dilarang `--force` di branch bersama. |
-| Review | Minimal 1 approval, 2 untuk berkas bersama. Reviewer merespons paling lambat 1×24 jam hari kerja. |
-| Urutan merge | PR API dengan `openapi.json` baru merge lebih dulu, baru PR web yang bergantung padanya. |
-| Terblokir | Pasang label `blocked` atau `butuh-api` dan sampaikan di grup pada hari yang sama. |
-| Rahasia | `.env`, kunci Groq/Gemini, dan dokumen asli instansi tidak pernah masuk repo. Bila bocor, cabut kunci dan kabari PM lebih dulu. |
+- Branch dibuat dari `develop`, PR kembali ke `develop`. Judul PR menyebut ID milestone, misalnya `feat(ai): tambah endpoint kuota (AI-3)`.
+- Satu branch untuk satu butir pekerjaan. Contoh branch untuk setiap milestone ada di halaman milestone-nya.
+- Template issue Tugas milestone, Proposal kontrak, dan Laporan bug tersedia otomatis di semua repo organisasi.
 
-**Definition of Ready** untuk tiket FE yang butuh API: proposal berlabel `kontrak-disetujui`, layar ada di peta halaman lengkap dengan keadaan kosong, memuat, dan error, setiap `code` error punya teks tampilan, dan requirement punya kriteria terima.
-
-**Definition of Done**: CI hijau, tes untuk logika baru, `openapi.json` ikut di-commit bila menyentuh endpoint, tipe web dari `schema.d.ts`, diuji di 360 px dan desktop, PR saling merujuk, dan QA tidak menemukan bug prioritas tinggi.
-
-### Label
-
-| Label | Dipasang oleh | Arti |
-|---|---|---|
-| `be-core`, `be-ai`, `fe`, `qa`, `pm`, `docs` | pembuat issue | Area pemilik pekerjaan |
-| `feature`, `bug`, `priority-high` | pembuat issue | Jenis dan prioritas |
-| `blocked` | yang terblokir | Butuh keputusan, endpoint, atau desain dari anggota lain |
-| `kontrak` | siapa saja | Issue berisi atau membutuhkan proposal kontrak |
-| `kontrak-disetujui` | `fe` setelah `qa` setuju | Proposal final, implementasi boleh mulai |
-| `memecah-kontrak` | `be-*` | Butuh `/api/v2` atau tahap deprecated |
-| `butuh-api` | `fe` | Tiket FE terblokir endpoint yang belum ada |
-| `butuh-fe` | `be-*` | Endpoint sudah merge, layar belum ada |
-| `siap-rilis` | `qa` | Pasangan commit lolos uji |
-
-Template issue **Proposal kontrak**, **Laporan bug**, dan **Tugas milestone** tersedia otomatis di semua repo organisasi lewat repo ini.
+Aturan lengkap ada di 🔒 [`TEAM_CONTRACT.md`](https://github.com/DraftAja/Backend-Laravel/blob/develop/TEAM_CONTRACT.md) dan 🔒 [doc 17](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/17-kolaborasi-dan-serah-terima.md).
 
 ---
 

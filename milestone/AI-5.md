@@ -7,7 +7,7 @@
 | Pemilik | Hamid · BE 2 · `be-ai` |
 | Fase | Fase 2 · Katalog 64 template |
 | Repo | Backend-Laravel |
-| Contoh branch | `test/be-ai-regresi-prompt` |
+| Contoh branch | `test/be-ai-ai5-regresi-prompt` |
 | Mulai setelah | [AI-4](AI-4.md) selesai |
 | Lanjut ke | selesai |
 

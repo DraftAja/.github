@@ -7,7 +7,7 @@
 | Pemilik | Alvira · FE · `fe` |
 | Fase | Fase 1 · Penyelarasan persona |
 | Repo | Frontend-Nextjs |
-| Contoh branch | `feat/fe-final-dan-revisi` |
+| Contoh branch | `feat/fe-web3-final-dan-revisi` |
 | Mulai setelah | [WEB-2](WEB-2.md) selesai, menerima H11, H12, H13 |
 | Lanjut ke | [WEB-4](WEB-4.md) |
 

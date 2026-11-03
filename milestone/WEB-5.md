@@ -7,7 +7,7 @@
 | Pemilik | Alvira · FE · `fe` |
 | Fase | Fase 2 · Katalog 64 template |
 | Repo | Frontend-Nextjs |
-| Contoh branch | `test/fe-e2e-mvp` |
+| Contoh branch | `test/fe-web5-e2e-mvp` |
 | Mulai setelah | [WEB-4](WEB-4.md) selesai, menerima H8 |
 | Lanjut ke | selesai |
 

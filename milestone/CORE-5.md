@@ -7,7 +7,7 @@
 | Pemilik | Octaf · BE 1 · `be-core` |
 | Fase | Fase 2 · Katalog 64 template |
 | Repo | Backend-Laravel |
-| Contoh branch | `test/be-core-postgresql-16` |
+| Contoh branch | `test/be-core-core5-postgresql-16` |
 | Mulai setelah | [CORE-4](CORE-4.md) selesai, menerima H15 |
 | Lanjut ke | selesai |
 

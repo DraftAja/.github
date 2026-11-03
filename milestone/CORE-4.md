@@ -7,7 +7,7 @@
 | Pemilik | Octaf · BE 1 · `be-core` |
 | Fase | Fase 2 · Katalog 64 template |
 | Repo | Backend-Laravel |
-| Contoh branch | `feat/be-core-katalog-template` |
+| Contoh branch | `feat/be-core-core4-katalog-template` |
 | Mulai setelah | [CORE-3](CORE-3.md) selesai |
 | Lanjut ke | [CORE-5](CORE-5.md) |
 

@@ -7,7 +7,7 @@
 | Pemilik | Louis · QA · `qa` |
 | Fase | Fase 0 · Keamanan dan stabilisasi pasca-split |
 | Repo | Backend-Laravel (dokumentasi), issue di kedua repo |
-| Contoh branch | `docs/qa-rencana-uji` |
+| Contoh branch | `docs/qa-qa1-rencana-uji` |
 | Mulai setelah | Repo dipisah, 3 November 2026 |
 | Lanjut ke | [QA-2](QA-2.md) |
 

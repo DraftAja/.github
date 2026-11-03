@@ -7,7 +7,7 @@
 | Pemilik | Raja · PM · `pm` |
 | Fase | Fase 0 · Keamanan dan stabilisasi pasca-split |
 | Repo | Backend-Laravel, Frontend-Nextjs, DraftAja, .github |
-| Contoh branch | `docs/pm-kontrak-tim-v1.1` |
+| Contoh branch | `docs/pm-pm1-kontrak-tim-v1.1` |
 | Mulai setelah | Repo dipisah, 3 November 2026 |
 | Lanjut ke | [PM-2](PM-2.md) |
 

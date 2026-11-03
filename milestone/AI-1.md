@@ -7,7 +7,7 @@
 | Pemilik | Hamid · BE 2 · `be-ai` |
 | Fase | Fase 0 · Keamanan dan stabilisasi pasca-split |
 | Repo | Backend-Laravel |
-| Contoh branch | `feat/be-ai-tipe-respons` |
+| Contoh branch | `feat/be-ai-ai1-tipe-respons` |
 | Mulai setelah | menerima H3 |
 | Lanjut ke | [AI-2](AI-2.md) |
 

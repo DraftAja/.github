@@ -7,7 +7,7 @@
 | Pemilik | Louis · QA · `qa` |
 | Fase | Fase 1 · Penyelarasan persona |
 | Repo | uji terhadap pasangan commit `develop` |
-| Contoh branch | `test/qa-fase-1` |
+| Contoh branch | `test/qa-qa3-fase-1` |
 | Mulai setelah | [QA-2](QA-2.md) selesai, menerima H14 |
 | Lanjut ke | [QA-4](QA-4.md) |
 
