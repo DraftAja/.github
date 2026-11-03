@@ -50,12 +50,12 @@ Monolit Laravel + Inertia dipecah menjadi dua repo pada **3 November 2026**. Sej
 | Anggota | Peran | Alias branch | Area | Dokumen yang dipegang |
 |---|---|---|---|---|
 | **Ahmad Raja Fadhil** ([@rajafadhil](https://github.com/rajafadhil)) | Project Manager | `pm` | Kontrak tim, konfigurasi repo, CI/CD, rilis dan tag, keputusan produk | API `docs/01`, `06`, `11` sampai `14`, `17`, `TEAM_CONTRACT.md` |
-| **Abdurrahman Abdul Hamid** ([@abdhaamed](https://github.com/abdhaamed)) | Backend 2, modul inti | `be-core` | Auth, dokumen (laporan), template, ekspor, keamanan data | API `docs/04`, `05`, `07`, `18` (butir `be-core`) |
-| **M. Octafachdiansyah D.** ([@octafex](https://github.com/octafex)) | Backend 1, modul AI | `be-ai` | Pembelajaran pola, perapihan, generate dan chat, kuota AI | API `docs-ai/`, `docs/08`, `18` (butir `be-ai`) |
+| **M. Octafachdiansyah D.** ([@octafex](https://github.com/octafex)) | BE 1, modul inti | `be-core` | Auth, dokumen (laporan), template, ekspor, keamanan data | API `docs/04`, `05`, `07`, `18` (butir `be-core`) |
+| **Abdurrahman Abdul Hamid** ([@abdhaamed](https://github.com/abdhaamed)) | BE 2, modul AI | `be-ai` | Pembelajaran pola, perapihan, generate dan chat, kuota AI | API `docs-ai/`, `docs/08`, `18` (butir `be-ai`) |
 | **Alvira Risky** | Frontend | `fe` | Seluruh draftaja-web | web `docs/03` sampai `07` |
 | **Louis Andreas** | QA | `qa` | Rencana uji, kasus negatif, E2E, laporan bug, tanda siap rilis | API `docs/16`, web `docs/07` |
 
-Pembagian `be-core` dan `be-ai` mengikuti `TEAM_CONTRACT.md` bagian 2, 9, dan Lampiran A. Bagian 3 kontrak masih menulis kebalikannya; penyelarasannya adalah milestone **PM-1** di bawah.
+BE 1 = `be-core` (Octaf) dan BE 2 = `be-ai` (Hamid), sesuai `TEAM_CONTRACT.md` v1.0.1 bagian 2, 3, 9, dan Lampiran A.
 
 ---
 
@@ -86,9 +86,9 @@ Lima kotak di atas adalah lima anggota yang bekerja beriringan. Garis yang turun
 
 | Tanda | Arti |
 |---|---|
-| 🏁 di atas garis | Titik milestone: pekerjaan sampai titik ini selesai, lalu orang itu lanjut ke milestone berikutnya di garis yang sama |
+| 🏁 di atas garis | Titik milestone. Setelah titik ini selesai, orang itu lanjut ke milestone berikutnya di garis yang sama. Isi setiap milestone ada di [peta milestone](#peta-milestone). |
 | Bingkai `par` "Bekerja bersamaan" | Milestone di dalamnya dikerjakan pada waktu yang sama oleh orang yang berbeda |
-| Panah mendatar `H1` sampai `H22` | Serah terima: pengirim melapor atau menyerahkan hasil, penerima memakainya untuk milestone berikutnya. Rinciannya di [tabel serah terima](#titik-serah-terima) |
+| Panah mendatar | Serah terima. Labelnya `H<nomor> · <milestone pengirim> → <milestone penerima> · <isi>`, dan label yang sama persis ada di [tabel serah terima](#titik-serah-terima) |
 | Blok berwarna | Fase roadmap. MVP adalah fase 0 sampai 2 |
 | 🚩 | Gerbang rilis |
 
@@ -96,8 +96,8 @@ Lima kotak di atas adalah lima anggota yang bekerja beriringan. Garis yang turun
 %%{init: {"sequence": {"noteAlign": "center"}}}%%
 sequenceDiagram
     participant PM as Raja<br/>PM · pm
-    participant CORE as Hamid<br/>BE 2 · be-core
-    participant AI as Octaf<br/>BE 1 · be-ai
+    participant CORE as Octaf<br/>BE 1 · be-core
+    participant AI as Hamid<br/>BE 2 · be-ai
     participant WEB as Alvira<br/>FE · fe
     participant QA as Louis<br/>QA · qa
 
@@ -110,13 +110,13 @@ sequenceDiagram
         and
             Note over WEB: 🏁 WEB-1<br/>Ketahanan tanpa menunggu API
         and
-            Note over QA: 🏁 QA-1<br/>Rencana uji, tinjau kontrak
+            Note over QA: 🏁 QA-1<br/>Rencana uji dan tinjauan kontrak
         end
-        PM->>CORE: H1 kontrak tim v1.1, CODEOWNERS
-        QA->>CORE: H2 kasus error disetujui
-        QA->>AI: H3 kasus error AI disetujui
-        CORE->>QA: H4 fase 0 siap uji
-        WEB->>QA: H5 fase 0 siap uji
+        PM->>CORE: H1 · PM-1 → CORE-2 · kontrak tim v1.1, CODEOWNERS
+        QA->>CORE: H2 · QA-1 → CORE-2 · kasus error inti disetujui
+        QA->>AI: H3 · QA-1 → AI-1 · kasus error AI disetujui
+        CORE->>QA: H4 · CORE-1 → QA-2 · fase 0 API siap uji
+        WEB->>QA: H5 · WEB-1 → QA-2 · fase 0 web siap uji
         par Bekerja bersamaan
             Note over CORE: 🏁 CORE-2<br/>Kontrak error dan tipe respons
         and
@@ -124,170 +124,124 @@ sequenceDiagram
         and
             Note over QA: 🏁 QA-2<br/>Uji fase 0
         end
-        CORE->>WEB: H6 openapi.json baru
-        AI->>WEB: H7 tipe generate, tidy, chat
+        CORE->>WEB: H6 · CORE-2 → WEB-2 · openapi.json inti baru
+        AI->>WEB: H7 · AI-1 → WEB-2 · tipe generate, tidy, chat
         par Bekerja bersamaan
             Note over AI: 🏁 AI-2<br/>Provider palsu untuk E2E
         and
             Note over WEB: 🏁 WEB-2<br/>Sinkron kontrak baru
         end
-        AI->>WEB: H8 stub provider untuk E2E
+        AI->>WEB: H8 · AI-2 → WEB-5 · stub provider untuk E2E
     end
 
     rect rgba(59, 130, 246, 0.12)
         Note over PM,QA: FASE 1 · Penyelarasan persona
         Note over PM: 🏁 PM-2<br/>Keputusan produk fase 1
-        PM->>CORE: H9 kategori, kolom identitas
-        PM->>AI: H10 persona asisten
-        PM->>WEB: H11 teks kebijakan privasi
+        PM->>CORE: H9 · PM-2 → CORE-3 · kategori dan kolom identitas
+        PM->>AI: H10 · PM-2 → AI-3 · persona asisten
+        PM->>WEB: H11 · PM-2 → WEB-3 · teks kebijakan privasi
         par Bekerja bersamaan
             Note over CORE: 🏁 CORE-3<br/>Persona dan alur dokumen
         and
             Note over AI: 🏁 AI-3<br/>Persona asisten, kuota, proposal
         end
-        CORE->>WEB: H12 BE-05 final dan revisi, BE-07 konflik
-        AI->>WEB: H13 BE-06 proposal, BE-08 kuota
+        CORE->>WEB: H12 · CORE-3 → WEB-3 · final, revisi, konflik
+        AI->>WEB: H13 · AI-3 → WEB-3 · kuota dan proposal
         Note over WEB: 🏁 WEB-3<br/>Final, revisi, kuota, konflik
-        WEB->>QA: H14 fase 1 siap uji
+        WEB->>QA: H14 · WEB-3 → QA-3 · fase 1 siap uji
         Note over QA: 🏁 QA-3<br/>Uji fase 1
     end
 
     rect rgba(34, 197, 94, 0.12)
         Note over PM,QA: FASE 2 · Katalog 64 template · batas feature freeze minggu 14
         Note over PM: 🏁 PM-3<br/>Lingkungan uji nyata
-        PM->>CORE: H15 PostgreSQL 16 sekali pakai
-        PM->>AI: H16 kunci Groq dan Gemini
+        PM->>CORE: H15 · PM-3 → CORE-5 · PostgreSQL 16 sekali pakai
+        PM->>AI: H16 · PM-3 → AI-4 · kunci Groq dan Gemini
         par Bekerja bersamaan
             Note over CORE: 🏁 CORE-4<br/>Katalog 64 template
         and
             Note over AI: 🏁 AI-4<br/>Uji provider sungguhan
         end
-        CORE->>WEB: H17 GET /categories, field_values
-        CORE->>QA: H18 64 template di seeder
+        CORE->>WEB: H17 · CORE-4 → WEB-4 · kategori dan kolom isian
+        CORE->>QA: H18 · CORE-4 → QA-4 · 64 template di seeder
         par Bekerja bersamaan
             Note over CORE: 🏁 CORE-5<br/>Verifikasi PostgreSQL 16
         and
-            Note over AI: 🏁 AI-5<br/>Regresi prompt
+            Note over AI: 🏁 AI-5<br/>Regresi prompt nol fakta tambahan
         and
-            Note over WEB: 🏁 WEB-4<br/>Katalog 8 kategori
+            Note over WEB: 🏁 WEB-4<br/>Katalog 8 kategori dan kolom isian
         end
-        AI->>QA: H19 hasil regresi prompt
+        AI->>QA: H19 · AI-5 → QA-4 · hasil regresi prompt
         par Bekerja bersamaan
             Note over WEB: 🏁 WEB-5<br/>E2E MVP dan aksesibilitas
         and
-            Note over QA: 🏁 QA-4<br/>Uji katalog dan regresi
+            Note over QA: 🏁 QA-4<br/>Uji katalog dan regresi prompt
         end
-        WEB->>QA: H20 E2E MVP hijau
-        CORE->>PM: H21 hasil tes PostgreSQL 16
+        WEB->>QA: H20 · WEB-5 → QA-5 · E2E MVP hijau
+        CORE->>PM: H21 · CORE-5 → PM-4 · hasil tes PostgreSQL 16
         Note over QA: 🏁 QA-5<br/>Gerbang rilis MVP
-        QA->>PM: H22 label siap-rilis
+        QA->>PM: H22 · QA-5 → PM-4 · label siap-rilis
     end
 
     rect rgba(239, 68, 68, 0.12)
         Note over PM,QA: RILIS
-        Note over PM: 🚩 PM-4<br/>Feature freeze, rilis MVP, minggu 14
+        Note over PM: 🚩 PM-4<br/>Feature freeze dan rilis MVP, minggu 14
         Note over PM,QA: Setelah minggu 14 hanya perbaikan bug dan dokumentasi
         Note over PM: 🚩 PM-5<br/>v1.0-final minggu 15, pameran minggu 16
     end
 ```
 
+### Peta milestone
+
+Tabel ini mengikuti lajur di diagram: satu kolom per anggota, satu baris per fase. Klik nomor milestone untuk membuka halamannya, berisi tujuan, butir pekerjaan beserta kriteria terima, serah terima masuk dan keluar, dan dokumen rujukan. Semua halaman juga ada di [folder milestone](https://github.com/DraftAja/.github/tree/main/milestone).
+
+| Fase | Raja · PM | Octaf · BE 1 | Hamid · BE 2 | Alvira · FE | Louis · QA |
+|---|---|---|---|---|---|
+| Fase 0 · Keamanan dan stabilisasi pasca-split | [PM-1](https://github.com/DraftAja/.github/blob/main/milestone/PM-1.md) Fondasi kolaborasi dua repo | [CORE-1](https://github.com/DraftAja/.github/blob/main/milestone/CORE-1.md) Keamanan fase 0<br>[CORE-2](https://github.com/DraftAja/.github/blob/main/milestone/CORE-2.md) Kontrak error dan tipe respons | [AI-1](https://github.com/DraftAja/.github/blob/main/milestone/AI-1.md) Kontrak AI terketik<br>[AI-2](https://github.com/DraftAja/.github/blob/main/milestone/AI-2.md) Provider palsu untuk E2E | [WEB-1](https://github.com/DraftAja/.github/blob/main/milestone/WEB-1.md) Ketahanan tanpa menunggu API<br>[WEB-2](https://github.com/DraftAja/.github/blob/main/milestone/WEB-2.md) Sinkron kontrak baru | [QA-1](https://github.com/DraftAja/.github/blob/main/milestone/QA-1.md) Rencana uji dan tinjauan kontrak<br>[QA-2](https://github.com/DraftAja/.github/blob/main/milestone/QA-2.md) Uji fase 0 |
+| Fase 1 · Penyelarasan persona | [PM-2](https://github.com/DraftAja/.github/blob/main/milestone/PM-2.md) Keputusan produk fase 1 | [CORE-3](https://github.com/DraftAja/.github/blob/main/milestone/CORE-3.md) Persona dan alur dokumen | [AI-3](https://github.com/DraftAja/.github/blob/main/milestone/AI-3.md) Persona asisten, kuota, proposal | [WEB-3](https://github.com/DraftAja/.github/blob/main/milestone/WEB-3.md) Final, revisi, kuota, konflik | [QA-3](https://github.com/DraftAja/.github/blob/main/milestone/QA-3.md) Uji fase 1 |
+| Fase 2 · Katalog 64 template | [PM-3](https://github.com/DraftAja/.github/blob/main/milestone/PM-3.md) Lingkungan uji nyata | [CORE-4](https://github.com/DraftAja/.github/blob/main/milestone/CORE-4.md) Katalog 64 template<br>[CORE-5](https://github.com/DraftAja/.github/blob/main/milestone/CORE-5.md) Verifikasi PostgreSQL 16 | [AI-4](https://github.com/DraftAja/.github/blob/main/milestone/AI-4.md) Uji provider sungguhan<br>[AI-5](https://github.com/DraftAja/.github/blob/main/milestone/AI-5.md) Regresi prompt nol fakta tambahan | [WEB-4](https://github.com/DraftAja/.github/blob/main/milestone/WEB-4.md) Katalog 8 kategori dan kolom isian<br>[WEB-5](https://github.com/DraftAja/.github/blob/main/milestone/WEB-5.md) E2E MVP dan aksesibilitas | [QA-4](https://github.com/DraftAja/.github/blob/main/milestone/QA-4.md) Uji katalog dan regresi prompt<br>[QA-5](https://github.com/DraftAja/.github/blob/main/milestone/QA-5.md) Gerbang rilis MVP |
+| Rilis · minggu 14, 15, 16 | [PM-4](https://github.com/DraftAja/.github/blob/main/milestone/PM-4.md) Feature freeze dan rilis MVP, minggu 14<br>[PM-5](https://github.com/DraftAja/.github/blob/main/milestone/PM-5.md) v1.0-final minggu 15, pameran minggu 16 |   |   |   |   |
+
 ### Titik serah terima
 
-Setiap baris adalah janji antar anggota. Pengirim belum dianggap selesai sebelum penerima bisa memakai hasilnya. Kanal yang dipakai mengikuti 🔒 [API doc 17, label issue](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/17-kolaborasi-dan-serah-terima.md#label-issue).
+Cara membaca: cari label panah di diagram, lalu cari label yang sama di tabel ini. Urutan baris sama dengan urutan panah dari atas ke bawah. Pengirim belum dianggap selesai sebelum penerima bisa memakai hasilnya.
 
-| No | Dari | Ke | Yang diserahkan | Kanal | Dipakai penerima untuk |
+#### Fase 0 · Keamanan dan stabilisasi pasca-split
+
+| Label di diagram | Dari | Ke | Yang diserahkan | Kanal | Dipakai untuk |
 |---|---|---|---|---|---|
-| H1 | Raja | Hamid, semua | `TEAM_CONTRACT.md` v1.1, CODEOWNERS per repo, branch protection | PR ke `develop`, pengumuman di grup | Reviewer wajib berlaku sebelum BE-03 mengubah kontrak error |
-| H2 | Louis | Hamid | Persetujuan daftar `code` error di proposal kontrak | Komentar di issue `kontrak`, label `kontrak-disetujui` | Menulis tes per `code` di BE-03 |
-| H3 | Louis | Octaf | Persetujuan kasus error endpoint AI | Issue `kontrak` | Mengunci bentuk respons AI di BE-04 |
-| H4 | Hamid | Louis | PR fase 0 yang sudah merge beserta cara memicu setiap error | Daftar periksa serah terima QA di PR | Uji kasus negatif fase 0 |
-| H5 | Alvira | Louis | Pasangan commit API dan web, tangkapan layar 360 px dan desktop | PR web | Uji tampilan status tak dikenal, mode baca, zona waktu |
-| H6 | Hamid | Alvira | `openapi.json` dengan skema error dan tipe respons inti | PR API merge, label `butuh-fe` | `npm run api:sync && npm run api:types`, mengosongkan "Kontrak manual" |
-| H7 | Octaf | Alvira | Tipe `Generation`, `CleanupReservation`, `ChatReply` di `openapi.json` | PR API merge, label `butuh-fe` | FE-08 tanpa tipe tulisan tangan |
-| H8 | Octaf | Alvira, Louis | Cara mengarahkan `AI_*` ke provider palsu lokal | Issue kesepakatan, doc 09 | E2E perapihan tanpa kunci sungguhan (FE-23) di WEB-5 |
-| H9 | Raja | Hamid | Keputusan 8 kunci kategori dan kolom identitas pengganti kolom akademik | Issue keputusan, doc 12 diperbarui | Enum `DocumentCategory`, migrasi kolom (KF-DOK-04) |
-| H10 | Raja | Octaf | Persona dan batas asisten DraftAja | Issue keputusan, doc 01 dan 11 | Mengganti prompt "LaporBot" (KF-AI-05) |
-| H11 | Raja | Alvira | Isi kebijakan privasi | Issue keputusan | Halaman `/kebijakan-privasi` (FE-15) |
-| H12 | Hamid | Alvira | `POST /laporan/{id}/finalize`, `/revisions`, 409 `revision_changed` | PR API merge, label `butuh-fe` | FE-12 tombol final dan revisi, FE-14 dialog konflik |
-| H13 | Octaf | Alvira | `GET /ai/quota`, field `proposal` berbentuk objek | PR API merge, label `butuh-fe` | FE-13 kartu kuota, FE-18 tanpa `JSON.parse` |
-| H14 | Alvira | Louis | Fase 1 lengkap di kedua repo, PR web merujuk PR API | Repo gabungan mencatat pasangan commit | Uji transisi status, persona, ekspor per kategori |
-| H15 | Raja | Hamid | Instance PostgreSQL 16 sekali pakai dan izin pemakaiannya | Kanal aman, bukan repo | Menjalankan tes konkurensi dan schema check |
-| H16 | Raja | Octaf | Kunci Groq dan Gemini, izin eksplisit, nama `GEMINI_MODEL` aktif | Kanal aman, bukan chat grup terbuka | Smoke test dan regresi prompt |
-| H17 | Hamid | Alvira | `GET /categories`, `template_fields`, `field_values` | PR API merge, label `butuh-fe` | FE-17 katalog dan kolom isian |
-| H18 | Hamid | Louis | 64 template di `TemplateSeeder` sesuai `docs/templates/` | PR API merge | Uji kesesuaian spesifikasi dan seeder |
-| H19 | Octaf | Louis | Keluaran 10 pasang catatan untuk Groq dan Gemini | Dicatat di doc 10 dan `docs-ai/07-testing.md` | Pemeriksaan fakta tambahan dan penanda `[perlu dilengkapi]` |
-| H20 | Alvira | Louis | E2E P1 dan "P2 bagian template" lulus di 360 px dan 1440 px | CI web hijau | Kriteria rilis butir 5 |
-| H21 | Hamid | Raja | Hasil rangkaian tes PostgreSQL 16 | Doc 10 bagian verifikasi | Kriteria rilis butir 1 |
-| H22 | Louis | Raja | Label `siap-rilis` pada pasangan commit | Issue di repo gabungan | Membuat `release/*`, tag pasangan versi |
+| **H1 · PM-1 → CORE-2 · kontrak tim v1.1, CODEOWNERS** | Raja (PM)<br>[PM-1](https://github.com/DraftAja/.github/blob/main/milestone/PM-1.md) | Octaf (BE 1)<br>[CORE-2](https://github.com/DraftAja/.github/blob/main/milestone/CORE-2.md) | `TEAM_CONTRACT.md` v1.1, CODEOWNERS per repo, branch protection, label. Berlaku untuk semua anggota. | PR ke `develop`, pengumuman di grup | Reviewer wajib sudah berlaku sebelum BE-03 mengubah kontrak error |
+| **H2 · QA-1 → CORE-2 · kasus error inti disetujui** | Louis (QA)<br>[QA-1](https://github.com/DraftAja/.github/blob/main/milestone/QA-1.md) | Octaf (BE 1)<br>[CORE-2](https://github.com/DraftAja/.github/blob/main/milestone/CORE-2.md) | Persetujuan daftar `code` error di proposal kontrak endpoint inti | Komentar di issue `kontrak`, label `kontrak-disetujui` | Menulis satu tes per `code` di BE-03 |
+| **H3 · QA-1 → AI-1 · kasus error AI disetujui** | Louis (QA)<br>[QA-1](https://github.com/DraftAja/.github/blob/main/milestone/QA-1.md) | Hamid (BE 2)<br>[AI-1](https://github.com/DraftAja/.github/blob/main/milestone/AI-1.md) | Persetujuan kasus error endpoint AI (generate, tidy, chat) | Komentar di issue `kontrak`, label `kontrak-disetujui` | Mengunci bentuk respons AI di BE-04 |
+| **H4 · CORE-1 → QA-2 · fase 0 API siap uji** | Octaf (BE 1)<br>[CORE-1](https://github.com/DraftAja/.github/blob/main/milestone/CORE-1.md) | Louis (QA)<br>[QA-2](https://github.com/DraftAja/.github/blob/main/milestone/QA-2.md) | PR BE-01, BE-02, BE-09, BE-17 yang sudah merge, beserta cara memicu setiap error | Daftar periksa serah terima QA di PR | Menguji kasus negatif fase 0 |
+| **H5 · WEB-1 → QA-2 · fase 0 web siap uji** | Alvira (FE)<br>[WEB-1](https://github.com/DraftAja/.github/blob/main/milestone/WEB-1.md) | Louis (QA)<br>[QA-2](https://github.com/DraftAja/.github/blob/main/milestone/QA-2.md) | Pasangan commit API dan web, tangkapan layar 360 px dan desktop | Daftar periksa serah terima QA di PR web | Menguji status tak dikenal, mode baca, zona waktu, pesan error |
+| **H6 · CORE-2 → WEB-2 · openapi.json inti baru** | Octaf (BE 1)<br>[CORE-2](https://github.com/DraftAja/.github/blob/main/milestone/CORE-2.md) | Alvira (FE)<br>[WEB-2](https://github.com/DraftAja/.github/blob/main/milestone/WEB-2.md) | `openapi.json` dengan skema `ErrorResponse` dan tipe respons dashboard, options, template | PR API merge, label `butuh-fe` di issue web | `npm run api:sync && npm run api:types`, lalu mengosongkan "Kontrak manual" |
+| **H7 · AI-1 → WEB-2 · tipe generate, tidy, chat** | Hamid (BE 2)<br>[AI-1](https://github.com/DraftAja/.github/blob/main/milestone/AI-1.md) | Alvira (FE)<br>[WEB-2](https://github.com/DraftAja/.github/blob/main/milestone/WEB-2.md) | Tipe `Generation`, `CleanupReservation`, `ChatReply` di `openapi.json` | PR API merge, label `butuh-fe` di issue web | FE-08 tanpa tipe tulisan tangan |
+| **H8 · AI-2 → WEB-5 · stub provider untuk E2E** | Hamid (BE 2)<br>[AI-2](https://github.com/DraftAja/.github/blob/main/milestone/AI-2.md) | Alvira (FE)<br>[WEB-5](https://github.com/DraftAja/.github/blob/main/milestone/WEB-5.md) | Cara mengarahkan `AI_*` ke provider palsu lokal, tertulis di doc 09 API. Juga dipakai Louis. | Issue kesepakatan `be-ai` dan `fe` | E2E perapihan tanpa kunci sungguhan (FE-23) |
 
-### Milestone per anggota
+#### Fase 1 · Penyelarasan persona
 
-Klik nama anggota untuk membuka milestone-nya. Kolom **Rujukan** langsung menuju bagian dokumen yang relevan.
+| Label di diagram | Dari | Ke | Yang diserahkan | Kanal | Dipakai untuk |
+|---|---|---|---|---|---|
+| **H9 · PM-2 → CORE-3 · kategori dan kolom identitas** | Raja (PM)<br>[PM-2](https://github.com/DraftAja/.github/blob/main/milestone/PM-2.md) | Octaf (BE 1)<br>[CORE-3](https://github.com/DraftAja/.github/blob/main/milestone/CORE-3.md) | Keputusan 8 kunci kategori, pemetaan nilai lama, dan kolom identitas pengganti kolom akademik | Issue keputusan ditutup, doc 12 diperbarui | Enum `DocumentCategory` dan migrasi kolom (KF-DOK-04) |
+| **H10 · PM-2 → AI-3 · persona asisten** | Raja (PM)<br>[PM-2](https://github.com/DraftAja/.github/blob/main/milestone/PM-2.md) | Hamid (BE 2)<br>[AI-3](https://github.com/DraftAja/.github/blob/main/milestone/AI-3.md) | Persona dan batas asisten DraftAja | Issue keputusan ditutup, doc 01 atau 11 diperbarui | Mengganti prompt "LaporBot" (KF-AI-05) |
+| **H11 · PM-2 → WEB-3 · teks kebijakan privasi** | Raja (PM)<br>[PM-2](https://github.com/DraftAja/.github/blob/main/milestone/PM-2.md) | Alvira (FE)<br>[WEB-3](https://github.com/DraftAja/.github/blob/main/milestone/WEB-3.md) | Isi halaman kebijakan privasi | Issue keputusan ditutup | Halaman `/kebijakan-privasi` (FE-15) |
+| **H12 · CORE-3 → WEB-3 · final, revisi, konflik** | Octaf (BE 1)<br>[CORE-3](https://github.com/DraftAja/.github/blob/main/milestone/CORE-3.md) | Alvira (FE)<br>[WEB-3](https://github.com/DraftAja/.github/blob/main/milestone/WEB-3.md) | `POST /laporan/{id}/finalize`, `POST /laporan/{id}/revisions`, 409 `revision_changed` | PR API merge, label `butuh-fe` di issue web | FE-12 tombol final dan revisi, FE-14 dialog konflik |
+| **H13 · AI-3 → WEB-3 · kuota dan proposal** | Hamid (BE 2)<br>[AI-3](https://github.com/DraftAja/.github/blob/main/milestone/AI-3.md) | Alvira (FE)<br>[WEB-3](https://github.com/DraftAja/.github/blob/main/milestone/WEB-3.md) | `GET /ai/quota` dan field `proposal` berbentuk objek | PR API merge, label `butuh-fe` di issue web | FE-13 kartu kuota, FE-18 tanpa `JSON.parse` |
+| **H14 · WEB-3 → QA-3 · fase 1 siap uji** | Alvira (FE)<br>[WEB-3](https://github.com/DraftAja/.github/blob/main/milestone/WEB-3.md) | Louis (QA)<br>[QA-3](https://github.com/DraftAja/.github/blob/main/milestone/QA-3.md) | Fase 1 lengkap di kedua repo: PR web merujuk PR API yang sudah merge | Repo gabungan mencatat pasangan commit, daftar periksa serah terima QA | Menguji transisi status, persona, ekspor per kategori |
 
-<details>
-<summary><b>Raja · PM</b> · PM-1 sampai PM-5</summary>
+#### Fase 2 · Katalog 64 template
 
-| Milestone | Isi pekerjaan | Selesai bila | Serah terima | Rujukan |
-|---|---|---|---|---|
-| **PM-1** Fondasi kolaborasi dua repo | BE-15: revisi `TEAM_CONTRACT.md` v1.1 (pemetaan nama ke `be-core`/`be-ai`, kepemilikan per repo, aturan PR lintas repo). CODEOWNERS di kedua repo. Branch protection `main` dan `develop`. Label dari kontrak dan doc 17. GitHub Milestone dan papan Projects. Mengundang Alvira dan Louis ke organisasi. | Disetujui 4 dari 5 anggota; review pemilik kode diwajibkan di kedua repo; label tersedia | Kirim H1 | 🔒 [Usulan revisi v1.1](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/17-kolaborasi-dan-serah-terima.md#usulan-revisi-team_contractmd-v11) · 🔒 [S-19](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/18-audit-pasca-split.md#proses-lintas-repo) · 🔒 [Lampiran B](https://github.com/DraftAja/Backend-Laravel/blob/develop/TEAM_CONTRACT.md#lampiran-b-pengaturan-branch-protection-github) |
-| **PM-2** Keputusan produk fase 1 | Menetapkan 8 kunci kategori, kolom identitas dokumen pengganti `nim`/`prodi`/`dosen_pembimbing`, persona asisten, isi kebijakan privasi. Memperbarui doc 12 dengan kriteria terima yang bisa diuji. | Setiap keputusan tercatat sebagai issue tertutup dan doc 01, 11, 12 diperbarui | Kirim H9, H10, H11 | 🔒 [Keputusan A1 sampai A10](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/README.md#keputusan-yang-diambil-saat-menyusun-ulang-dokumen) · 🔒 [doc 12](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/12-kebutuhan-sistem.md) · 🔒 [Fase 1](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/10-project-status-and-gaps.md#fase-1-penyelarasan-persona) |
-| **PM-3** Lingkungan uji nyata | Menyediakan PostgreSQL 16 sekali pakai dan staging, kunci Groq dan Gemini dengan izin pemakaian. Menyiapkan urutan deploy API lalu web. | Hamid dan Octaf menerima akses lewat kanal aman | Kirim H15, H16 | 🔒 [Langkah verifikasi](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/10-project-status-and-gaps.md#langkah-verifikasi-yang-harus-dijadwalkan) · 🔒 [Urutan merge dan deploy](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/17-kolaborasi-dan-serah-terima.md#urutan-merge-dan-deploy) |
-| **PM-4** Feature freeze dan rilis MVP, minggu 14 | Memeriksa 7 kriteria rilis MVP, menerima tertulis risiko yang tersisa, membuat `release/*`, tag pasangan versi di kedua repo, mengisi tabel pasangan rilis. | Kriteria rilis terpenuhi atau risikonya diterima tertulis | Terima H21, H22 | 🔒 [Kriteria rilis MVP](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/16-strategi-pengujian.md#kriteria-rilis-mvp) · 🔒 [Kontrak tim bagian 11](https://github.com/DraftAja/Backend-Laravel/blob/develop/TEAM_CONTRACT.md#11-rilis-milestone-dan-code-freeze) |
-| **PM-5** `v1.0-final` dan pameran | Minggu 15: merge `develop` ke `main`, tag `v1.0-final`, penyerahan dokumen mata kuliah. Minggu 16: hanya `hotfix/*`. | Tag ada di kedua repo dan repo gabungan | Ke semua anggota | 🔒 [Kontrak tim bagian 11](https://github.com/DraftAja/Backend-Laravel/blob/develop/TEAM_CONTRACT.md#11-rilis-milestone-dan-code-freeze) |
-
-</details>
-
-<details>
-<summary><b>Hamid · BE 2 · be-core</b> · CORE-1 sampai CORE-5</summary>
-
-| Milestone | Isi pekerjaan | Selesai bila | Serah terima | Rujukan |
-|---|---|---|---|---|
-| **CORE-1** Keamanan fase 0 | BE-01 policy ekspor dokumen final. BE-02 validasi `templates.use`. BE-09 gambar editor dan logo di disk privat. BE-17 HTMLPurifier untuk isi bagian dan CSP pratinjau. `UserSeeder` hanya lokal dan tes. | Tes fase 0 di doc 16 ada dan lulus; S-01, S-02, S-13, S-21 ditutup | Kirim H4 | 🔒 [Backlog backend](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/18-audit-pasca-split.md#backlog-backend) · 🔒 [Fase 0](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/10-project-status-and-gaps.md#fase-0-keamanan-dan-stabilisasi-pasca-split) · 🔒 [Risiko doc 07](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/07-authentication-security.md#risiko) |
-| **CORE-2** Kontrak error dan tipe respons | BE-03 renderer error tunggal dengan `code` dan pesan Indonesia, skema `ErrorResponse`. BE-04 bagian inti: respons dashboard, options, dan template. BE-11 `securitySchemes`. | Tes katalog: setiap error `api/*` punya `message` dan `code`; `openapi.json` memuat skema | Terima H1, H2. Kirim H6 | 🔒 [Proposal kontrak](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/17-kolaborasi-dan-serah-terima.md#proposal-kontrak) · 🔒 [Tes kontrak](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/16-strategi-pengujian.md#tes-kontrak) · 🔒 [doc 05](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/05-api-documentation.md) |
-| **CORE-3** Persona dan alur dokumen | Enum `DocumentCategory` dan migrasi nilai lama. Kolom identitas pengganti kolom akademik. Menghapus jenis akademik (S-22). BE-05 final dan revisi. BE-07 konkurensi bagian. BE-10 `MustVerifyEmail`. Tata letak ekspor per kategori. | DOCX Surat tanpa sampul dan daftar isi; dokumen final menolak suntingan 403 | Terima H9. Kirim H12 | 🔒 [Fase 1](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/10-project-status-and-gaps.md#fase-1-penyelarasan-persona) · 🔒 [Tes per fase](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/16-strategi-pengujian.md#tes-yang-wajib-ditambah-per-fase) · 🔒 [doc 04](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/04-database-design.md) |
-| **CORE-4** Katalog 64 template | 64 template di `TemplateSeeder` dari spesifikasi. Tabel `template_fields` dan `laporans.field_values`. `GET /categories`. BE-12 `url` deprecated. BE-13 paginasi `GET /laporan`. | `TemplateSeedTest` mengharapkan 64, tepat 8 per kategori; tes kesesuaian spesifikasi dan seeder lulus | Kirim H17, H18 | 🔒 [Katalog template](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/templates/README.md) · 🔒 [Fase 2](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/10-project-status-and-gaps.md#fase-2-katalog-64-template) |
-| **CORE-5** Verifikasi PostgreSQL 16 | Seluruh rangkaian tes, migrasi, upgrade, `documents:schema-check`, dan uji pemulihan di PostgreSQL 16 sekali pakai. BE-14 dan BE-16 bila kapasitas ada. | Hasil tercatat di doc 10 bagian verifikasi | Terima H15. Kirim H21 | 🔒 [Verifikasi](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/10-project-status-and-gaps.md#verifikasi) · 🔒 [Roadmap AI](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs-ai/08-roadmap.md) · 🔒 [Setup](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/09-setup-development.md) |
-
-</details>
-
-<details>
-<summary><b>Octaf · BE 1 · be-ai</b> · AI-1 sampai AI-5</summary>
-
-| Milestone | Isi pekerjaan | Selesai bila | Serah terima | Rujukan |
-|---|---|---|---|---|
-| **AI-1** Kontrak AI terketik | BE-04 bagian AI: `Generation`, `CleanupReservation`, `ChatReply` muncul di `openapi.json` tanpa mengubah bentuk JSON. S-16: menyelaraskan `docs-ai/05-api.md` dengan doc 05. | Bagian AI di "Kontrak manual" web bisa dihapus dan `tsc` tetap lolos | Terima H3. Kirim H7 | 🔒 [Backlog backend](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/18-audit-pasca-split.md#backlog-backend) · 🔒 [docs-ai](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs-ai/README.md) |
-| **AI-2** Provider palsu untuk E2E | Menyepakati dan menyediakan cara mengarahkan `AI_*` ke stub lokal untuk CI web. | Tes E2E bisa menjalankan perapihan tanpa kunci sungguhan | Kirim H8 | 🔒 [FE-23](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/06-backlog-frontend.md#pengujian) · 🔒 [Aturan E2E](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/07-pengujian.md#aturan-menulis-tes-e2e) |
-| **AI-3** Persona asisten, kuota, proposal | Prompt chat berpersona asisten DraftAja tanpa "LaporBot" (KF-AI-05). BE-08 `GET /ai/quota`. BE-06 field `proposal` berbentuk objek. | Prompt sistem tidak memuat "LaporBot" atau "Lapor.in"; `used` bertambah sesuai potongan | Terima H10. Kirim H13 | 🔒 [Fase 1](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/10-project-status-and-gaps.md#fase-1-penyelarasan-persona) · 🔒 [Rencana penggantian field](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/18-audit-pasca-split.md#rencana-penggantian-field) |
-| **AI-4** Uji provider sungguhan | Smoke test Groq dan Gemini untuk analisis pola dan perapihan. Mencatat token rata-rata per dokumen untuk perhitungan biaya. | Hasil tanpa rahasia tercatat di doc 10 dan `docs-ai/07-testing.md` | Terima H16 | 🔒 [Roadmap AI](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs-ai/08-roadmap.md) · 🔒 [Integrasi](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/08-integrations.md) · 🔒 [Struktur biaya](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/14-model-bisnis.md#struktur-biaya) |
-| **AI-5** Regresi prompt | Minimal 10 pasang catatan dari bagian "Contoh" spesifikasi template, sebaran kategori merata, untuk Groq dan Gemini. | Nol fakta tambahan; catatan yang kurang menghasilkan `[perlu dilengkapi]` | Kirim H19 | 🔒 [Regresi prompt AI](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/16-strategi-pengujian.md#regresi-prompt-ai) |
-
-</details>
-
-<details>
-<summary><b>Alvira · FE</b> · WEB-1 sampai WEB-5</summary>
-
-| Milestone | Isi pekerjaan | Selesai bila | Serah terima | Rujukan |
-|---|---|---|---|---|
-| **WEB-1** Ketahanan tanpa menunggu API | FE-01 status tak dikenal. FE-02 mode baca untuk selain `draft`. FE-04 sembunyikan jenis dokumen akademik. FE-05 batas waktu polling. FE-06 zona waktu `Asia/Jakarta`. FE-07 kontras border 3:1. FE-09 peringatan drift kontrak. FE-16 pesan 400. | Tes Vitest untuk FE-01, FE-06, FE-16 lulus | Kirim H5 | 🔒 [Ketahanan](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/06-backlog-frontend.md#ketahanan-terhadap-perubahan-api) · 🔒 [Kebenaran tampilan](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/06-backlog-frontend.md#kebenaran-tampilan) |
-| **WEB-2** Sinkron kontrak baru | FE-03 cabang `code === 'email_unverified'`. FE-08 tipe dari `schema.d.ts`. | Bagian "Kontrak manual" kosong atau hanya tipe sementara bernomor issue | Terima H6, H7 | 🔒 [Bekerja sebelum API siap](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/17-kolaborasi-dan-serah-terima.md#bekerja-sebelum-api-siap) · 🔒 [Integrasi API](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/04-integrasi-api.md) |
-| **WEB-3** Final, revisi, kuota, konflik | FE-11 penanda `[perlu dilengkapi]`. FE-12 tombol final dan revisi. FE-15 `not-found`, `error`, `/kebijakan-privasi`. FE-13 kartu kuota. FE-14 dialog konflik. FE-18 `proposal` objek. Dialog data dokumen dengan kolom identitas baru. | Semua keadaan di peta halaman ditangani; diuji di 360 px dan desktop | Terima H11, H12, H13. Kirim H14 | 🔒 [Alur yang menunggu API](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/06-backlog-frontend.md#alur-yang-menunggu-api) · 🔒 [Peta halaman](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/03-peta-halaman.md) |
-| **WEB-4** Katalog 8 kategori dan kolom isian | FE-17 katalog, pencarian, pratinjau struktur, kolom isian. Penanda kolom wajib kosong sebelum ekspor (KF-DOK-05). FE-21 ringkasan beranda. | Katalog memakai `GET /categories`; tidak ada istilah akademik yang tampil | Terima H17 | 🔒 [Fase 2](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/10-project-status-and-gaps.md#fase-2-katalog-64-template) · 🔒 [Sistem desain](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/05-sistem-desain.md) |
-| **WEB-5** E2E MVP dan aksesibilitas | FE-22 unggah template sampai `ready`. FE-23 perapihan sampai terima usulan. FE-24 unduh PDF. FE-26 pemeriksaan aksesibilitas 5 halaman utama (dependensi baru butuh persetujuan). | E2E lulus di profil desktop dan ponsel | Terima H8. Kirim H20 | 🔒 [Pengujian frontend](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/07-pengujian.md#yang-wajib-ditambah) · 🔒 [Uji peramban](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/16-strategi-pengujian.md#uji-peramban) |
-
-</details>
-
-<details>
-<summary><b>Louis · QA</b> · QA-1 sampai QA-5</summary>
-
-| Milestone | Isi pekerjaan | Selesai bila | Serah terima | Rujukan |
-|---|---|---|---|---|
-| **QA-1** Rencana uji dan tinjauan kontrak | Menyusun rencana uji dari doc 16. Meninjau kasus error di setiap proposal kontrak sebelum label `kontrak-disetujui`. Template laporan bug. | Rencana uji per fase tersedia; proposal kontrak yang terbuka sudah ditinjau | Kirim H2, H3 | 🔒 [Strategi pengujian](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/16-strategi-pengujian.md) · 🔒 [Proposal kontrak](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/17-kolaborasi-dan-serah-terima.md#proposal-kontrak) |
-| **QA-2** Uji fase 0 | Kasus negatif untuk BE-01, BE-02, BE-09, BE-17. Memicu keadaan error manual (kuota habis, 401, 419, origin tidak stateful, DOCX ditolak). | Temuan P0 ditutup atau tercatat sebagai issue `bug` | Terima H4, H5 | 🔒 [Cara memicu error](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/07-pengujian.md#serah-terima-ke-qa) · 🔒 [Serah terima ke QA](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/17-kolaborasi-dan-serah-terima.md#serah-terima-ke-qa) |
-| **QA-3** Uji fase 1 | Transisi final dan revisi, persona (pencarian istilah "Hindari"), ekspor per kategori, E2E kasus negatif. | Tidak ada bug prioritas tinggi terbuka untuk fase 1 | Terima H14 | 🔒 [Tes per fase](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/16-strategi-pengujian.md#tes-yang-wajib-ditambah-per-fase) · 🔒 [Sistem desain, kolom Hindari](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/05-sistem-desain.md) |
-| **QA-4** Uji katalog dan regresi prompt | Memeriksa 64 template terhadap spesifikasi. Memeriksa keluaran regresi prompt secara manual. Menyiapkan sesi uji pengguna setelah fase 2. | Nol fakta tambahan disetujui; katalog sesuai spesifikasi | Terima H18, H19 | 🔒 [Regresi prompt AI](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/16-strategi-pengujian.md#regresi-prompt-ai) · 🔒 [Uji pengguna](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/16-strategi-pengujian.md#uji-pengguna) |
-| **QA-5** Gerbang rilis MVP | Memeriksa 7 kriteria rilis MVP. Skenario peramban di Chromium, Firefox, WebKit pada 360 px dan 1440 px. Memasang `siap-rilis`. | Pasangan commit berlabel `siap-rilis` | Terima H20. Kirim H22 | 🔒 [Kriteria rilis MVP](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/16-strategi-pengujian.md#kriteria-rilis-mvp) |
-
-</details>
+| Label di diagram | Dari | Ke | Yang diserahkan | Kanal | Dipakai untuk |
+|---|---|---|---|---|---|
+| **H15 · PM-3 → CORE-5 · PostgreSQL 16 sekali pakai** | Raja (PM)<br>[PM-3](https://github.com/DraftAja/.github/blob/main/milestone/PM-3.md) | Octaf (BE 1)<br>[CORE-5](https://github.com/DraftAja/.github/blob/main/milestone/CORE-5.md) | Instance PostgreSQL 16 sekali pakai (bukan database Azure bersama) dan izin pemakaiannya | Kanal aman, bukan repo | Tes konkurensi, migrasi, upgrade, schema check |
+| **H16 · PM-3 → AI-4 · kunci Groq dan Gemini** | Raja (PM)<br>[PM-3](https://github.com/DraftAja/.github/blob/main/milestone/PM-3.md) | Hamid (BE 2)<br>[AI-4](https://github.com/DraftAja/.github/blob/main/milestone/AI-4.md) | Kunci Groq dan Gemini, izin pemakaian terbatas, nama `GEMINI_MODEL` yang aktif | Kanal aman, bukan chat grup terbuka | Smoke test provider dan regresi prompt |
+| **H17 · CORE-4 → WEB-4 · kategori dan kolom isian** | Octaf (BE 1)<br>[CORE-4](https://github.com/DraftAja/.github/blob/main/milestone/CORE-4.md) | Alvira (FE)<br>[WEB-4](https://github.com/DraftAja/.github/blob/main/milestone/WEB-4.md) | `GET /categories`, `template_fields`, `laporans.field_values` di `openapi.json` | PR API merge, label `butuh-fe` di issue web | FE-17 katalog dan kolom isian |
+| **H18 · CORE-4 → QA-4 · 64 template di seeder** | Octaf (BE 1)<br>[CORE-4](https://github.com/DraftAja/.github/blob/main/milestone/CORE-4.md) | Louis (QA)<br>[QA-4](https://github.com/DraftAja/.github/blob/main/milestone/QA-4.md) | 64 template di `TemplateSeeder` sesuai `docs/templates/` | PR API merge | Memeriksa kesesuaian spesifikasi dan seeder |
+| **H19 · AI-5 → QA-4 · hasil regresi prompt** | Hamid (BE 2)<br>[AI-5](https://github.com/DraftAja/.github/blob/main/milestone/AI-5.md) | Louis (QA)<br>[QA-4](https://github.com/DraftAja/.github/blob/main/milestone/QA-4.md) | Keluaran minimal 10 pasang catatan untuk Groq dan Gemini | Dicatat di doc 10 dan `docs-ai/07-testing.md` | Pemeriksaan manual fakta tambahan dan penanda `[perlu dilengkapi]` |
+| **H20 · WEB-5 → QA-5 · E2E MVP hijau** | Alvira (FE)<br>[WEB-5](https://github.com/DraftAja/.github/blob/main/milestone/WEB-5.md) | Louis (QA)<br>[QA-5](https://github.com/DraftAja/.github/blob/main/milestone/QA-5.md) | E2E P1 dan "P2 bagian template" lulus di 360 px dan 1440 px | CI web hijau di `develop` | Kriteria rilis butir 5 |
+| **H21 · CORE-5 → PM-4 · hasil tes PostgreSQL 16** | Octaf (BE 1)<br>[CORE-5](https://github.com/DraftAja/.github/blob/main/milestone/CORE-5.md) | Raja (PM)<br>[PM-4](https://github.com/DraftAja/.github/blob/main/milestone/PM-4.md) | Hasil seluruh rangkaian tes di PostgreSQL 16 | Doc 10 bagian verifikasi | Kriteria rilis butir 1 |
+| **H22 · QA-5 → PM-4 · label siap-rilis** | Louis (QA)<br>[QA-5](https://github.com/DraftAja/.github/blob/main/milestone/QA-5.md) | Raja (PM)<br>[PM-4](https://github.com/DraftAja/.github/blob/main/milestone/PM-4.md) | Label `siap-rilis` pada pasangan commit API dan web | Issue di repo gabungan DraftAja | Membuat `release/*` dan tag pasangan versi |
 
 ### Siklus satu fitur lintas repo
 
@@ -297,7 +251,7 @@ Milestone di atas dikerjakan lewat siklus yang sama untuk setiap fitur yang meny
 sequenceDiagram
     autonumber
     actor PM as Raja (pm)
-    actor BE as Hamid / Octaf (be-*)
+    actor BE as Octaf / Hamid (be-*)
     actor FE as Alvira (fe)
     actor QA as Louis (qa)
     PM->>BE: Issue fitur dengan requirement KF-*
