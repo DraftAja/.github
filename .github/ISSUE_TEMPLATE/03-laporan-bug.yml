@@ -1,0 +1,72 @@
+name: Laporan bug
+description: Temuan dari pengujian. Perbaikan dikerjakan pemilik area terkait, bukan QA.
+title: "bug(<scope>): <ringkasan singkat>"
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Jangan melampirkan `.env`, kunci API, atau dokumen asli instansi. Pakai akun uji dan dokumen contoh anonim.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - be-core (auth, dokumen, template, ekspor)
+        - be-ai (pola, perapihan, generate, chat, kuota)
+        - fe (antarmuka)
+        - pm (CI, konfigurasi repo, dokumentasi)
+    validations:
+      required: true
+  - type: dropdown
+    id: prioritas
+    attributes:
+      label: Prioritas
+      description: P0 menghambat fitur lain atau membocorkan data, P1 harus selesai sebelum feature freeze minggu 14, P2 bila kapasitas ada.
+      options:
+        - P0
+        - P1
+        - P2
+    validations:
+      required: true
+  - type: input
+    id: pasangan
+    attributes:
+      label: Pasangan commit yang diuji
+      placeholder: API develop abc1234, web develop def5678
+    validations:
+      required: true
+  - type: textarea
+    id: langkah
+    attributes:
+      label: Langkah reproduksi
+      placeholder: |
+        1. Masuk sebagai sekretaris@drafaja.test
+        2. ...
+    validations:
+      required: true
+  - type: textarea
+    id: diharapkan
+    attributes:
+      label: Hasil yang diharapkan
+    validations:
+      required: true
+  - type: textarea
+    id: aktual
+    attributes:
+      label: Hasil aktual
+      description: Sertakan status HTTP dan `code` error bila ada.
+    validations:
+      required: true
+  - type: input
+    id: lingkungan
+    attributes:
+      label: Lingkungan
+      placeholder: Chromium 360 px, lokal SQLite / staging PostgreSQL 16
+    validations:
+      required: true
+  - type: textarea
+    id: bukti
+    attributes:
+      label: Bukti
+      description: Tangkapan layar, log, atau rekaman. Samarkan data pribadi.

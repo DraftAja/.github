@@ -1,0 +1,100 @@
+name: Proposal kontrak API
+description: Endpoint baru atau perubahan bentuk respons yang dipakai frontend. Dibuat di repo Backend-Laravel sebelum kode ditulis.
+title: "Proposal kontrak: <nama fitur>"
+labels: ["kontrak"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Alur lengkap: docs/17-kolaborasi-dan-serah-terima.md di Backend-Laravel, bagian "Proposal kontrak".
+        Proposal disetujui bila `fe` dan `qa` memberi persetujuan di issue ini dan label `kontrak-disetujui` dipasang. Perubahan setelah itu ditulis sebagai komentar baru, bukan dengan mengedit proposal.
+  - type: input
+    id: requirement
+    attributes:
+      label: Requirement
+      placeholder: KF-...
+    validations:
+      required: true
+  - type: dropdown
+    id: pemilik
+    attributes:
+      label: Pemilik API
+      options:
+        - be-core
+        - be-ai
+    validations:
+      required: true
+  - type: input
+    id: layar
+    attributes:
+      label: Layar yang memakai
+      description: Path halaman di draftaja-web, lihat docs/03-peta-halaman.md di repo web.
+      placeholder: /dokumen/[id]
+    validations:
+      required: true
+  - type: textarea
+    id: endpoint
+    attributes:
+      label: Endpoint
+      value: |
+        METHOD /api/v1/...
+        Nama rute:
+        Middleware: auth:sanctum, verified, throttle:...
+    validations:
+      required: true
+  - type: textarea
+    id: request
+    attributes:
+      label: Request
+      value: |
+        | Field | Tipe | Wajib | Aturan | Contoh |
+        |---|---|---|---|---|
+  - type: textarea
+    id: sukses
+    attributes:
+      label: Respons sukses
+      value: |
+        Status: 200 | 201 | 202 | 204
+        Bentuk: {data: ...} | objek datar
+
+        | Field | Tipe | Null? | Arti |
+        |---|---|---|---|
+
+        Contoh JSON:
+    validations:
+      required: true
+  - type: textarea
+    id: error
+    attributes:
+      label: Error
+      value: |
+        | Status | code | Kapan | Yang ditampilkan FE |
+        |---|---|---|---|
+    validations:
+      required: true
+  - type: textarea
+    id: idempotensi
+    attributes:
+      label: Idempotensi dan konkurensi
+      value: |
+        request_key: wajib | opsional | tidak
+        Yang terjadi bila diulang:
+  - type: textarea
+    id: asinkron
+    attributes:
+      label: Asinkron
+      value: |
+        Ya/tidak. Bila ya: endpoint status, nilai status, interval polling yang disarankan.
+  - type: dropdown
+    id: kompatibilitas
+    attributes:
+      label: Kompatibilitas
+      options:
+        - Menambah (aman untuk web develop)
+        - Memecah (butuh /api/v2 atau tahap deprecated, pasang label memecah-kontrak)
+    validations:
+      required: true
+  - type: textarea
+    id: penggantian
+    attributes:
+      label: Field yang diganti dan jadwal penghapusannya

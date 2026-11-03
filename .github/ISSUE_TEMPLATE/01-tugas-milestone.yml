@@ -1,0 +1,85 @@
+name: Tugas milestone
+description: Satu pekerjaan 1 sampai 3 hari kerja yang menjadi bagian dari milestone anggota.
+title: "<tipe>(<scope>): <deskripsi singkat>"
+labels: ["feature"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Daftar milestone, alur paralel, dan titik serah terima ada di profil organisasi: https://github.com/DraftAja
+        Setelah issue dibuat, pilih GitHub Milestone yang sesuai di panel kanan dan pasang label area (`be-core`, `be-ai`, `fe`, `qa`, `pm`, `docs`).
+  - type: dropdown
+    id: milestone
+    attributes:
+      label: Milestone
+      options:
+        - PM-1 Fondasi kolaborasi dua repo
+        - PM-2 Keputusan produk fase 1
+        - PM-3 Lingkungan uji nyata
+        - PM-4 Feature freeze dan rilis MVP
+        - PM-5 v1.0-final dan pameran
+        - CORE-1 Keamanan fase 0
+        - CORE-2 Kontrak error dan tipe respons
+        - CORE-3 Persona dan alur dokumen
+        - CORE-4 Katalog 64 template
+        - CORE-5 Verifikasi PostgreSQL 16
+        - AI-1 Kontrak AI terketik
+        - AI-2 Provider palsu untuk E2E
+        - AI-3 Persona asisten, kuota, proposal
+        - AI-4 Uji provider sungguhan
+        - AI-5 Regresi prompt
+        - WEB-1 Ketahanan tanpa menunggu API
+        - WEB-2 Sinkron kontrak baru
+        - WEB-3 Final, revisi, kuota, konflik
+        - WEB-4 Katalog 8 kategori dan kolom isian
+        - WEB-5 E2E MVP dan aksesibilitas
+        - QA-1 Rencana uji dan tinjauan kontrak
+        - QA-2 Uji fase 0
+        - QA-3 Uji fase 1
+        - QA-4 Uji katalog dan regresi prompt
+        - QA-5 Gerbang rilis MVP
+        - Fase 3 atau 4, di luar MVP
+    validations:
+      required: true
+  - type: input
+    id: backlog
+    attributes:
+      label: Butir backlog dan requirement
+      description: ID dari doc 18 API, doc 06 web, atau doc 12 API.
+      placeholder: BE-05, FE-12, KF-TIN-04
+    validations:
+      required: true
+  - type: textarea
+    id: pekerjaan
+    attributes:
+      label: Pekerjaan
+      description: Apa yang dikerjakan dan mengapa.
+    validations:
+      required: true
+  - type: textarea
+    id: kriteria
+    attributes:
+      label: Kriteria terima
+      description: Kondisi yang bisa diuji. Salin dari kolom kriteria terima di backlog bila ada.
+      placeholder: |
+        - [ ] Tes fitur: ...
+        - [ ] ...
+    validations:
+      required: true
+  - type: input
+    id: menerima
+    attributes:
+      label: Menunggu hasil dari
+      description: Titik serah terima yang masuk (H1 sampai H22) atau issue lain. Kosongkan bila tidak ada.
+      placeholder: H11, DraftAja/Backend-Laravel#42
+  - type: input
+    id: menyerahkan
+    attributes:
+      label: Hasilnya dipakai oleh
+      description: Titik serah terima yang keluar dan siapa penerimanya.
+      placeholder: H6 ke Alvira (fe)
+  - type: textarea
+    id: rujukan
+    attributes:
+      label: Rujukan dokumen
+      description: Tautan ke bagian dokumen yang relevan.
