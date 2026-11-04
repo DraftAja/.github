@@ -28,7 +28,8 @@ Layanan web untuk sekretaris, admin instansi, dan panitia kegiatan. Pilih templa
 3. [Kolaborasi: milestone, alur paralel, dan serah terima](#kolaborasi-milestone-alur-paralel-dan-serah-terima)
 4. [Arsitektur sistem end-to-end](#arsitektur-sistem-end-to-end)
 5. [Teknologi dan versi](#teknologi-dan-versi)
-6. [Mulai di sini untuk anggota baru](#mulai-di-sini-untuk-anggota-baru)
+6. [Bekerja dengan Claude Code dan tim agen](#bekerja-dengan-claude-code-dan-tim-agen)
+7. [Mulai di sini untuk anggota baru](#mulai-di-sini-untuk-anggota-baru)
 
 > [!NOTE]
 > Repo kode bersifat privat. Tautan bertanda 🔒 hanya bisa dibuka anggota organisasi yang sudah masuk ke GitHub. Ringkasan setiap milestone ditulis langsung di halaman ini agar bisa dibaca tanpa membuka berkas dokumentasi satu per satu.
@@ -439,13 +440,25 @@ Versi belum ditetapkan untuk teknologi yang belum masuk kode. Versinya dipilih d
 
 ---
 
+## Bekerja dengan Claude Code dan tim agen
+
+Kedua repo kode menyiapkan aturan yang sama untuk agen AI. `AGENTS.md` berisi aturan proyek yang dibaca semua alat, `CLAUDE.md` mengimpornya lalu menambah cara kerja khusus Claude Code, dan `.claude/agents/` berisi dua tim agen per repo dari [agency-agents](https://github.com/msitarzewski/agency-agents).
+
+| Repo | Tim 1 | Tim 2 |
+|---|---|---|
+| Backend-Laravel | Core Dokumen (`be-core`), gerbang API Tester | AI (`be-ai`), gerbang Reality Checker |
+| Frontend-Nextjs | Produk dan Antarmuka (`fe`), gerbang UI Finish-Gate Reviewer | Kualitas dan Integrasi (`qa`), gerbang Code Reviewer |
+
+Satu tugas mengikuti urutan: kartu tugas, rencana yang disetujui, pengerjaan dengan tes, gerbang verifikasi, pemeriksaan agen gerbang, lalu PR. Persiapan, contoh prompt, alur per peran, dan cara merawat aturan ada di **[panduan kerja dengan agen AI](https://github.com/DraftAja/.github/blob/main/panduan/kerja-dengan-agen-ai.md)**.
+
 ## Mulai di sini untuk anggota baru
 
 1. Baca 🔒 [`TEAM_CONTRACT.md`](https://github.com/DraftAja/Backend-Laravel/blob/develop/TEAM_CONTRACT.md) dan bagian [Kolaborasi](#kolaborasi-milestone-alur-paralel-dan-serah-terima) di halaman ini.
 2. Pahami produk: 🔒 [doc 01 Ringkasan produk](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/01-project-overview.md), lalu 🔒 [doc 11 Persona](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/11-persona-dan-perjalanan-pengguna.md).
 3. Ikuti urutan baca sesuai peran: 🔒 [indeks dokumentasi API](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/README.md#urutan-baca) atau 🔒 [indeks dokumentasi web](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/README.md#urutan-baca).
 4. Jalankan kedua aplikasi di lokal: 🔒 [setup API](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/09-setup-development.md) dan 🔒 [README web](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/README.md). Pastikan `session.upload_progress.enabled = Off` di `php.ini`.
-5. Ambil issue dari milestone milikmu, buat branch dari `develop`, dan buka PR dengan template yang tersedia.
+5. Ikuti [persiapan Claude Code](https://github.com/DraftAja/.github/blob/main/panduan/kerja-dengan-agen-ai.md#persiapan-sekali-per-anggota): periksa `/memory` dan daftar agen di kedua repo.
+6. Ambil issue dari milestone milikmu, buat branch dari `develop`, dan buka PR dengan template yang tersedia.
 
 <div align="center">
 
