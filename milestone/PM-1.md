@@ -24,6 +24,8 @@ Aturan main untuk dua repo berlaku sebelum kontrak API mulai berubah. Setelah mi
 | Lampiran B | Branch protection `main` dan `develop` di kedua repo, termasuk status check `api:check` di web. | Push langsung ke `develop` ditolak; approval 1 untuk `develop` dan 2 untuk `main`; review pemilik kode wajib | 🔒 [Lampiran B](https://github.com/DraftAja/Backend-Laravel/blob/develop/TEAM_CONTRACT.md#lampiran-b-pengaturan-branch-protection-github) |
 | Label | Membuat label dari kontrak bagian 12 dan doc 17 di ketiga repo: `be-core`, `be-ai`, `fe`, `qa`, `docs`, `bug`, `feature`, `blocked`, `priority-high`, `kontrak`, `kontrak-disetujui`, `memecah-kontrak`, `butuh-api`, `butuh-fe`, `siap-rilis`. | Semua label tersedia dan dipakai template issue | 🔒 [doc 17, label issue](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/17-kolaborasi-dan-serah-terima.md#label-issue) |
 | Organisasi | Mengundang Alvira dan Louis ke organisasi DraftAja, lalu membuat GitHub Milestone atau Projects untuk 25 milestone ini dengan tanggal jatuh tempo. | Kelima anggota bisa di-assign ke issue dan menjadi pemilik kode | 🔒 [kontrak bagian 12](https://github.com/DraftAja/Backend-Laravel/blob/develop/TEAM_CONTRACT.md#12-issue-dan-pelacakan-pekerjaan) |
+| INF-01 | Audit server PostgreSQL dev bersama dengan perintah baca-saja di doc 19, lalu perbaiki firewall, TLS, lock, dan akun admin. Dikerjakan bersama Octaf. | Tabel audit di doc 19 terisi; tidak ada aturan firewall terbuka; lock `CanNotDelete` terpasang | 🔒 [doc 19, audit](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/19-infrastruktur-azure.md#audit-kondisi-sekarang) |
+| INF-02 | Budget di subscription Azure dengan peringatan 50, 80, dan 100 persen ke Raja dan Octaf. | Budget aktif | 🔒 [doc 19, biaya](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/19-infrastruktur-azure.md#biaya) |
 
 ## Rincian pekerjaan
 
@@ -95,6 +97,24 @@ done
 2. Buat GitHub Milestone di repo yang sesuai untuk 25 milestone, dengan tanggal jatuh tempo. Milestone lintas repo (PM-1, QA-x) dibuat di repo API.
 3. Atau buat satu GitHub Project tingkat organisasi dengan kolom `Backlog`, `To Do`, `In Progress`, `In Review`, `Done` (kontrak bagian 12), dan field Milestone.
 4. Buat satu issue per butir pekerjaan dengan template "Tugas milestone".
+### INF-01 · Audit server database dev
+
+Masalah sekarang: server Azure Database for PostgreSQL yang menampung `draftaja_shared_dev` sudah dipakai tim, tetapi konfigurasinya tidak tercatat di repo mana pun. Aturan firewall, TLS, retensi backup, lock, dan siapa yang memegang login admin belum diketahui. Menghapus server ikut menghapus semua backup-nya.
+
+Langkah:
+
+1. Jalankan perintah audit baca-saja di doc 19 bagian "Audit kondisi sekarang". Perintah itu tidak mengubah apa pun.
+2. Isi tabel audit di doc 19 lewat PR dokumentasi, tanpa menyalin kata sandi atau IP pribadi.
+3. Perbaiki bersama Octaf: hapus aturan firewall `0.0.0.0` sampai `255.255.255.255` dan aturan "izinkan semua layanan Azure" bila ada, pastikan `require_secure_transport` bernilai `on`, pasang lock `CanNotDelete`, dan pindahkan kata sandi admin ke kanal aman.
+4. Buat role `draftaja_readonly` untuk anggota yang hanya perlu membaca data dev (doc 19 bagian role dan hak akses).
+
+Bukti selesai: tabel audit terisi di doc 19 dan `az lock list` menampilkan lock pada server.
+
+### INF-02 · Budget
+
+Masalah sekarang: subscription memakai kredit Azure for Students sebesar USD 100 untuk 12 bulan. Bila kredit habis, subscription dinonaktifkan, dan sumber daya bisa dihapus bila tidak di-upgrade dalam 90 hari. Itu bisa terjadi tepat sebelum pameran.
+
+Langkah: di Cost Management, buat budget sebesar sisa kredit dengan tiga ambang (50, 80, 100 persen) dan kirim ke email Raja dan Octaf. Periksa dengan `az consumption budget list`.
 
 ## Urutan kerja yang disarankan
 
@@ -118,6 +138,7 @@ Tidak ada. Milestone ini bisa dikerjakan tanpa menunggu anggota lain.
 
 ## Selesai bila
 
+- [ ] Tabel audit INF-01 terisi dan budget INF-02 aktif
 - [ ] Kontrak v1.1 merge ke `develop` dengan 4 persetujuan
 - [ ] CODEOWNERS dan branch protection aktif di kedua repo
 - [ ] Label tersedia di ketiga repo

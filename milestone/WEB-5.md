@@ -19,6 +19,7 @@ Alur MVP dibuktikan otomatis di peramban, desktop dan ponsel, termasuk pemeriksa
 
 | Butir | Pekerjaan | Kriteria terima | Sumber |
 |---|---|---|---|
+| FE-27 | Prasyarat job E2E di CI: `php artisan queue:work` di latar belakang dan `npm ci` di direktori `api` pada langkah "Siapkan API". | Skenario yang menunggu worker atau PDF bisa lulus di CI | 🔒 [web doc 06, pengujian](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/06-backlog-frontend.md#pengujian) |
 | FE-22 | E2E: unggah template sampai `ready`, lalu buat dokumen darinya. | Lulus di profil desktop dan ponsel | 🔒 [web doc 07, yang wajib ditambah](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/07-pengujian.md#yang-wajib-ditambah) |
 | FE-23 | E2E: perapihan sampai terima usulan, memakai provider palsu dari H8. | Lulus tanpa memanggil Groq atau Gemini sungguhan | 🔒 [web doc 07, aturan E2E](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/07-pengujian.md#aturan-menulis-tes-e2e) |
 | FE-24 | E2E: unduh PDF dari antarmuka. | Lulus di profil desktop dan ponsel | 🔒 [web doc 07, yang wajib ditambah](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/07-pengujian.md#yang-wajib-ditambah) |
@@ -33,7 +34,7 @@ Alur MVP dibuktikan otomatis di peramban, desktop dan ponsel, termasuk pemeriksa
 
 ### FE-22 · Unggah template sampai pola siap
 
-Prasyarat CI: langkah "Siapkan API" di job E2E saat ini hanya menjalankan `php artisan serve`. Analisis pola dan perapihan dikerjakan worker antrean, jadi tambahkan `php artisan queue:work --sleep=1 > ../worker.log 2>&1 &` di langkah itu. Tanpa worker, status tetap `analyzing` dan tes habis waktu.
+Prasyarat CI (FE-27): langkah "Siapkan API" di job E2E saat ini hanya menjalankan `php artisan serve`. Analisis pola dan perapihan dikerjakan worker antrean, jadi tambahkan `php artisan queue:work --sleep=1 > ../worker.log 2>&1 &` di langkah itu. Tanpa worker, status tetap `analyzing` dan tes habis waktu.
 
 Langkah: masuk dengan akun baru, buka `/template`, unggah DOCX fixture kecil, tunggu badge "Pola siap", tekan "Gunakan", isi judul, lalu pastikan editor terbuka dengan bab dari heading DOCX. Analisis pola memanggil provider AI, jadi skenario ini memakai provider palsu dari [H8](../serah-terima/H8.md). Fixture DOCX disimpan di `tests/e2e/fixtures/`, dibuat dari spesifikasi template, tanpa data pribadi.
 
@@ -87,6 +88,7 @@ Label sama persis dengan panah di diagram profil.
 
 ## Selesai bila
 
+- [ ] FE-27 merge lebih dulu sebagai PR tersendiri
 - [ ] Job E2E hijau di `develop` dengan FE-22, FE-23, FE-24
 - [ ] Web doc 07 diperbarui untuk skenario baru
 - [ ] H20 terkirim ke Louis

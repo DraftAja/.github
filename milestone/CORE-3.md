@@ -26,6 +26,7 @@ Dokumen berhenti berpersona akademik: kategori memakai 8 kunci, identitas dokume
 | BE-07 | Konkurensi optimistis di `PUT /sections/{id}` dengan field opsional `base_updated_at`. | Tes: dua pembaruan dengan `base_updated_at` sama, yang kedua 409 `revision_changed`; tanpa field, perilaku lama tetap | 🔒 [S-12](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/18-audit-pasca-split.md#kebenaran-perilaku) |
 | BE-10 | `MustVerifyEmail` di `User`. | Tes: akun belum terverifikasi menerima 409 `email_unverified` di rute aplikasi | 🔒 [S-17](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/18-audit-pasca-split.md#keamanan-dan-data) |
 | KF-EKS-02, KF-EKS-03 | Tata letak ekspor per kategori: Surat dan Notula tanpa sampul dan daftar isi. | Tes: DOCX Surat tidak memuat sampul dan daftar isi; DOCX `PRP-01` memuat keduanya | 🔒 [doc 12, ekspor](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/12-kebutuhan-sistem.md#ekspor-eks) |
+| INF-08 | Azure Communication Services Email dan domain pengirim untuk staging, sebelum BE-10 mewajibkan verifikasi email. | Email atur ulang kata sandi diterima dari staging | 🔒 [doc 19, email](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/19-infrastruktur-azure.md#email) |
 
 ## Rincian pekerjaan
 
@@ -110,6 +111,14 @@ Masalah sekarang: ekspor DOCX selalu menyisipkan sampul dan daftar isi, sehingga
 Langkah: tentukan tata letak dari kategori dan kode template. Surat, Notula, SOP, dan Ringkasan tanpa sampul dan tanpa daftar isi. Daftar isi hanya untuk template yang menyebutnya di spesifikasi, misalnya `PRP-01`, `LAP-02`, `DTI-01` (daftar lengkap di doc 08 API). Terapkan aturan yang sama di PDF.
 
 Bukti selesai: tes DOCX dokumen kategori Surat tidak memuat sampul dan daftar isi; tes DOCX `PRP-01` memuat keduanya. Tes ini bisa memakai definisi template sementara sampai 64 template masuk di CORE-4.
+
+### INF-08 · Email keluar
+
+Masalah sekarang: `MAIL_MAILER=log`, jadi email verifikasi dan atur ulang kata sandi hanya tertulis di log. Begitu BE-10 mewajibkan verifikasi, pengguna staging tidak bisa masuk tanpa email yang benar-benar terkirim.
+
+Langkah: ikuti doc 19 bagian email. Buat resource Email Communication Services dengan domain Azure-managed untuk staging, tautkan ke Communication Services, lalu buat app Entra untuk kredensial SMTP. Isi `MAIL_MAILER=smtp`, `MAIL_HOST=smtp.azurecomm.net`, `MAIL_PORT=587`, dan `MAIL_USERNAME`, dengan `MAIL_PASSWORD` di Key Vault. Periksa dulu pemberitahuan pensiun layanan Azure Communication Services. Bila Email terdampak, pakai penyedia SMTP lain di port 587.
+
+Bukti selesai: email atur ulang kata sandi dari staging diterima di kotak masuk sungguhan.
 
 ## Urutan kerja yang disarankan
 

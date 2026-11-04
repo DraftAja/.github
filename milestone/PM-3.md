@@ -6,8 +6,8 @@
 |---|---|
 | Pemilik | Raja · PM · `pm` |
 | Fase | Fase 2 · Katalog 64 template |
-| Repo | infrastruktur, tanpa perubahan kode |
-| Branch | tidak perlu branch |
+| Repo | Backend-Laravel (`infra/`, `deploy.yml`), Frontend-Nextjs (`deploy.yml`), Azure |
+| Contoh branch | `chore/pm-pm3-infra-staging` |
 | Mulai setelah | [PM-2](PM-2.md) selesai |
 | Lanjut ke | [PM-4](PM-4.md) |
 
@@ -22,6 +22,9 @@ Menyediakan lingkungan yang tidak bisa dibuat sendiri oleh BE: PostgreSQL 16 unt
 | Doc 10 langkah 1 | Instance PostgreSQL 16 sekali pakai untuk tes, misalnya Docker Compose `postgres:16-alpine` dengan nama database `draftaja_test_*`. Bukan database Azure bersama. | Octaf punya akses dan izin menjalankan tes | 🔒 [doc 10, langkah verifikasi](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/10-project-status-and-gaps.md#langkah-verifikasi-yang-harus-dijadwalkan) |
 | Doc 10 langkah 2 | Kunci Groq dan Gemini dengan izin pemakaian terbatas, plus nama `GEMINI_MODEL` yang aktif. | Hamid menerima kunci lewat kanal aman; tidak ada kunci di repo atau chat grup terbuka | 🔒 [doc 08 integrasi](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/08-integrations.md) |
 | Doc 17 deploy | Staging dengan urutan deploy: API lebih dulu, migration sebelum container baru menerima lalu lintas, lalu web. | Urutan deploy dicoba sekali di staging | 🔒 [doc 17, urutan merge dan deploy](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/17-kolaborasi-dan-serah-terima.md#urutan-merge-dan-deploy) |
+| INF-03 | Bicep untuk staging di `infra/` Backend-Laravel: VNet, Container Apps environment, app dan job, PostgreSQL atau database di server dev, Key Vault, Storage, ACR, managed identity, Log Analytics. Dikerjakan bersama Octaf. | `az bicep build` bersih; deploy ke resource group kosong berhasil | 🔒 [doc 19, pekerjaan](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/19-infrastruktur-azure.md#pekerjaan-yang-dibutuhkan) |
+| INF-07 | Workflow `deploy.yml` di kedua repo dengan OIDC dan urutan migrate, API, scheduler, web. | Push ke `develop` men-deploy staging tanpa langkah manual | 🔒 [doc 19, alur deploy](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/19-infrastruktur-azure.md#alur-deploy) |
+| INF-12 | Domain kustom dan managed certificate untuk web staging. | `https://<domain>` melayani web staging | 🔒 [doc 19, layanan](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/19-infrastruktur-azure.md#layanan-yang-dipilih) |
 
 ## Rincian pekerjaan
 
@@ -43,6 +46,10 @@ PostgreSQL di Docker Compose (`postgres:16-alpine`, database `draftaja_test_loca
 5. Serahkan lewat [H16](../serah-terima/H16.md). Cabut kunci setelah pameran.
 
 ### Staging dan urutan deploy
+
+Rancangan lengkap staging, termasuk layanan, jaringan, role database, rahasia, dan alur deploy, ada di 🔒 doc 19. Keputusan hosting dan region menunggu persetujuan Raja di ADR 0006. Ringkasnya: Container Apps di Indonesia Central dengan `ca-web` eksternal, `ca-api` internal, `ca-worker`, serta job scheduler dan migrate; PostgreSQL Flexible Server Burstable; Azure Files untuk `storage/app`; Key Vault dengan managed identity.
+
+INF-03 menulis semua itu sebagai Bicep, INF-07 menambahkan workflow deploy, dan INF-12 memasang domain. Octaf mengerjakan bagian aplikasinya di CORE-5 (INF-04 sampai INF-06).
 
 Staging dipakai untuk mencoba urutan deploy sebelum rilis MVP. Variabel yang mengikat kedua repo ada di `docs/ENV_CONTRACT.md` API, dan salah satu saja keliru membuat login gagal.
 
@@ -76,6 +83,7 @@ Tidak ada. Milestone ini bisa dikerjakan tanpa menunggu anggota lain.
 
 ## Selesai bila
 
+- [ ] INF-03, INF-07, dan INF-12 selesai; staging bisa di-deploy ulang dari nol dengan Bicep
 - [ ] H15 dan H16 terkirim lewat kanal aman
 - [ ] Staging bisa menjalankan pasangan commit `develop`
 - [ ] Urutan deploy dan rollback web dicoba sekali

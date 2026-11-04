@@ -27,15 +27,19 @@ Karena itu milestone ini dimulai dengan memperbaiki migrate di PostgreSQL. Perba
 
 | Butir | Pekerjaan | Kriteria terima | Sumber |
 |---|---|---|---|
-| Migrasi dari kosong | Memperbaiki penolakan migration `2026_10_28_000002` pada PostgreSQL yang dibuat dari nol, lalu menghapus `continue-on-error` dari job CI. | `php artisan migrate` di PostgreSQL 16 kosong selesai; job CI PostgreSQL gagal bila ada tes gagal | log job CI "Tes (PostgreSQL 16)" |
+| BE-18 | Memperbaiki penolakan migration `2026_10_28_000002` pada PostgreSQL yang dibuat dari nol, lalu menghapus `continue-on-error` dari job CI. | `php artisan migrate` di PostgreSQL 16 kosong selesai; job CI PostgreSQL gagal bila ada tes gagal | 🔒 [S-23](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/18-audit-pasca-split.md#proses-lintas-repo) |
 | Doc 10 langkah 1 | Menjalankan seluruh rangkaian tes, migrasi dari kosong, upgrade dari baseline, `documents:schema-check`, dan uji pemulihan di PostgreSQL 16 sekali pakai. | Semua lulus; hasil tercatat di doc 10 bagian verifikasi | 🔒 [doc 10, langkah verifikasi](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/10-project-status-and-gaps.md#langkah-verifikasi-yang-harus-dijadwalkan) |
 | Konkurensi | Menjalankan tes `*PostgresConcurrencyTest` yang selama ini dilewati di SQLite. | Tes konkurensi lulus | 🔒 [doc 16, lapisan uji](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/16-strategi-pengujian.md#lapisan-uji) |
 | BE-14 | Menyamakan aturan validasi buat dan ubah dokumen (bila kapasitas ada). | Tes: nilai yang diterima saat buat juga diterima saat ubah | 🔒 [S-18](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/18-audit-pasca-split.md#kebenaran-perilaku) |
 | BE-16 | Menghapus parser lama yang tidak dipakai (bila kapasitas ada). | `php artisan test` dan Larastan hijau; entri baseline terkait ikut dihapus | 🔒 [S-20](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/18-audit-pasca-split.md#kebenaran-perilaku) |
+| INF-04 | Role PostgreSQL `draftaja_migrator`, `draftaja_app`, `draftaja_readonly` per database staging. | `ca-api` berjalan dengan `draftaja_app`; migrate hanya lewat job | 🔒 [doc 19, role](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/19-infrastruktur-azure.md#role-dan-hak-akses) |
+| INF-05 | Mount Azure Files di `/var/www/html/storage/app` untuk `ca-api` dan `ca-worker`, lalu uji tulis-baca dari kedua peran. | Unggah template di staging dianalisis worker sampai pola siap | 🔒 [doc 19, penyimpanan](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/19-infrastruktur-azure.md#penyimpanan-berkas) |
+| INF-06 | `LOG_CHANNEL=stderr` dan variabel baru dari doc 19 masuk `ENV_CONTRACT.md`, serta aturan `EnvContract` bila perlu. | `env:verify` lolos di staging | 🔒 [doc 19, variabel](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/19-infrastruktur-azure.md#variabel-environment-per-app) |
+| INF-10 | Uji pemulihan: PITR ke server baru, staging diarahkan ke sana, buka dokumen dan ekspor PDF. | Hasil tercatat di doc 10 | 🔒 [doc 19, backup](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/19-infrastruktur-azure.md#backup-restore-dan-pemulihan-bencana) |
 
 ## Rincian pekerjaan
 
-### Migrasi dari kosong di PostgreSQL
+### BE-18 · Migrasi dari kosong di PostgreSQL
 
 Langkah:
 
@@ -62,6 +66,16 @@ Setelah [H15](../serah-terima/H15.md):
 ### Konkurensi
 
 `AcceptDocumentPostgresConcurrencyTest` dan `PatternLearnerPostgresConcurrencyTest` menguji penguncian baris (`lockForUpdate`) saat dua permintaan menerima usulan atau memesan kuota bersamaan. SQLite tidak mendukung penguncian itu, jadi tes ini hanya bermakna di PostgreSQL. Di log CI terakhir keduanya ikut gagal karena migrate gagal. Setelah migrate diperbaiki, keduanya harus lulus tanpa diubah.
+
+### INF-04 sampai INF-06 · Aplikasi di staging
+
+Tiga pekerjaan ini menyiapkan aplikasi untuk staging yang dibangun Raja di PM-3:
+
+1. INF-04: buat role per database dengan SQL contoh di doc 19. `ca-api`, `ca-worker`, dan job scheduler memakai `draftaja_app` (tanpa DDL); job migrate memakai `draftaja_migrator`.
+2. INF-05: mount Azure Files ke `storage/app`. Periksa izin berkas, karena image membuat direktori dengan pemilik `www-data`, sedangkan share SMB punya pemilik dan mode sendiri.
+3. INF-06: tambahkan `LOG_CHANNEL=stderr` dan variabel lain dari doc 19 ke `ENV_CONTRACT.md` dan `.env.example`, supaya log Laravel masuk Log Analytics.
+
+INF-10 (uji pemulihan) dijalankan bersama verifikasi data nyata di atas, setelah H15.
 
 ### BE-14 · Validasi buat dan ubah dokumen
 
@@ -96,6 +110,7 @@ Label sama persis dengan panah di diagram profil.
 
 ## Selesai bila
 
+- [ ] INF-04, INF-05, INF-06 selesai di staging dan INF-10 tercatat di doc 10
 - [ ] Job CI PostgreSQL hijau tanpa `continue-on-error`
 - [ ] Hasil PostgreSQL 16 tercatat di doc 10
 - [ ] H21 terkirim ke Raja

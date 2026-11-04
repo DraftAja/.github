@@ -26,10 +26,9 @@ Layanan web untuk sekretaris, admin instansi, dan panitia kegiatan. Pilih templa
 1. [Repositori](#repositori)
 2. [Tim dan peran](#tim-dan-peran)
 3. [Kolaborasi: milestone, alur paralel, dan serah terima](#kolaborasi-milestone-alur-paralel-dan-serah-terima)
-4. [MVP](#mvp)
-5. [Arsitektur sistem end-to-end](#arsitektur-sistem-end-to-end)
-6. [Teknologi dan versi](#teknologi-dan-versi)
-7. [Mulai di sini untuk anggota baru](#mulai-di-sini-untuk-anggota-baru)
+4. [Arsitektur sistem end-to-end](#arsitektur-sistem-end-to-end)
+5. [Teknologi dan versi](#teknologi-dan-versi)
+6. [Mulai di sini untuk anggota baru](#mulai-di-sini-untuk-anggota-baru)
 
 > [!NOTE]
 > Repo kode bersifat privat. Tautan bertanda 🔒 hanya bisa dibuka anggota organisasi yang sudah masuk ke GitHub. Ringkasan setiap milestone ditulis langsung di halaman ini agar bisa dibaca tanpa membuka berkas dokumentasi satu per satu.
@@ -49,7 +48,7 @@ Monolit Laravel + Inertia dipecah menjadi dua repo pada **3 November 2026**. Sej
 
 | Anggota | Peran | Alias branch | Area | Dokumen yang dipegang |
 |---|---|---|---|---|
-| **Ahmad Raja Fadhil** ([@rajafadhil](https://github.com/rajafadhil)) | Project Manager | `pm` | Kontrak tim, konfigurasi repo, CI/CD, rilis dan tag, keputusan produk | API `docs/01`, `06`, `11` sampai `14`, `17`, `TEAM_CONTRACT.md` |
+| **Ahmad Raja Fadhil** ([@rajafadhil](https://github.com/rajafadhil)) | Project Manager | `pm` | Kontrak tim, konfigurasi repo, CI/CD, rilis dan tag, keputusan produk | API `docs/01`, `06`, `11` sampai `14`, `17`, `19`, `docs/adr/`, `TEAM_CONTRACT.md` |
 | **M. Octafachdiansyah D.** ([@octafex](https://github.com/octafex)) | BE 1, modul inti | `be-core` | Auth, dokumen (laporan), template, ekspor, keamanan data | API `docs/04`, `05`, `07`, `18` (butir `be-core`) |
 | **Abdurrahman Abdul Hamid** ([@abdhaamed](https://github.com/abdhaamed)) | BE 2, modul AI | `be-ai` | Pembelajaran pola, perapihan, generate dan chat, kuota AI | API `docs-ai/`, `docs/08`, `18` (butir `be-ai`) |
 | **Alvira Risky** | Frontend | `fe` | Seluruh draftaja-web | web `docs/03` sampai `07` |
@@ -428,8 +427,13 @@ Versi belum ditetapkan untuk teknologi yang belum masuk kode. Versinya dipilih d
 | Teknologi | Rencana pemakaian | Kapan |
 |---|---|---|
 | `@axe-core/playwright` | Pemeriksaan aksesibilitas otomatis di 5 halaman utama (FE-26) | Fase 2, butuh persetujuan dependensi |
-| Layanan SMTP | Verifikasi email, undangan ruang kerja, notifikasi tinjauan. Penyedia belum dipilih. | Fase 3 |
-| Azure Blob Storage | Pengganti volume bersama untuk berkas unggahan | Fase 5 |
+| Azure Container Apps | Hosting `ca-web`, `ca-api` (ingress internal), `ca-worker`, serta job scheduler dan migrate. Diusulkan di ADR 0006, menunggu keputusan PM. | PM-3 (INF-03), 🔒 [doc 19](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/19-infrastruktur-azure.md) |
+| Azure Files | Mount `storage/app` bersama untuk peran API dan worker | PM-3, CORE-5 (INF-05) |
+| Azure Key Vault, managed identity | Rahasia aplikasi dibaca Container Apps tanpa kunci di image | PM-3 (INF-03) |
+| Azure Container Registry, Log Analytics | Image bertag SHA dan log container | PM-3 (INF-03, INF-07) |
+| Azure Communication Services Email | SMTP port 587 untuk verifikasi email dan atur ulang kata sandi, lalu undangan ruang kerja dan notifikasi tinjauan. Usulan; penyedia SMTP lain dipakai bila Email terdampak pemberitahuan pensiun layanan. | CORE-3 (INF-08), fase 3 untuk undangan |
+| Bicep | Infrastruktur sebagai kode di `infra/` Backend-Laravel | PM-3 (INF-03) |
+| Azure Blob Storage | Pengganti Azure Files untuk berkas unggahan, lewat adapter Flysystem | Fase 5 |
 | Laravel Socialite, Google OAuth | Masuk dengan akun Google. Masih usulan, menunggu keputusan PM. | Fase 5 |
 | Gerbang pembayaran | Paket berbayar per ruang kerja. Penyedia belum dipilih. | Fase 5 |
 

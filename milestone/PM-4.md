@@ -23,6 +23,8 @@ MVP (fase 0 sampai 2) dibekukan dan dirilis sebagai pasangan versi API dan web y
 | Risiko | Menerima tertulis risiko R1 sampai R9 dan temuan P0 yang belum selesai. | Daftar penerimaan risiko tercatat di doc 10 | 🔒 [doc 07, risiko](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/07-authentication-security.md#risiko) |
 | Freeze | Mengumumkan feature freeze: setelah ini hanya perbaikan bug dan dokumentasi. | PR fitur baru ditahan sampai setelah rilis | 🔒 [kontrak bagian 11](https://github.com/DraftAja/Backend-Laravel/blob/develop/TEAM_CONTRACT.md#11-rilis-milestone-dan-code-freeze) |
 | Rilis | Membuat `release/*` dari `develop`, memberi tag dengan nama sama di kedua repo, dan mengisi tabel pasangan rilis di doc 17. | Tag ada di kedua repo; repo gabungan mencatat pasangan commit | 🔒 [doc 17, urutan merge dan deploy](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/17-kolaborasi-dan-serah-terima.md#urutan-merge-dan-deploy) |
+| INF-09 | Peringatan Azure Monitor dan action group: kesehatan API, restart berulang, job gagal, CPU, storage, dan koneksi PostgreSQL, biaya. | Semua peringatan di doc 19 aktif | 🔒 [doc 19, pemantauan](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/19-infrastruktur-azure.md#pemantauan-dan-peringatan) |
+| INF-11 | Produksi: server General Purpose dengan HA zone-redundant, retensi backup 35 hari, job `pg_dump` mingguan. Hanya bila anggaran cukup; bila tidak, staging dipakai untuk pameran dan risikonya dicatat. | Keputusan tercatat; bila dibangun, uji pemulihan lulus | 🔒 [doc 19, backup](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/19-infrastruktur-azure.md#backup-restore-dan-pemulihan-bencana) |
 
 ## Rincian pekerjaan
 
@@ -31,6 +33,10 @@ MVP (fase 0 sampai 2) dibekukan dan dirilis sebagai pasangan versi API dan web y
 1. Baca issue `siap-rilis` dari [H22](../serah-terima/H22.md) dan bagian verifikasi doc 10 dari [H21](../serah-terima/H21.md).
 2. Untuk setiap kriteria yang tidak terpenuhi, pilih: tunda rilis sampai diperbaiki, atau terima risiko tertulis. Penerimaan risiko ditulis di doc 10 dengan alasan dan rencana perbaikannya.
 3. Untuk risiko R1 sampai R9 di doc 07 dan temuan P0 di doc 18 yang belum selesai, lakukan hal yang sama.
+
+### Infrastruktur rilis
+
+Sebelum tag dibuat, pastikan peringatan INF-09 aktif supaya kegagalan saat pameran terlihat. Untuk INF-11, putuskan apakah produksi dibangun terpisah. Server General Purpose dengan HA memakan kredit jauh lebih cepat daripada Burstable, dan Indonesia Central tidak punya backup geo-redundan, sehingga salinan `pg_dump` harus dibuat sendiri. Lokasi salinan itu (di Indonesia atau di region lain) adalah keputusan Raja karena menyangkut UU PDP.
 
 ### Feature freeze
 
@@ -59,6 +65,7 @@ Tidak ada serah terima keluar. Hasilnya dipakai langsung di milestone berikutnya
 
 ## Selesai bila
 
+- [ ] INF-09 aktif dan keputusan INF-11 tercatat
 - [ ] 7 kriteria rilis diperiksa
 - [ ] Tag pasangan versi dibuat
 - [ ] Tabel pasangan rilis di doc 17 terisi
