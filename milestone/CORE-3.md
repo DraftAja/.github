@@ -13,9 +13,9 @@
 
 ## Tujuan
 
-Dokumen berhenti berpersona akademik: kategori memakai 8 kunci, identitas dokumen sesuai kantor, dokumen bisa difinalkan dan direvisi, dan ekspor mengikuti bentuk kategorinya.
+Dokumen berhenti berpersona akademik: kategori memakai 8 kunci, identitas dokumen sesuai kantor, dokumen bisa difinalkan dan direvisi, dan ekspor mengikuti bentuk kategorinya. Milestone ini juga menutup dua celah yang muncul begitu dokumen bisa final: konflik suntingan dari dua tab, dan verifikasi email yang belum diwajibkan.
 
-## Yang dikerjakan
+## Ringkasan pekerjaan
 
 | Butir | Pekerjaan | Kriteria terima | Sumber |
 |---|---|---|---|
@@ -27,31 +27,123 @@ Dokumen berhenti berpersona akademik: kategori memakai 8 kunci, identitas dokume
 | BE-10 | `MustVerifyEmail` di `User`. | Tes: akun belum terverifikasi menerima 409 `email_unverified` di rute aplikasi | 🔒 [S-17](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/18-audit-pasca-split.md#keamanan-dan-data) |
 | KF-EKS-02, KF-EKS-03 | Tata letak ekspor per kategori: Surat dan Notula tanpa sampul dan daftar isi. | Tes: DOCX Surat tidak memuat sampul dan daftar isi; DOCX `PRP-01` memuat keduanya | 🔒 [doc 12, ekspor](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/12-kebutuhan-sistem.md#ekspor-eks) |
 
+## Rincian pekerjaan
+
+### KF-TPL-05 · Kategori 8 kunci
+
+Masalah sekarang: `templates.category` adalah teks bebas dengan nilai lama `laporan_kegiatan`, `laporan_berkala`, dan `notulen`. Dokumen tidak punya kategori, hanya `report_type` berisi nilai akademik.
+
+Langkah:
+
+1. Buat enum `App\Enums\DocumentCategory` dengan 8 kasus: `laporan`, `proposal`, `notula`, `dokumentasi_ti`, `sop`, `surat`, `ringkasan`, `rencana_kerja`. Tambah method `label()` untuk teks tampilan.
+2. Migration baru: tambah kolom `category` di `laporans`, isi dari `report_type` memakai tabel pemetaan dari [H9](../serah-terima/H9.md). Migration lain memetakan nilai lama `templates.category`.
+3. Cast `category` ke enum di model `Laporan` dan `Template`. Ulangi nilai bawaan migration di `$attributes` model (aturan di `CLAUDE.md`).
+4. Validasi `Rule::enum(DocumentCategory::class)` di semua request yang menerima kategori.
+5. Tambah `category` ke `LaporanResource` dan `TemplateResource`. `report_type` tetap dikirim dan ditandai deprecated (rencana penggantian field di doc 18).
+
+Bukti selesai: tes migrasi data lama ke kunci baru; tes 422 untuk nilai di luar enum.
+
+### KF-DOK-04 · Kolom identitas kantor
+
+Masalah sekarang: `laporans` masih memuat `nim`, `prodi`, `mata_kuliah`, `dosen_pembimbing`, dan `tahun_ajaran`. `User::$fillable` juga menyebut `nim` dan `prodi`, padahal tabel `users` tidak punya kolom itu.
+
+Langkah:
+
+1. Migration baru menambah kolom pengganti sesuai H9. Usulan doc 04: `nomor_dokumen`, `tanggal_dokumen`, `unit_kerja`, `penandatangan_nama`, `penandatangan_jabatan`.
+2. Salin nilai yang bisa dipetakan dalam migration yang sama (`prodi` ke `unit_kerja`).
+3. Tambah kolom baru ke `LaporanResource` dan ke validasi `store` serta `update`.
+4. Berhenti mengirim kolom akademik di Resource setelah web memakai kolom baru. Drop kolom di migration terpisah, paling cepat satu sprint kemudian.
+5. Hapus `nim` dan `prodi` dari `User::$fillable`.
+
+Bukti selesai: tes `POST` dan `PUT /laporan` menyimpan kolom baru; tes `LaporanResource` tidak memuat kolom akademik setelah langkah 4.
+
+Hindari: mengedit migration lama, termasuk merapikannya dengan Pint.
+
+### S-22 · Jenis dokumen akademik dihapus
+
+Masalah sekarang: `LaporanController::REPORT_TYPES` berisi Makalah, Proposal, Laporan Praktikum, Studi Kasus, Skripsi, dan dikirim apa adanya ke web lewat `GET /laporan/options`. `createDefaultSections` membuat bab akademik (Pendahuluan, Pembahasan, Penutup, Daftar Pustaka).
+
+Langkah: ganti sumber pilihan dengan `DocumentCategory`, dan ganti bab bawaan per kategori dengan struktur minimal yang netral (misalnya satu bagian "Isi" untuk dokumen tanpa template). Pesan error yang memakai kata "pattern" atau "templat" ikut diganti menjadi "pola" dan "template".
+
+Bukti selesai: tes `GET /laporan/options` tidak memuat istilah akademik; tes dokumen baru tanpa template tidak berisi "Daftar Pustaka".
+
+### BE-05 · Final dan revisi
+
+Masalah sekarang: model dan policy sudah mengunci dokumen final, dan `markAsFinal()` ada, tetapi tidak ada endpoint yang memanggilnya.
+
+Langkah:
+
+1. Proposal kontrak untuk dua endpoint, disetujui Alvira dan Louis.
+2. `POST /laporan/{id}/finalize`: otorisasi pemilik dan status `draft`, panggil `markAsFinal()`, balas `{data: LaporanResource}`. Dokumen yang sudah final membalas 403 `document_final`.
+3. Migration: kolom `revision_of_id` (FK ke `laporans`, nullable, dengan `->index()`) dan `revision_no` (integer, bawaan 0).
+4. `POST /laporan/{id}/revisions`: dokumen sumber harus final dan milik pengguna. Dalam satu transaksi, salin dokumen dan semua bagiannya (termasuk hubungan induk dan anak), isi `revision_of_id`, naikkan `revision_no`, status `draft`. Balas 201.
+5. Ekspor dokumen final sudah bisa sejak BE-01 di CORE-1. Periksa ulang dengan tes.
+6. `composer api:spec`, lalu perbarui doc 05 dan doc 06 API.
+
+Bukti selesai: tes final mengisi `finalized_at`; tes final kedua kali 403 `document_final`; tes suntingan dokumen final 403; tes revisi membuat draf baru dengan jumlah bagian sama dan dokumen asal tetap final.
+
+### BE-07 · Konflik suntingan dua tab
+
+Masalah sekarang: `PUT /sections/{id}` tidak memeriksa versi. Editor menyimpan otomatis 1,5 detik setelah ketikan terakhir, jadi dua tab yang membuka bagian sama saling menimpa tanpa peringatan.
+
+Langkah:
+
+1. Terima field opsional `base_updated_at` (ISO 8601, nilai `updated_at` bagian saat dimuat klien).
+2. Bila dikirim dan tidak sama dengan `updated_at` di basis data, balas 409 `revision_changed` dengan isi bagian terbaru di body.
+3. Bila tidak dikirim, simpan seperti sekarang supaya web versi lama tetap jalan.
+4. Pakai field body, bukan header `If-Match`, karena proxy web hanya meneruskan daftar header tertentu.
+
+Bukti selesai: tes dua pembaruan dengan `base_updated_at` yang sama, yang kedua 409; tes tanpa field tetap 200.
+
+### BE-10 · Verifikasi email diwajibkan
+
+Masalah sekarang: `User` belum mengimplementasikan `MustVerifyEmail`, jadi middleware `verified` tidak pernah menolak dan `must_verify_email` selalu `false`. Undangan ruang kerja (fase 3) tidak aman tanpa verifikasi.
+
+Langkah: implementasikan `MustVerifyEmail` di `User`. Pastikan email verifikasi menaut ke `FRONTEND_URL/verifikasi-email?url=...`, sama dengan alur yang sudah ada. Akun uji di `UserSeeder` diberi `email_verified_at` supaya E2E dan uji manual tidak terhalang.
+
+Bukti selesai: tes akun belum terverifikasi menerima 409 `email_unverified` di `GET /me`; tes akun terverifikasi 200; tes E2E web yang mendaftar akun baru tetap lulus atau disesuaikan bersama Alvira.
+
+### KF-EKS-02, KF-EKS-03 · Ekspor per kategori
+
+Masalah sekarang: ekspor DOCX selalu menyisipkan sampul dan daftar isi, sehingga surat dan notula hasil ekspor salah bentuk.
+
+Langkah: tentukan tata letak dari kategori dan kode template. Surat, Notula, SOP, dan Ringkasan tanpa sampul dan tanpa daftar isi. Daftar isi hanya untuk template yang menyebutnya di spesifikasi, misalnya `PRP-01`, `LAP-02`, `DTI-01` (daftar lengkap di doc 08 API). Terapkan aturan yang sama di PDF.
+
+Bukti selesai: tes DOCX dokumen kategori Surat tidak memuat sampul dan daftar isi; tes DOCX `PRP-01` memuat keduanya. Tes ini bisa memakai definisi template sementara sampai 64 template masuk di CORE-4.
+
+## Urutan kerja yang disarankan
+
+1. BE-07 dan BE-10, yang tidak menunggu keputusan produk.
+2. BE-05, yang bergantung pada BE-01 di CORE-1.
+3. Setelah [H9](../serah-terima/H9.md): KF-TPL-05, lalu KF-DOK-04 dan S-22.
+4. KF-EKS-02 dan KF-EKS-03, yang membutuhkan kategori.
+
+Kirim [H12](../serah-terima/H12.md) setelah BE-05 dan BE-07 merge. Alvira bisa mulai tanpa menunggu butir kategori.
+
 ## Serah terima masuk
 
 Label sama persis dengan panah di diagram profil.
 
 | Label di diagram | Dari | Yang diterima | Dipakai untuk |
 |---|---|---|---|
-| **H9 · PM-2 → CORE-3 · kategori dan kolom identitas** | Raja (PM), [PM-2](PM-2.md) | Keputusan 8 kunci kategori, pemetaan nilai lama, dan kolom identitas pengganti kolom akademik | Enum `DocumentCategory` dan migrasi kolom (KF-DOK-04) |
+| [**H9 · PM-2 → CORE-3 · kategori dan kolom identitas**](../serah-terima/H9.md) | Raja (PM), [PM-2](PM-2.md) | Keputusan 8 kunci kategori, pemetaan nilai lama, dan kolom identitas pengganti kolom akademik | Enum `DocumentCategory` dan migrasi kolom (KF-DOK-04) |
 
 ## Serah terima keluar
 
 | Label di diagram | Ke | Yang diserahkan | Kanal |
 |---|---|---|---|
-| **H12 · CORE-3 → WEB-3 · final, revisi, konflik** | Alvira (FE), [WEB-3](WEB-3.md) | `POST /laporan/{id}/finalize`, `POST /laporan/{id}/revisions`, 409 `revision_changed` | PR API merge, label `butuh-fe` di issue web |
+| [**H12 · CORE-3 → WEB-3 · final, revisi, konflik**](../serah-terima/H12.md) | Alvira (FE), [WEB-3](WEB-3.md) | `POST /laporan/{id}/finalize`, `POST /laporan/{id}/revisions`, 409 `revision_changed` | PR API merge, label `butuh-fe` di issue web |
 
 ## Selesai bila
 
-- [ ] Semua tes di kolom kriteria lulus
-- [ ] Doc 04 dan 05 diperbarui untuk kolom dan endpoint baru
+- [ ] Semua tes di kolom kriteria lulus, termasuk di job CI PostgreSQL
+- [ ] Doc 04, 05, dan 06 diperbarui untuk kolom dan endpoint baru
 - [ ] H12 terkirim ke Alvira
 
 ## Dokumen rujukan lain
 
-- 🔒 [Roadmap fase 1](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/10-project-status-and-gaps.md#fase-1-penyelarasan-persona)
-- 🔒 [Doc 16 tes per fase](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/16-strategi-pengujian.md#tes-yang-wajib-ditambah-per-fase)
-- 🔒 [Doc 04 basis data](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/04-database-design.md)
+- 🔒 [Doc 04, kolom yang harus diganti](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/04-database-design.md)
+- 🔒 [Doc 06, status dokumen](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/06-business-workflows.md#status-dokumen)
 - 🔒 [Rencana penggantian field](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/18-audit-pasca-split.md#rencana-penggantian-field)
 
 ---

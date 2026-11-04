@@ -15,7 +15,7 @@
 
 Aturan main untuk dua repo berlaku sebelum kontrak API mulai berubah. Setelah milestone ini, setiap PR otomatis meminta review pemilik kode dan setiap anggota bisa diberi tugas di GitHub.
 
-## Yang dikerjakan
+## Ringkasan pekerjaan
 
 | Butir | Pekerjaan | Kriteria terima | Sumber |
 |---|---|---|---|
@@ -25,6 +25,87 @@ Aturan main untuk dua repo berlaku sebelum kontrak API mulai berubah. Setelah mi
 | Label | Membuat label dari kontrak bagian 12 dan doc 17 di ketiga repo: `be-core`, `be-ai`, `fe`, `qa`, `docs`, `bug`, `feature`, `blocked`, `priority-high`, `kontrak`, `kontrak-disetujui`, `memecah-kontrak`, `butuh-api`, `butuh-fe`, `siap-rilis`. | Semua label tersedia dan dipakai template issue | 🔒 [doc 17, label issue](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/17-kolaborasi-dan-serah-terima.md#label-issue) |
 | Organisasi | Mengundang Alvira dan Louis ke organisasi DraftAja, lalu membuat GitHub Milestone atau Projects untuk 25 milestone ini dengan tanggal jatuh tempo. | Kelima anggota bisa di-assign ke issue dan menjadi pemilik kode | 🔒 [kontrak bagian 12](https://github.com/DraftAja/Backend-Laravel/blob/develop/TEAM_CONTRACT.md#12-issue-dan-pelacakan-pekerjaan) |
 
+## Rincian pekerjaan
+
+### Kontrak tim v1.1
+
+Masalah sekarang: `TEAM_CONTRACT.md` v1.0.1 masih menulis "seluruh kode berada dalam satu monorepo". Bagian 3 menggambarkan struktur Laravel + Inertia (`resources/js`, `vite.config.js`) yang sudah tidak ada di repo API. Lampiran A berisi CODEOWNERS untuk folder yang sudah pindah ke repo web atau tidak pernah ada, misalnya `PatternLearningController.php` dan `ExportController.php`.
+
+Perubahan yang diusulkan, dari doc 17 API:
+
+| Bagian | Perubahan |
+|---|---|
+| Pembuka | Dua repo kode ditambah repo gabungan dan repo `.github`, menggantikan "satu monorepo" |
+| 3 | Dua tabel kepemilikan, satu per repo. Seluruh Frontend-Nextjs milik `fe`. Di Backend-Laravel, area `be-core` dan `be-ai` mengikuti pembagian di doc 05 API. |
+| 4, 7 | Aturan PR lintas repo: proposal kontrak lebih dulu, PR API dengan `openapi.json` baru merge sebelum PR web, PR saling merujuk |
+| 10 | `package.json` di repo API hanya untuk Puppeteer; paket JS antarmuka sepenuhnya milik `fe` di repo web |
+| 12 | Label tambahan dari doc 17 |
+| 13 | Definition of Done tambahan: `composer api:spec` di PR API, tipe dari `schema.d.ts` di PR web, tes untuk setiap `code` error baru |
+| Lampiran A | CODEOWNERS per repo, lihat di bawah |
+| Lampiran B | Branch protection yang sama di kedua repo, dengan nama status check yang sebenarnya |
+
+Langkah: buka PR ke `develop` di Backend-Laravel, minta persetujuan kelima anggota di PR, lalu merge setelah minimal 4 setuju. Naikkan versi di kepala dokumen menjadi 1.1 dengan tanggal.
+
+### CODEOWNERS
+
+Isi minimal Backend-Laravel `.github/CODEOWNERS`. Username Hamid, Octaf, dan Raja tertulis di halaman profil. Username Alvira dan Louis diisi setelah keduanya masuk organisasi.
+
+| Path | Pemilik |
+|---|---|
+| `*` | Raja |
+| `/app/Services/Ai/`, `/app/Jobs/Ai/`, `/app/Http/Controllers/Ai*`, `/app/Http/Controllers/DocumentCleanupController.php`, `/app/Http/Requests/Ai/`, `/config/ai.php`, `/docs-ai/`, `/tests/Unit/Ai/` | Hamid |
+| `/app/Http/Controllers/Auth/`, `LaporanController.php`, `TemplateController.php`, `ReportSectionController.php`, `SectionController.php`, `/app/Policies/`, `/app/Services/Documents/`, `/app/Services/Export/`, `/app/Http/Resources/` | Octaf |
+| `/docs/api/openapi.json` | Octaf, Hamid, Alvira |
+| `/routes/`, `/database/migrations/`, `/composer.json` | Raja, Octaf, Hamid |
+| `/tests/Feature/`, `/tests/Fixtures/`, `/docs/qa/` | Louis |
+
+Frontend-Nextjs: `*` milik Alvira; `/contracts/` dan `/src/lib/api/` juga milik Octaf dan Hamid; `/tests/e2e/` juga milik Louis.
+
+Pemilik di CODEOWNERS harus punya akses tulis ke repo, kalau tidak GitHub mengabaikan barisnya.
+
+### Branch protection
+
+Di Settings, bagian Branches, untuk `main` dan `develop` kedua repo:
+
+| Aturan | `develop` | `main` |
+|---|---|---|
+| Wajib PR | ya | ya |
+| Jumlah approval | 1 | 2 |
+| Review pemilik kode | wajib | wajib |
+| Status check wajib, API | "Audit, gaya, analisis statis, kontrak", "Tes (SQLite)", "Tes (PostgreSQL 16)", "Build image" | sama |
+| Status check wajib, web | "Audit, tipe, lint, tes, build", "E2E terhadap draftaja-api", "Build image" | sama |
+| Branch harus terbaru sebelum merge | ya | ya |
+| Force push dan hapus branch | dilarang | dilarang |
+
+Job "Tes (PostgreSQL 16)" saat ini hijau karena `continue-on-error`, meskipun tesnya gagal. Status check itu baru bermakna setelah Octaf memperbaikinya di [CORE-5](CORE-5.md).
+
+### Label
+
+Buat 15 label di Backend-Laravel, Frontend-Nextjs, dan DraftAja. Template issue di repo `.github` sudah memakai `feature`, `kontrak`, dan `bug`, jadi label itu harus ada lebih dulu. Cara cepat dengan GitHub CLI, misalnya:
+
+```bash
+for repo in DraftAja/Backend-Laravel DraftAja/Frontend-Nextjs DraftAja/DraftAja; do
+  gh label create kontrak-disetujui --repo "$repo" --color 0E8A16 --description "Proposal kontrak final" --force
+done
+```
+
+### Organisasi dan pelacakan
+
+1. Undang Alvira dan Louis ke organisasi dengan akses tulis ke kedua repo kode.
+2. Buat GitHub Milestone di repo yang sesuai untuk 25 milestone, dengan tanggal jatuh tempo. Milestone lintas repo (PM-1, QA-x) dibuat di repo API.
+3. Atau buat satu GitHub Project tingkat organisasi dengan kolom `Backlog`, `To Do`, `In Progress`, `In Review`, `Done` (kontrak bagian 12), dan field Milestone.
+4. Buat satu issue per butir pekerjaan dengan template "Tugas milestone".
+
+## Urutan kerja yang disarankan
+
+1. Undang Alvira dan Louis, karena CODEOWNERS butuh akun mereka.
+2. Label.
+3. PR kontrak v1.1 dan CODEOWNERS.
+4. Branch protection setelah CODEOWNERS merge.
+5. Milestone dan issue.
+
+Kirim [H1](../serah-terima/H1.md) setelah langkah 4.
+
 ## Serah terima masuk
 
 Tidak ada. Milestone ini bisa dikerjakan tanpa menunggu anggota lain.
@@ -33,7 +114,7 @@ Tidak ada. Milestone ini bisa dikerjakan tanpa menunggu anggota lain.
 
 | Label di diagram | Ke | Yang diserahkan | Kanal |
 |---|---|---|---|
-| **H1 · PM-1 → CORE-2 · kontrak tim v1.1, CODEOWNERS** | Octaf (BE 1), [CORE-2](CORE-2.md) | `TEAM_CONTRACT.md` v1.1, CODEOWNERS per repo, branch protection, label. Berlaku untuk semua anggota. | PR ke `develop`, pengumuman di grup |
+| [**H1 · PM-1 → CORE-2 · kontrak tim v1.1, CODEOWNERS**](../serah-terima/H1.md) | Octaf (BE 1), [CORE-2](CORE-2.md) | `TEAM_CONTRACT.md` v1.1, CODEOWNERS per repo, branch protection, label. Berlaku untuk semua anggota. | PR ke `develop`, pengumuman di grup |
 
 ## Selesai bila
 
@@ -44,9 +125,8 @@ Tidak ada. Milestone ini bisa dikerjakan tanpa menunggu anggota lain.
 
 ## Dokumen rujukan lain
 
-- 🔒 [TEAM_CONTRACT.md](https://github.com/DraftAja/Backend-Laravel/blob/develop/TEAM_CONTRACT.md)
-- 🔒 [Temuan S-19](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/18-audit-pasca-split.md#proses-lintas-repo)
-- 🔒 [Doc 17 kolaborasi](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/17-kolaborasi-dan-serah-terima.md)
+- 🔒 [`TEAM_CONTRACT.md`](https://github.com/DraftAja/Backend-Laravel/blob/develop/TEAM_CONTRACT.md)
+- 🔒 [Doc 17, kolaborasi dan serah terima](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/17-kolaborasi-dan-serah-terima.md)
 
 ---
 
