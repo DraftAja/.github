@@ -64,6 +64,19 @@ stateDiagram-v2
 | 2 | H20 · WEB-5 → QA-5 · E2E MVP hijau | [H20](H20.md) |
 | 2 | H21 · CORE-5 → PM-4 · hasil tes PostgreSQL 16 | [H21](H21.md) |
 | 2 | H22 · QA-5 → PM-4 · label siap-rilis | [H22](H22.md) |
+| U | H23 · PM-6 → CORE-6 · ADR usaha dan batas add-on | [H23](H23.md) |
+| U | H24 · PM-6 → AI-6 · ADR 0008 dan dependensi disetujui | [H24](H24.md) |
+| U | H25 · QA-6 → CORE-6 · kasus uji rumus disetujui | [H25](H25.md) |
+| U | H26 · QA-6 → AI-6 · kasus uji impor dan ekspor disetujui | [H26](H26.md) |
+| U | H27 · CORE-6 → WEB-6 · openapi usaha, uang, stok | [H27](H27.md) |
+| U | H28 · CORE-6 → AI-6 · service uang dan stok | [H28](H28.md) |
+| U | H29 · CORE-7 → WEB-7 · openapi mitra dan invoice | [H29](H29.md) |
+| U | H30 · CORE-7 → AI-7 · data invoice untuk rekap dan pengingat | [H30](H30.md) |
+| U | H31 · AI-6 → WEB-7 · openapi lembar kerja, impor, ekspor | [H31](H31.md) |
+| U | H32 · AI-7 → WEB-7 · openapi ringkasan, teks ke tabel, pengingat | [H32](H32.md) |
+| U | H33 · AI-7 → QA-7 · hasil regresi prompt teks ke tabel | [H33](H33.md) |
+| U | H34 · WEB-7 → QA-7 · Fase U siap uji | [H34](H34.md) |
+| U | H35 · QA-7 → PM-4 · label siap-rilis Fase U | [H35](H35.md) |
 
 ## Daftar periksa serah terima QA
 

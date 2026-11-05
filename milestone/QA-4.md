@@ -9,7 +9,7 @@
 | Repo | uji terhadap pasangan commit `develop` |
 | Contoh branch | `test/qa-qa4-katalog-dan-regresi` |
 | Mulai setelah | [QA-3](QA-3.md) selesai, menerima H18, H19 |
-| Lanjut ke | [QA-5](QA-5.md) |
+| Lanjut ke | [QA-5](QA-5.md), dan [QA-6](QA-6.md) bila Fase U dikerjakan |
 
 ## Tujuan
 

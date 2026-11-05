@@ -1,4 +1,4 @@
-[Profil organisasi](https://github.com/DraftAja) · [Semua milestone](README.md) · Sebelumnya: [AI-4](AI-4.md)
+[Profil organisasi](https://github.com/DraftAja) · [Semua milestone](README.md) · Sebelumnya: [AI-4](AI-4.md) · Berikutnya: [AI-6](AI-6.md)
 
 # AI-5 · Regresi prompt nol fakta tambahan
 
@@ -9,7 +9,7 @@
 | Repo | Backend-Laravel |
 | Contoh branch | `test/be-ai-ai5-regresi-prompt` |
 | Mulai setelah | [AI-4](AI-4.md) selesai |
-| Lanjut ke | selesai |
+| Lanjut ke | [AI-6](AI-6.md) bila Fase U dikerjakan, selain itu selesai |
 
 ## Tujuan
 

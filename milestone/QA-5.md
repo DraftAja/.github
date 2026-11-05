@@ -1,4 +1,4 @@
-[Profil organisasi](https://github.com/DraftAja) · [Semua milestone](README.md) · Sebelumnya: [QA-4](QA-4.md)
+[Profil organisasi](https://github.com/DraftAja) · [Semua milestone](README.md) · Sebelumnya: [QA-4](QA-4.md) · Berikutnya: [QA-6](QA-6.md)
 
 # QA-5 · Gerbang rilis MVP
 
@@ -9,7 +9,7 @@
 | Repo | uji terhadap pasangan commit `develop` |
 | Contoh branch | `test/qa-qa5-gerbang-rilis` |
 | Mulai setelah | [QA-4](QA-4.md) selesai, menerima H20 |
-| Lanjut ke | selesai |
+| Lanjut ke | [QA-7](QA-7.md) bila Fase U dikerjakan, selain itu selesai |
 
 ## Tujuan
 

@@ -188,10 +188,10 @@ Setiap repo punya dua tim. Agen pembangun mengerjakan, agen gerbang memeriksa. S
 | Anggota | Repo | Tim | Gerbang | Pemakaian utama |
 |---|---|---|---|---|
 | Raja · PM | Keduanya | Tidak memakai tim agen | Memutuskan "Open decisions" di `AGENTS.md` | Meringkas PR, memeriksa kelengkapan serah terima, menyusun proposal kontrak bersama BE |
-| Octaf · BE 1 | Backend-Laravel | Tim 1 Core Dokumen | API Tester | [CORE-1](../milestone/CORE-1.md) sampai [CORE-5](../milestone/CORE-5.md) |
-| Hamid · BE 2 | Backend-Laravel | Tim 2 AI | Reality Checker | [AI-1](../milestone/AI-1.md) sampai [AI-5](../milestone/AI-5.md) |
-| Alvira · FE | Frontend-Nextjs | Tim 1 Produk dan Antarmuka | UI Finish-Gate Reviewer | [WEB-1](../milestone/WEB-1.md) sampai [WEB-5](../milestone/WEB-5.md) |
-| Louis · QA | Frontend-Nextjs, juga tes di API | Tim 2 Kualitas dan Integrasi | Code Reviewer | [QA-1](../milestone/QA-1.md) sampai [QA-5](../milestone/QA-5.md) |
+| Octaf · BE 1 | Backend-Laravel | Tim 1 Core Dokumen | API Tester | [CORE-1](../milestone/CORE-1.md) sampai [CORE-7](../milestone/CORE-7.md) |
+| Hamid · BE 2 | Backend-Laravel | Tim 2 AI | Reality Checker | [AI-1](../milestone/AI-1.md) sampai [AI-7](../milestone/AI-7.md) |
+| Alvira · FE | Frontend-Nextjs | Tim 1 Produk dan Antarmuka | UI Finish-Gate Reviewer | [WEB-1](../milestone/WEB-1.md) sampai [WEB-7](../milestone/WEB-7.md) |
+| Louis · QA | Frontend-Nextjs, juga tes di API | Tim 2 Kualitas dan Integrasi | Code Reviewer | [QA-1](../milestone/QA-1.md) sampai [QA-7](../milestone/QA-7.md) |
 
 Contoh pemakaian per peran:
 

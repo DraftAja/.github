@@ -63,8 +63,8 @@ BE 1 = `be-core` (Octaf) dan BE 2 = `be-ai` (Hamid), sesuai `TEAM_CONTRACT.md` v
 
 Semua pekerjaan kolaborasi berawal dari milestone. Setiap anggota memegang lima milestone yang membatasi apa yang menjadi tanggung jawabnya, dan setiap milestone merujuk butir backlog yang sudah ditulis di dokumentasi kedua repo:
 
-- Backlog backend `BE-01` sampai `BE-17` dan temuan `S-xx`: 🔒 [API doc 18](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/18-audit-pasca-split.md#backlog-backend)
-- Backlog frontend `FE-01` sampai `FE-26`: 🔒 [web doc 06](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/06-backlog-frontend.md)
+- Backlog backend `BE-01` sampai `BE-30` dan temuan `S-xx`: 🔒 [API doc 18](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/18-audit-pasca-split.md#backlog-backend)
+- Backlog frontend `FE-01` sampai `FE-38`: 🔒 [web doc 06](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/06-backlog-frontend.md)
 - Fase roadmap 0 sampai 5: 🔒 [API doc 10](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/10-project-status-and-gaps.md#roadmap)
 - Kriteria rilis MVP: 🔒 [API doc 16](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/16-strategi-pengujian.md#kriteria-rilis-mvp)
 
@@ -78,6 +78,7 @@ MVP adalah **fase 0 sampai 2** dan harus selesai sebelum feature freeze minggu 1
 | 1 | Penyelarasan persona: kategori, final dan revisi, kuota | PM-2, CORE-3, AI-3, WEB-3, QA-3 | Sebelum fase 2 |
 | 2 | Katalog 64 template, kolom isian, regresi prompt | PM-3, CORE-4, CORE-5, AI-4, AI-5, WEB-4, WEB-5, QA-4, QA-5 | Feature freeze **minggu 14** |
 | Rilis | MVP dibekukan, `v1.0-final`, pameran | PM-4, PM-5 | Minggu 14, 15, 16 |
+| U | Dashboard usaha untuk UMKM: pencatatan, titip jual, invoice, lembar kerja, impor dan ekspor Excel, pengingat, add-on Multi-usaha | PM-6, CORE-6, CORE-7, AI-6, AI-7, WEB-6, WEB-7, QA-6, QA-7 | Bila kapasitas ada. Setiap anggota mulai setelah milestone fase 2 miliknya selesai. Sisa yang belum lulus di minggu 14 pindah ke fase 5. |
 | 3 dan 4 | Ruang kerja instansi, tinjau dan penomoran | Ditambahkan sebagai milestone baru bila kapasitas ada | Setelah MVP |
 
 ### Diagram alur paralel
@@ -183,6 +184,39 @@ sequenceDiagram
         QA->>PM: H22 · QA-5 → PM-4 · label siap-rilis
     end
 
+    rect rgba(168, 85, 247, 0.12)
+        Note over PM,QA: FASE U · Dashboard usaha · bila kapasitas, tidak menggeser minggu 14
+        par Bekerja bersamaan
+            Note over PM: 🏁 PM-6<br/>Keputusan produk Dashboard Usaha
+        and
+            Note over QA: 🏁 QA-6<br/>Rencana uji dan lembar hitung Fase U
+        end
+        PM->>CORE: H23 · PM-6 → CORE-6 · ADR usaha dan batas add-on
+        PM->>AI: H24 · PM-6 → AI-6 · ADR 0008 dan dependensi disetujui
+        QA->>CORE: H25 · QA-6 → CORE-6 · kasus uji rumus disetujui
+        QA->>AI: H26 · QA-6 → AI-6 · kasus uji impor dan ekspor disetujui
+        Note over CORE: 🏁 CORE-6<br/>Usaha, uang, dan stok
+        CORE->>WEB: H27 · CORE-6 → WEB-6 · openapi usaha, uang, stok
+        CORE->>AI: H28 · CORE-6 → AI-6 · service uang dan stok
+        par Bekerja bersamaan
+            Note over CORE: 🏁 CORE-7<br/>Mitra, titip jual, dan invoice
+        and
+            Note over AI: 🏁 AI-6<br/>Lembar kerja, impor, dan ekspor
+        and
+            Note over WEB: 🏁 WEB-6<br/>Kerangka Dashboard Usaha
+        end
+        CORE->>WEB: H29 · CORE-7 → WEB-7 · openapi mitra dan invoice
+        CORE->>AI: H30 · CORE-7 → AI-7 · data invoice untuk rekap dan pengingat
+        AI->>WEB: H31 · AI-6 → WEB-7 · openapi lembar kerja, impor, ekspor
+        Note over AI: 🏁 AI-7<br/>Ringkasan, teks ke tabel, dan pengingat
+        AI->>WEB: H32 · AI-7 → WEB-7 · openapi ringkasan, teks ke tabel, pengingat
+        AI->>QA: H33 · AI-7 → QA-7 · hasil regresi prompt teks ke tabel
+        Note over WEB: 🏁 WEB-7<br/>Mitra, invoice, lembar kerja, dan impor
+        WEB->>QA: H34 · WEB-7 → QA-7 · Fase U siap uji
+        Note over QA: 🏁 QA-7<br/>Uji dan gerbang Fase U
+        QA->>PM: H35 · QA-7 → PM-4 · label siap-rilis Fase U
+    end
+
     rect rgba(239, 68, 68, 0.12)
         Note over PM,QA: RILIS
         Note over PM: 🚩 PM-4<br/>Feature freeze dan rilis MVP, minggu 14
@@ -200,6 +234,7 @@ Tabel ini mengikuti lajur di diagram: satu kolom per anggota, satu baris per fas
 | Fase 0 · Keamanan dan stabilisasi pasca-split | [PM-1](https://github.com/DraftAja/.github/blob/main/milestone/PM-1.md) Fondasi kolaborasi dua repo | [CORE-1](https://github.com/DraftAja/.github/blob/main/milestone/CORE-1.md) Keamanan fase 0<br>[CORE-2](https://github.com/DraftAja/.github/blob/main/milestone/CORE-2.md) Kontrak error dan tipe respons | [AI-1](https://github.com/DraftAja/.github/blob/main/milestone/AI-1.md) Kontrak AI terketik<br>[AI-2](https://github.com/DraftAja/.github/blob/main/milestone/AI-2.md) Provider palsu untuk E2E | [WEB-1](https://github.com/DraftAja/.github/blob/main/milestone/WEB-1.md) Ketahanan tanpa menunggu API<br>[WEB-2](https://github.com/DraftAja/.github/blob/main/milestone/WEB-2.md) Sinkron kontrak baru | [QA-1](https://github.com/DraftAja/.github/blob/main/milestone/QA-1.md) Rencana uji dan tinjauan kontrak<br>[QA-2](https://github.com/DraftAja/.github/blob/main/milestone/QA-2.md) Uji fase 0 |
 | Fase 1 · Penyelarasan persona | [PM-2](https://github.com/DraftAja/.github/blob/main/milestone/PM-2.md) Keputusan produk fase 1 | [CORE-3](https://github.com/DraftAja/.github/blob/main/milestone/CORE-3.md) Persona dan alur dokumen | [AI-3](https://github.com/DraftAja/.github/blob/main/milestone/AI-3.md) Persona asisten, kuota, proposal | [WEB-3](https://github.com/DraftAja/.github/blob/main/milestone/WEB-3.md) Final, revisi, kuota, konflik | [QA-3](https://github.com/DraftAja/.github/blob/main/milestone/QA-3.md) Uji fase 1 |
 | Fase 2 · Katalog 64 template | [PM-3](https://github.com/DraftAja/.github/blob/main/milestone/PM-3.md) Lingkungan uji nyata | [CORE-4](https://github.com/DraftAja/.github/blob/main/milestone/CORE-4.md) Katalog 64 template<br>[CORE-5](https://github.com/DraftAja/.github/blob/main/milestone/CORE-5.md) Verifikasi PostgreSQL 16 | [AI-4](https://github.com/DraftAja/.github/blob/main/milestone/AI-4.md) Uji provider sungguhan<br>[AI-5](https://github.com/DraftAja/.github/blob/main/milestone/AI-5.md) Regresi prompt nol fakta tambahan | [WEB-4](https://github.com/DraftAja/.github/blob/main/milestone/WEB-4.md) Katalog 8 kategori dan kolom isian<br>[WEB-5](https://github.com/DraftAja/.github/blob/main/milestone/WEB-5.md) E2E MVP dan aksesibilitas | [QA-4](https://github.com/DraftAja/.github/blob/main/milestone/QA-4.md) Uji katalog dan regresi prompt<br>[QA-5](https://github.com/DraftAja/.github/blob/main/milestone/QA-5.md) Gerbang rilis MVP |
+| Fase U · Dashboard usaha (bila kapasitas) | [PM-6](https://github.com/DraftAja/.github/blob/main/milestone/PM-6.md) Keputusan produk Dashboard Usaha | [CORE-6](https://github.com/DraftAja/.github/blob/main/milestone/CORE-6.md) Usaha, uang, dan stok<br>[CORE-7](https://github.com/DraftAja/.github/blob/main/milestone/CORE-7.md) Mitra, titip jual, dan invoice | [AI-6](https://github.com/DraftAja/.github/blob/main/milestone/AI-6.md) Lembar kerja, impor, dan ekspor<br>[AI-7](https://github.com/DraftAja/.github/blob/main/milestone/AI-7.md) Ringkasan, teks ke tabel, dan pengingat | [WEB-6](https://github.com/DraftAja/.github/blob/main/milestone/WEB-6.md) Kerangka Dashboard Usaha<br>[WEB-7](https://github.com/DraftAja/.github/blob/main/milestone/WEB-7.md) Mitra, invoice, lembar kerja, dan impor | [QA-6](https://github.com/DraftAja/.github/blob/main/milestone/QA-6.md) Rencana uji dan lembar hitung Fase U<br>[QA-7](https://github.com/DraftAja/.github/blob/main/milestone/QA-7.md) Uji dan gerbang Fase U |
 | Rilis · minggu 14, 15, 16 | [PM-4](https://github.com/DraftAja/.github/blob/main/milestone/PM-4.md) Feature freeze dan rilis MVP, minggu 14<br>[PM-5](https://github.com/DraftAja/.github/blob/main/milestone/PM-5.md) v1.0-final minggu 15, pameran minggu 16 |   |   |   |   |
 
 ### Titik serah terima
@@ -243,6 +278,24 @@ Cara membaca: cari label panah di diagram, lalu cari label yang sama di tabel in
 | [**H21 · CORE-5 → PM-4 · hasil tes PostgreSQL 16**](https://github.com/DraftAja/.github/blob/main/serah-terima/H21.md) | Octaf (BE 1)<br>[CORE-5](https://github.com/DraftAja/.github/blob/main/milestone/CORE-5.md) | Raja (PM)<br>[PM-4](https://github.com/DraftAja/.github/blob/main/milestone/PM-4.md) | Hasil seluruh rangkaian tes di PostgreSQL 16 | Doc 10 bagian verifikasi | Kriteria rilis butir 1 |
 | [**H22 · QA-5 → PM-4 · label siap-rilis**](https://github.com/DraftAja/.github/blob/main/serah-terima/H22.md) | Louis (QA)<br>[QA-5](https://github.com/DraftAja/.github/blob/main/milestone/QA-5.md) | Raja (PM)<br>[PM-4](https://github.com/DraftAja/.github/blob/main/milestone/PM-4.md) | Label `siap-rilis` pada pasangan commit API dan web | Issue di repo gabungan DraftAja | Membuat `release/*` dan tag pasangan versi |
 
+#### Fase U · Dashboard usaha
+
+| Label di diagram | Dari | Ke | Yang diserahkan | Kanal | Dipakai untuk |
+|---|---|---|---|---|---|
+| [**H23 · PM-6 → CORE-6 · ADR usaha dan batas add-on**](https://github.com/DraftAja/.github/blob/main/serah-terima/H23.md) | Raja (PM)<br>[PM-6](https://github.com/DraftAja/.github/blob/main/milestone/PM-6.md) | Octaf (BE 1)<br>[CORE-6](https://github.com/DraftAja/.github/blob/main/milestone/CORE-6.md) | ADR 0007 Diterima, angka batas usaha untuk akun uji coba, cara admin mengaktifkan add-on | PR docs merge, pengumuman di grup | BE-19 usaha dan `PlanLimits::maxBusinesses()` |
+| [**H24 · PM-6 → AI-6 · ADR 0008 dan dependensi disetujui**](https://github.com/DraftAja/.github/blob/main/serah-terima/H24.md) | Raja (PM)<br>[PM-6](https://github.com/DraftAja/.github/blob/main/milestone/PM-6.md) | Hamid (BE 2)<br>[AI-6](https://github.com/DraftAja/.github/blob/main/milestone/AI-6.md) | ADR 0008 Diterima, izin PhpSpreadsheet dan TanStack Table. Juga berlaku untuk Alvira (WEB-7). | PR docs merge, pengumuman di grup | BE-26, BE-27, FE-35 |
+| [**H25 · QA-6 → CORE-6 · kasus uji rumus disetujui**](https://github.com/DraftAja/.github/blob/main/serah-terima/H25.md) | Louis (QA)<br>[QA-6](https://github.com/DraftAja/.github/blob/main/milestone/QA-6.md) | Octaf (BE 1)<br>[CORE-6](https://github.com/DraftAja/.github/blob/main/milestone/CORE-6.md) | Lembar hitung manual U01 sampai U17 yang cocok dengan doc 21 | Komentar di issue `kontrak`, label `kontrak-disetujui` | Tes rumus BE-20 sampai BE-23 |
+| [**H26 · QA-6 → AI-6 · kasus uji impor dan ekspor disetujui**](https://github.com/DraftAja/.github/blob/main/serah-terima/H26.md) | Louis (QA)<br>[QA-6](https://github.com/DraftAja/.github/blob/main/milestone/QA-6.md) | Hamid (BE 2)<br>[AI-6](https://github.com/DraftAja/.github/blob/main/milestone/AI-6.md) | Daftar berkas uji impor dan pemeriksaan ekspor beserta hasil yang diharapkan | Komentar di issue `kontrak`, label `kontrak-disetujui` | Tes BE-26 dan BE-27 |
+| [**H27 · CORE-6 → WEB-6 · openapi usaha, uang, stok**](https://github.com/DraftAja/.github/blob/main/serah-terima/H27.md) | Octaf (BE 1)<br>[CORE-6](https://github.com/DraftAja/.github/blob/main/milestone/CORE-6.md) | Alvira (FE)<br>[WEB-6](https://github.com/DraftAja/.github/blob/main/milestone/WEB-6.md) | `openapi.json` dengan endpoint usaha, uang, dan stok (BE-19 sampai BE-21) | PR API merge, label `butuh-fe` di issue web | FE-28, FE-30, FE-31, FE-32 |
+| [**H28 · CORE-6 → AI-6 · service uang dan stok**](https://github.com/DraftAja/.github/blob/main/serah-terima/H28.md) | Octaf (BE 1)<br>[CORE-6](https://github.com/DraftAja/.github/blob/main/milestone/CORE-6.md) | Hamid (BE 2)<br>[AI-6](https://github.com/DraftAja/.github/blob/main/milestone/AI-6.md) | Service uang dan mutasi stok yang dipanggil lembar kerja dan impor | PR API merge, issue kesepakatan `be-core` dan `be-ai` | BE-25 lembar bertipe, BE-26 commit impor |
+| [**H29 · CORE-7 → WEB-7 · openapi mitra dan invoice**](https://github.com/DraftAja/.github/blob/main/serah-terima/H29.md) | Octaf (BE 1)<br>[CORE-7](https://github.com/DraftAja/.github/blob/main/milestone/CORE-7.md) | Alvira (FE)<br>[WEB-7](https://github.com/DraftAja/.github/blob/main/milestone/WEB-7.md) | `openapi.json` dengan endpoint mitra, titip jual, dan invoice (BE-22 sampai BE-24) | PR API merge, label `butuh-fe` di issue web | FE-33, FE-34 |
+| [**H30 · CORE-7 → AI-7 · data invoice untuk rekap dan pengingat**](https://github.com/DraftAja/.github/blob/main/serah-terima/H30.md) | Octaf (BE 1)<br>[CORE-7](https://github.com/DraftAja/.github/blob/main/milestone/CORE-7.md) | Hamid (BE 2)<br>[AI-7](https://github.com/DraftAja/.github/blob/main/milestone/AI-7.md) | Service `BusinessFigures` dan status invoice | PR API merge, issue kesepakatan `be-core` dan `be-ai` | BE-28 rekap, pengingat invoice di BE-30 |
+| [**H31 · AI-6 → WEB-7 · openapi lembar kerja, impor, ekspor**](https://github.com/DraftAja/.github/blob/main/serah-terima/H31.md) | Hamid (BE 2)<br>[AI-6](https://github.com/DraftAja/.github/blob/main/milestone/AI-6.md) | Alvira (FE)<br>[WEB-7](https://github.com/DraftAja/.github/blob/main/milestone/WEB-7.md) | `openapi.json` dengan endpoint lembar kerja, impor, dan ekspor (BE-25 sampai BE-27) | PR API merge, label `butuh-fe` di issue web | FE-35, FE-36 |
+| [**H32 · AI-7 → WEB-7 · openapi ringkasan, teks ke tabel, pengingat**](https://github.com/DraftAja/.github/blob/main/serah-terima/H32.md) | Hamid (BE 2)<br>[AI-7](https://github.com/DraftAja/.github/blob/main/milestone/AI-7.md) | Alvira (FE)<br>[WEB-7](https://github.com/DraftAja/.github/blob/main/milestone/WEB-7.md) | `openapi.json` dengan endpoint ringkasan, rekap, teks ke tabel, dan pengingat (BE-28 sampai BE-30) | PR API merge, label `butuh-fe` di issue web | FE-29, FE-36, FE-37, FE-38 |
+| [**H33 · AI-7 → QA-7 · hasil regresi prompt teks ke tabel**](https://github.com/DraftAja/.github/blob/main/serah-terima/H33.md) | Hamid (BE 2)<br>[AI-7](https://github.com/DraftAja/.github/blob/main/milestone/AI-7.md) | Louis (QA)<br>[QA-7](https://github.com/DraftAja/.github/blob/main/milestone/QA-7.md) | Keluaran minimal 10 teks untuk Groq dan Gemini, nol angka tambahan | Dicatat di doc 10 dan `docs-ai/07-testing.md` | Pemeriksaan manual angka tambahan |
+| [**H34 · WEB-7 → QA-7 · Fase U siap uji**](https://github.com/DraftAja/.github/blob/main/serah-terima/H34.md) | Alvira (FE)<br>[WEB-7](https://github.com/DraftAja/.github/blob/main/milestone/WEB-7.md) | Louis (QA)<br>[QA-7](https://github.com/DraftAja/.github/blob/main/milestone/QA-7.md) | Pasangan commit API dan web dengan Fase U lengkap, tangkapan layar 360 px dan desktop | Repo gabungan mencatat pasangan commit, daftar periksa serah terima QA | Semua uji QA-7 |
+| [**H35 · QA-7 → PM-4 · label siap-rilis Fase U**](https://github.com/DraftAja/.github/blob/main/serah-terima/H35.md) | Louis (QA)<br>[QA-7](https://github.com/DraftAja/.github/blob/main/milestone/QA-7.md) | Raja (PM)<br>[PM-4](https://github.com/DraftAja/.github/blob/main/milestone/PM-4.md) | Label `siap-rilis-fase-u`, atau daftar bagian yang pindah ke fase 5 | Issue di repo gabungan DraftAja | Keputusan isi rilis minggu 14 |
+
 ### Cara kerja
 
 Nama branch memuat peran dan milestone yang sedang dikerjakan:
@@ -255,11 +308,11 @@ Nama branch memuat peran dan milestone yang sedang dikerjakan:
 
 | Peran | Alias | Milestone | Contoh branch |
 |---|---|---|---|
-| Raja · PM | `pm` | [PM-1](https://github.com/DraftAja/.github/blob/main/milestone/PM-1.md) sampai [PM-5](https://github.com/DraftAja/.github/blob/main/milestone/PM-5.md) | `docs/pm-pm1-kontrak-tim-v1.1` |
-| Octaf · BE 1 | `be-core` | [CORE-1](https://github.com/DraftAja/.github/blob/main/milestone/CORE-1.md) sampai [CORE-5](https://github.com/DraftAja/.github/blob/main/milestone/CORE-5.md) | `fix/be-core-core1-policy-ekspor` |
-| Hamid · BE 2 | `be-ai` | [AI-1](https://github.com/DraftAja/.github/blob/main/milestone/AI-1.md) sampai [AI-5](https://github.com/DraftAja/.github/blob/main/milestone/AI-5.md) | `feat/be-ai-ai1-tipe-respons` |
-| Alvira · FE | `fe` | [WEB-1](https://github.com/DraftAja/.github/blob/main/milestone/WEB-1.md) sampai [WEB-5](https://github.com/DraftAja/.github/blob/main/milestone/WEB-5.md) | `fix/fe-web1-status-bawaan` |
-| Louis · QA | `qa` | [QA-1](https://github.com/DraftAja/.github/blob/main/milestone/QA-1.md) sampai [QA-5](https://github.com/DraftAja/.github/blob/main/milestone/QA-5.md) | `docs/qa-qa1-rencana-uji` |
+| Raja · PM | `pm` | [PM-1](https://github.com/DraftAja/.github/blob/main/milestone/PM-1.md) sampai [PM-6](https://github.com/DraftAja/.github/blob/main/milestone/PM-6.md) | `docs/pm-pm1-kontrak-tim-v1.1` |
+| Octaf · BE 1 | `be-core` | [CORE-1](https://github.com/DraftAja/.github/blob/main/milestone/CORE-1.md) sampai [CORE-7](https://github.com/DraftAja/.github/blob/main/milestone/CORE-7.md) | `fix/be-core-core1-policy-ekspor` |
+| Hamid · BE 2 | `be-ai` | [AI-1](https://github.com/DraftAja/.github/blob/main/milestone/AI-1.md) sampai [AI-7](https://github.com/DraftAja/.github/blob/main/milestone/AI-7.md) | `feat/be-ai-ai1-tipe-respons` |
+| Alvira · FE | `fe` | [WEB-1](https://github.com/DraftAja/.github/blob/main/milestone/WEB-1.md) sampai [WEB-7](https://github.com/DraftAja/.github/blob/main/milestone/WEB-7.md) | `fix/fe-web1-status-bawaan` |
+| Louis · QA | `qa` | [QA-1](https://github.com/DraftAja/.github/blob/main/milestone/QA-1.md) sampai [QA-7](https://github.com/DraftAja/.github/blob/main/milestone/QA-7.md) | `docs/qa-qa1-rencana-uji` |
 
 - Branch dibuat dari `develop`, PR kembali ke `develop`. Judul PR menyebut ID milestone, misalnya `feat(ai): tambah endpoint kuota (AI-3)`.
 - Satu branch untuk satu butir pekerjaan. Contoh branch untuk setiap milestone ada di halaman milestone-nya.
@@ -436,7 +489,9 @@ Versi belum ditetapkan untuk teknologi yang belum masuk kode. Versinya dipilih d
 | Bicep | Infrastruktur sebagai kode di `infra/` Backend-Laravel | PM-3 (INF-03) |
 | Azure Blob Storage | Pengganti Azure Files untuk berkas unggahan, lewat adapter Flysystem | Fase 5 |
 | Laravel Socialite, Google OAuth | Masuk dengan akun Google. Masih usulan, menunggu keputusan PM. | Fase 5 |
-| Gerbang pembayaran | Paket berbayar per ruang kerja. Penyedia belum dipilih. | Fase 5 |
+| Gerbang pembayaran | Paket berbayar per ruang kerja dan add-on Multi-usaha. Penyedia belum dipilih. | Fase 5 |
+| PhpSpreadsheet | Impor CSV dan XLSX serta ekspor XLSX di Dashboard usaha. Diusulkan di ADR 0008, menunggu keputusan PM. | Fase U (AI-6) |
+| TanStack Table | Grid lembar kerja di Dashboard usaha. Diusulkan di ADR 0008, menunggu keputusan PM. | Fase U (WEB-7) |
 
 ---
 

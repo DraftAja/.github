@@ -1,4 +1,4 @@
-[Profil organisasi](https://github.com/DraftAja) · [Semua milestone](README.md) · Sebelumnya: [WEB-4](WEB-4.md)
+[Profil organisasi](https://github.com/DraftAja) · [Semua milestone](README.md) · Sebelumnya: [WEB-4](WEB-4.md) · Berikutnya: [WEB-6](WEB-6.md)
 
 # WEB-5 · E2E MVP dan aksesibilitas
 
@@ -9,7 +9,7 @@
 | Repo | Frontend-Nextjs |
 | Contoh branch | `test/fe-web5-e2e-mvp` |
 | Mulai setelah | [WEB-4](WEB-4.md) selesai, menerima H8 |
-| Lanjut ke | selesai |
+| Lanjut ke | [WEB-6](WEB-6.md) bila Fase U dikerjakan, selain itu selesai |
 
 ## Tujuan
 

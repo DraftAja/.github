@@ -9,7 +9,7 @@
 | Repo | Backend-Laravel (`infra/`, `deploy.yml`), Frontend-Nextjs (`deploy.yml`), Azure |
 | Contoh branch | `chore/pm-pm3-infra-staging` |
 | Mulai setelah | [PM-2](PM-2.md) selesai |
-| Lanjut ke | [PM-4](PM-4.md) |
+| Lanjut ke | [PM-4](PM-4.md), dan [PM-6](PM-6.md) bila Fase U dikerjakan |
 
 ## Tujuan
 

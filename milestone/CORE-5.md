@@ -1,4 +1,4 @@
-[Profil organisasi](https://github.com/DraftAja) · [Semua milestone](README.md) · Sebelumnya: [CORE-4](CORE-4.md)
+[Profil organisasi](https://github.com/DraftAja) · [Semua milestone](README.md) · Sebelumnya: [CORE-4](CORE-4.md) · Berikutnya: [CORE-6](CORE-6.md)
 
 # CORE-5 · Verifikasi PostgreSQL 16
 
@@ -9,7 +9,7 @@
 | Repo | Backend-Laravel |
 | Contoh branch | `test/be-core-core5-postgresql-16` |
 | Mulai setelah | [CORE-4](CORE-4.md) selesai, menerima H15 |
-| Lanjut ke | selesai |
+| Lanjut ke | [CORE-6](CORE-6.md) bila Fase U dikerjakan, selain itu selesai |
 
 ## Tujuan
 

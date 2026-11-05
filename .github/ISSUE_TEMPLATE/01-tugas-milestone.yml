@@ -38,6 +38,15 @@ body:
         - QA-3 Uji fase 1
         - QA-4 Uji katalog dan regresi prompt
         - QA-5 Gerbang rilis MVP
+        - PM-6 Keputusan produk Dashboard Usaha
+        - CORE-6 Usaha, uang, dan stok
+        - CORE-7 Mitra, titip jual, dan invoice
+        - AI-6 Lembar kerja, impor, dan ekspor
+        - AI-7 Ringkasan, teks ke tabel, dan pengingat
+        - WEB-6 Kerangka Dashboard Usaha
+        - WEB-7 Mitra, invoice, lembar kerja, dan impor
+        - QA-6 Rencana uji dan lembar hitung Fase U
+        - QA-7 Uji dan gerbang Fase U
         - Fase 3 atau 4, di luar MVP
     validations:
       required: true
@@ -70,7 +79,7 @@ body:
     id: menerima
     attributes:
       label: Menunggu hasil dari
-      description: Titik serah terima yang masuk (H1 sampai H22) atau issue lain. Kosongkan bila tidak ada.
+      description: Titik serah terima yang masuk (H1 sampai H35) atau issue lain. Kosongkan bila tidak ada.
       placeholder: H11, DraftAja/Backend-Laravel#42
   - type: input
     id: menyerahkan

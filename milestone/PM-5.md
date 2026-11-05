@@ -1,4 +1,4 @@
-[Profil organisasi](https://github.com/DraftAja) · [Semua milestone](README.md) · Sebelumnya: [PM-4](PM-4.md)
+[Profil organisasi](https://github.com/DraftAja) · [Semua milestone](README.md) · Sebelumnya: [PM-4](PM-4.md) · Berikutnya: [PM-6](PM-6.md)
 
 # PM-5 · v1.0-final minggu 15, pameran minggu 16
 
