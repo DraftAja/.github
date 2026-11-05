@@ -449,7 +449,7 @@ Kedua repo kode menyiapkan aturan yang sama untuk agen AI. `AGENTS.md` berisi at
 | Backend-Laravel | Core Dokumen (`be-core`), gerbang API Tester | AI (`be-ai`), gerbang Reality Checker |
 | Frontend-Nextjs | Produk dan Antarmuka (`fe`), gerbang UI Finish-Gate Reviewer | Kualitas dan Integrasi (`qa`), gerbang Code Reviewer |
 
-Satu tugas mengikuti urutan: kartu tugas, rencana yang disetujui, pengerjaan dengan tes, gerbang verifikasi, pemeriksaan agen gerbang, lalu PR. Persiapan, contoh prompt, alur per peran, dan cara merawat aturan ada di **[panduan kerja dengan agen AI](https://github.com/DraftAja/.github/blob/main/panduan/kerja-dengan-agen-ai.md)**. Prompt yang tinggal disalin untuk setiap tahap, dari mulai tugas sampai setelah merge, ada di **[prompt siap pakai](https://github.com/DraftAja/.github/blob/main/panduan/prompt-siap-pakai.md)**.
+Satu tugas mengikuti urutan: kartu tugas, rencana yang disetujui, pengerjaan dengan tes, gerbang verifikasi, pemeriksaan agen gerbang, lalu PR. Persiapan, contoh prompt, alur per peran, dan cara merawat aturan ada di **[panduan kerja dengan agen AI](https://github.com/DraftAja/.github/blob/main/panduan/kerja-dengan-agen-ai.md)**. Satu prompt utama yang tinggal disalin, ditambah prompt pendek untuk bug, perbaikan PR, dan setelah merge, ada di **[prompt siap pakai](https://github.com/DraftAja/.github/blob/main/panduan/prompt-siap-pakai.md)**.
 
 ## Mulai di sini untuk anggota baru
 

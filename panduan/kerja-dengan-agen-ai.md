@@ -7,7 +7,7 @@ Halaman ini menjelaskan cara memakai Claude Code di kedua repo kode DraftAja: ap
 Susunan ini masuk lewat 🔒 [Backend-Laravel #14](https://github.com/DraftAja/Backend-Laravel/pull/14) dan 🔒 [Frontend-Nextjs #14](https://github.com/DraftAja/Frontend-Nextjs/pull/14), dan sudah ada di `develop` kedua repo.
 
 > [!TIP]
-> Prompt lengkap untuk setiap tahap, termasuk langkah git yang dijalankan Claude, ada di **[prompt siap pakai](prompt-siap-pakai.md)**. Halaman ini menjelaskan alasannya dan susunan di repo.
+> Prompt utama yang tinggal disalin, termasuk langkah git yang dijalankan Claude, ada di **[prompt siap pakai](prompt-siap-pakai.md)**. Halaman ini menjelaskan alasannya dan susunan di repo.
 
 ## Daftar isi
 
@@ -48,7 +48,7 @@ Claude Code tidak membaca `AGENTS.md` bila ada `CLAUDE.md`. Karena itu setiap `C
 ## Persiapan sekali per anggota
 
 1. **Pasang atau perbarui Claude Code.** Susunan ini diuji dengan versi 2.1.318. Cek dengan `claude --version`.
-2. **Ambil `develop` terbaru** di kedua repo. Setelah itu langkah git dijalankan Claude lewat [prompt P1](prompt-siap-pakai.md#p1--mulai-tugas).
+2. **Ambil `develop` terbaru** di kedua repo. Setelah itu langkah git dijalankan Claude lewat [prompt utama](prompt-siap-pakai.md#prompt-utama).
 3. **Atur PHP** untuk anggota yang menjalankan API: `session.upload_progress.enabled = Off` di `php.ini` dan PHP minimal 8.4.27 atau 8.5.12. Tanpa ini `composer verify` sengaja gagal.
 4. **Pasang skill tambahan (disarankan).** `CLAUDE.md` merujuk skill ini dengan syarat "bila terpasang", jadi alur tetap berjalan tanpanya. Skill dipasang per komputer:
 
@@ -100,22 +100,22 @@ sequenceDiagram
 
 | Langkah | Yang dilakukan anggota | Yang dilakukan Claude |
 |---|---|---|
-| 1. Beri tugas | Tempel [P1](prompt-siap-pakai.md#p1--mulai-tugas) dengan ID milestone dan butir | Memeriksa working tree, `git switch develop`, `git pull`, membuat branch `<tipe>/<alias>-<milestone>-<deskripsi>` |
+| 1. Beri tugas | Tempel [prompt utama](prompt-siap-pakai.md#prompt-utama) dengan milestone, tugas, dan template branch | Memeriksa working tree, `git switch develop`, `git pull`, menentukan dan membuat branch `<tipe>/<alias>-<milestone>-<deskripsi>` |
 | 2. Baca konteks | | Membaca halaman milestone, `docs/12`, `docs/18`, atau `docs/06`, menentukan wilayah dan pemilik |
-| 3. Setujui rencana | Periksa berkas, tes, dan doc yang akan diubah, lalu tempel [P2](prompt-siap-pakai.md#p2--kerjakan-rencana). Ini titik paling murah untuk mengubah arah | Menulis rencana. Untuk tugas besar, pakai mode rencana (`Shift+Tab`) |
+| 3. Setujui rencana | Periksa berkas, tes, dan doc yang akan diubah, lalu balas "lanjut" atau beri koreksi. Ini titik paling murah untuk mengubah arah | Menulis rencana, lalu berhenti. Untuk tugas besar, pakai mode rencana (`Shift+Tab`) |
 | 4. Pengerjaan | Jawab bila Claude bertanya | Bug: tes merah dulu, baru perbaikan. Fitur: kode dan tes. Delegasi ke agen pembangun |
 | 5. Verifikasi | | Menjalankan [gerbang verifikasi](#gerbang-verifikasi-dan-bukti) dan membaca keluarannya |
-| 6. Pemeriksaan | Tempel [P5](prompt-siap-pakai.md#p5--periksa-sebelum-pr). Tagih bukti bila laporan hanya berisi klaim | `/code-review`, `/security-review`, agen gerbang, tabel kriteria terima |
-| 7. PR | Baca diff sendiri, lalu tempel [P6](prompt-siap-pakai.md#p6--commit-push-dan-pr) | Commit Conventional Commits, push, PR dengan template repo, menautkan PR pasangan |
-| 8. Setelah PR | [P7](prompt-siap-pakai.md#p7--ci-merah) bila CI merah, [P8](prompt-siap-pakai.md#p8--revisi-setelah-review) setelah review, [P9](prompt-siap-pakai.md#p9--setelah-merge) setelah merge | Memperbaiki CI, menjawab review, menghapus branch, menyiapkan serah terima dan kartu tugas berikutnya |
+| 6. Pemeriksaan | Tagih bukti bila laporan hanya berisi klaim | `/code-review`, `/security-review`, agen gerbang, tabel kriteria terima |
+| 7. PR | Baca diff PR sendiri sebelum meminta review | Commit Conventional Commits, push, PR dengan template repo, menautkan PR pasangan |
+| 8. Setelah PR | [Perbaiki PR](prompt-siap-pakai.md#perbaiki-pr) bila CI merah atau ada review, [setelah merge](prompt-siap-pakai.md#setelah-merge) bila sudah merge | Memperbaiki CI, menjawab review, menghapus branch, menyiapkan serah terima dan prompt utama berikutnya |
 
 ## Contoh prompt
 
-Prompt lengkap yang tinggal disalin ada di [prompt siap pakai](prompt-siap-pakai.md). Bagian ini hanya contoh singkat.
+Prompt yang tinggal disalin ada di [prompt siap pakai](prompt-siap-pakai.md). Bagian ini hanya contoh singkat.
 
 ### Kartu tugas
 
-Bentuk ringkas kartu tugas. Versi lengkapnya, yang juga menyiapkan branch dan membaca halaman milestone, adalah [P1](prompt-siap-pakai.md#p1--mulai-tugas). Semakin jelas batas "selesai bila", semakin kecil peluang Claude melebar ke pekerjaan lain.
+Bentuk ringkas kartu tugas. Versi lengkapnya, yang juga menyiapkan branch dan membaca halaman milestone, adalah [prompt utama](prompt-siap-pakai.md#prompt-utama). Semakin jelas batas "selesai bila", semakin kecil peluang Claude melebar ke pekerjaan lain.
 
 ```text
 Milestone: AI-3
