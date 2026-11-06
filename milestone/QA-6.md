@@ -58,7 +58,7 @@ Bukti selesai: daftar disetujui Hamid di issue `kontrak`.
 Langkah:
 
 1. Tabel semua endpoint Fase U dengan kolom: pengguna lain, usaha lain milik pengguna sama, tamu, usaha baca saja.
-2. Rencana uji pengguna: tugas "catat satu kunjungan mitra dan buat invoice", ukuran waktu dan bantuan, data contoh Tapeku, bukan data asli peserta.
+2. Rencana uji pengguna: tugas "catat satu kunjungan mitra dan buat invoice" dan tugas orientasi "mulai dari akun baru sesuai pekerjaanmu" (KN-16), ukuran waktu dan bantuan, data contoh Tapeku, bukan data asli peserta.
 
 Bukti selesai: kedua tabel tercatat di issue QA Fase U.
 

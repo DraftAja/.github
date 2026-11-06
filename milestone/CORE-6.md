@@ -13,7 +13,7 @@
 
 ## Tujuan
 
-Pengguna bisa membuat usaha, berganti usaha bila punya add-on, mencatat modal, pemasukan, pengeluaran, dan stok dengan batas minimum. Semua angka cocok dengan kasus uji doc 21 di SQLite dan PostgreSQL 16.
+Pengguna baru memilih tujuan pemakaian dan hanya melihat menu yang ia butuhkan. Pengguna bisa membuat usaha, berganti usaha bila punya add-on, mencatat modal, pemasukan, pengeluaran, dan stok dengan batas minimum. Semua angka cocok dengan kasus uji doc 21 di SQLite dan PostgreSQL 16.
 
 ## Ringkasan pekerjaan
 
@@ -21,6 +21,7 @@ Pengguna bisa membuat usaha, berganti usaha bila punya add-on, mencatat modal, p
 |---|---|---|---|
 | BE-19 | `businesses`, kolom usaha di `users`, `BusinessPolicy`, `business.writable`, `PlanLimits::maxBusinesses()`, `BusinessPlanService`, switch, perintah aktivasi add-on | Usaha kedua tanpa add-on 403 `business_limit_reached`; usaha orang lain 404; usaha `baca_saja` 403 `business_read_only` | 🔒 [doc 18, Backlog Fase U](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/18-audit-pasca-split.md#backlog-fase-u) |
 | BE-20 | `cash_categories`, `cash_transactions`, endpoint uang | Tes kasus U08 dan U09 | 🔒 [KF-USH-01, KF-USH-02](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/12-kebutuhan-sistem.md#usaha-ush) |
+| BE-31 | Kolom orientasi di `users`, `sales_channels` di `businesses`, `PATCH /me/preferences`, `POST /me/onboarding/complete`, `GET /getting-started` | Akun lama tidak melihat orientasi; `areas` kosong 422; status Langkah mulai sesuai data; area tidak membatasi endpoint | 🔒 [doc 22](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/22-orientasi-dan-panduan-fitur.md) |
 | BE-21 | `products`, `stock_movements`, mutasi, produksi, `stock_negative`, penanda menipis, `usaha:stock-check` | Tes kasus U10, U11, dan U17 di PostgreSQL | 🔒 [doc 21, stok](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/21-perhitungan-usaha.md#stok) |
 
 ## Rincian pekerjaan
@@ -75,9 +76,25 @@ Bukti selesai: U10 menghasilkan tepat dua penanda baru menipis; U17 lulus di Pos
 
 Hindari: mengizinkan stok diedit langsung lewat `PATCH /products/{id}`.
 
+### BE-31 · Orientasi dan area fitur
+
+Masalah sekarang: setelah daftar, semua pengguna langsung masuk Beranda dokumen. Tidak ada tempat untuk menyimpan tujuan pemakaian, sehingga pemilik usaha harus mencari menu Usaha sendiri dan sekretaris melihat menu yang tidak ia pakai.
+
+Langkah:
+
+1. Proposal kontrak untuk field baru di `GET /me`, `PATCH /me/preferences`, `POST /me/onboarding/complete`, dan `GET /getting-started`.
+2. Migrasi kolom `areas`, `onboarded_at`, `preferred_categories`, `dismissed_hints` di `users`. Migrasi yang sama mengisi akun lama dengan `areas = ["dokumen"]` dan `onboarded_at` waktu migrasi.
+3. Kolom `sales_channels` dan `first_recap_exported_at` masuk migrasi `businesses` (BE-19), selama migrasi itu belum merge.
+4. `GET /getting-started` menghitung `done` dari data, satu method per langkah, mengikuti tabel Langkah mulai di doc 22.
+5. Pastikan tidak ada middleware atau policy yang membaca `areas`. Area hanya tampilan.
+
+Bukti selesai: tes akun lama, validasi `areas`, setiap langkah `done` sebelum dan sesudah datanya dibuat, dan tes bahwa endpoint usaha tetap 200 untuk pengguna yang area usahanya tidak aktif.
+
+Hindari: mengirim path halaman dari API. Web membangun tujuan dari `key` langkah.
+
 ## Urutan kerja yang disarankan
 
-1. BE-19 setelah H23.
+1. BE-19 setelah H23, bersama BE-31 karena keduanya mengubah `users` dan `businesses`.
 2. BE-21, lalu BE-20, karena penjualan langsung membuat mutasi stok.
 3. Kirim [H27](../serah-terima/H27.md) dan [H28](../serah-terima/H28.md) setelah ketiganya merge.
 
@@ -92,14 +109,14 @@ Hindari: mengizinkan stok diedit langsung lewat `PATCH /products/{id}`.
 
 | Label di diagram | Ke | Yang diserahkan | Kanal |
 |---|---|---|---|
-| [**H27 · CORE-6 → WEB-6 · openapi usaha, uang, stok**](../serah-terima/H27.md) | Alvira (FE), [WEB-6](WEB-6.md) | `openapi.json` dengan endpoint BE-19 sampai BE-21 | PR API merge, label `butuh-fe` di issue web |
+| [**H27 · CORE-6 → WEB-6 · openapi usaha, uang, stok**](../serah-terima/H27.md) | Alvira (FE), [WEB-6](WEB-6.md) | `openapi.json` dengan endpoint BE-19 sampai BE-21 dan BE-31 | PR API merge, label `butuh-fe` di issue web |
 | [**H28 · CORE-6 → AI-6 · service uang dan stok**](../serah-terima/H28.md) | Hamid (BE 2), [AI-6](AI-6.md) | Service uang dan mutasi yang bisa dipanggil lembar kerja dan impor | PR API merge, issue kesepakatan `be-core` dan `be-ai` |
 
 ## Selesai bila
 
 - [ ] Tes U08 sampai U11 dan U17 lulus di SQLite dan PostgreSQL 16
 - [ ] `composer api:spec` dijalankan dan `openapi.json` di-commit
-- [ ] KF-USH-01, 02, 07, 08, 19 berlabel Sudah ada di doc 10, 12, dan 20
+- [ ] KF-USH-01, 02, 07, 08, 19 dan KF-ORI-01 sampai 06 berlabel Sudah ada di doc 10, 12, 20, dan 22
 - [ ] H27 dan H28 terkirim
 
 ## Dokumen rujukan lain

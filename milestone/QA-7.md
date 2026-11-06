@@ -23,7 +23,8 @@ Membuktikan bahwa angka usaha benar, data antarusaha terpisah, berkas terbuka di
 | KN-14 | Buka berkas ekspor setiap template di Excel dan LibreOffice | Tanpa pesan perbaikan, `=SUM` sama dengan baris total | 🔒 [KN-14](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/12-kebutuhan-sistem.md#kebutuhan-nonfungsional) |
 | KN-11, KN-13 | Ukur performa dengan `UsahaLoadSeeder` | p95 sesuai KN-11, dicatat di doc 10 | 🔒 [doc 16, Fase U](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/16-strategi-pengujian.md#fase-u-dashboard-usaha) |
 | KN-15 | Periksa pengingat dengan jadwal nyata di lingkungan uji | Terkirim paling lambat 10 menit setelah jadwal, tidak ganda | 🔒 [doc 06, W16](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/06-business-workflows.md#w16-peringatan-dan-pengingat) |
-| KN-10 | Uji pengguna dengan 5 pemilik UMKM | Hasil dibandingkan dengan target usulan KN-10 | Rencana uji QA-6 |
+| KN-10, KN-16 | Uji pengguna dengan 5 pemilik UMKM, termasuk orientasi dari akun baru | Hasil dibandingkan dengan target usulan KN-10 dan KN-16 | Rencana uji QA-6 |
+| KF-ORI | Periksa orientasi, area fitur, ajakan, dan pengarahan berkas terhadap doc 22 | Semua kriteria KF-ORI-01 sampai 07 terbukti, termasuk area tidak membatasi endpoint | 🔒 [doc 22](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/22-orientasi-dan-panduan-fitur.md) |
 | Gerbang | Kriteria selesai Fase U di doc 20 | Label `siap-rilis` Fase U atau daftar bagian yang pindah ke fase 5 | 🔒 [doc 20](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/20-dashboard-usaha.md#kriteria-selesai-fase-u) |
 
 ## Rincian pekerjaan

@@ -63,8 +63,8 @@ BE 1 = `be-core` (Octaf) dan BE 2 = `be-ai` (Hamid), sesuai `TEAM_CONTRACT.md` v
 
 Semua pekerjaan kolaborasi berawal dari milestone. Setiap anggota memegang lima milestone yang membatasi apa yang menjadi tanggung jawabnya, dan setiap milestone merujuk butir backlog yang sudah ditulis di dokumentasi kedua repo:
 
-- Backlog backend `BE-01` sampai `BE-30` dan temuan `S-xx`: 🔒 [API doc 18](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/18-audit-pasca-split.md#backlog-backend)
-- Backlog frontend `FE-01` sampai `FE-38`: 🔒 [web doc 06](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/06-backlog-frontend.md)
+- Backlog backend `BE-01` sampai `BE-31` dan temuan `S-xx`: 🔒 [API doc 18](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/18-audit-pasca-split.md#backlog-backend)
+- Backlog frontend `FE-01` sampai `FE-41`: 🔒 [web doc 06](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/06-backlog-frontend.md)
 - Fase roadmap 0 sampai 5: 🔒 [API doc 10](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/10-project-status-and-gaps.md#roadmap)
 - Kriteria rilis MVP: 🔒 [API doc 16](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/16-strategi-pengujian.md#kriteria-rilis-mvp)
 
@@ -78,7 +78,7 @@ MVP adalah **fase 0 sampai 2** dan harus selesai sebelum feature freeze minggu 1
 | 1 | Penyelarasan persona: kategori, final dan revisi, kuota | PM-2, CORE-3, AI-3, WEB-3, QA-3 | Sebelum fase 2 |
 | 2 | Katalog 64 template, kolom isian, regresi prompt | PM-3, CORE-4, CORE-5, AI-4, AI-5, WEB-4, WEB-5, QA-4, QA-5 | Feature freeze **minggu 14** |
 | Rilis | MVP dibekukan, `v1.0-final`, pameran | PM-4, PM-5 | Minggu 14, 15, 16 |
-| U | Dashboard usaha untuk UMKM: pencatatan, titip jual, invoice, lembar kerja, impor dan ekspor Excel, pengingat, add-on Multi-usaha | PM-6, CORE-6, CORE-7, AI-6, AI-7, WEB-6, WEB-7, QA-6, QA-7 | Bila kapasitas ada. Setiap anggota mulai setelah milestone fase 2 miliknya selesai. Sisa yang belum lulus di minggu 14 pindah ke fase 5. |
+| U | Dashboard usaha untuk UMKM: pencatatan, titip jual, invoice, lembar kerja, impor dan ekspor Excel, pengingat, add-on Multi-usaha, serta orientasi berdasarkan tujuan dengan menu sesuai pilihan | PM-6, CORE-6, CORE-7, AI-6, AI-7, WEB-6, WEB-7, QA-6, QA-7 | Bila kapasitas ada. Setiap anggota mulai setelah milestone fase 2 miliknya selesai. Sisa yang belum lulus di minggu 14 pindah ke fase 5. |
 | 3 dan 4 | Ruang kerja instansi, tinjau dan penomoran | Ditambahkan sebagai milestone baru bila kapasitas ada | Setelah MVP |
 
 ### Diagram alur paralel

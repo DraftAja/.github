@@ -25,6 +25,7 @@ Pemilik usaha mencatat kunjungan mitra dari ponsel, membuat dan mengunduh invoic
 | FE-35 | `DataGrid` dan Lembar kerja | Navigasi keyboard, tempel dari Excel, 360 px tanpa gulir halaman | 🔒 [web doc 05, DataGrid](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/05-sistem-desain.md#aturan-datagrid) |
 | FE-36 | Wizard Impor dan panel Rapikan teks | E2E impor `USH-04.csv` | 🔒 [web doc 03, Impor](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/03-peta-halaman.md#impor-usahaimpor) |
 | FE-37 | Laporan dan template laporan | Unduh XLSX dari rekap | 🔒 [web doc 06](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/06-backlog-frontend.md) |
+| FE-41 | Komponen panduan form, pemandu tugas, Langkah mulai, ajakan, pengarahan berkas salah tempat | E2E: ajakan ditutup tidak muncul lagi; `.xlsx` di Impor Word diarahkan ke Impor usaha | 🔒 [web doc 05, panduan form](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/05-sistem-desain.md#panduan-form-dan-orientasi) |
 | FE-38 | Pengingat dan notifikasi usaha | Tautan notifikasi usaha lain berganti usaha dulu | 🔒 [web doc 03, Pengingat](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/03-peta-halaman.md#pengingat-usahapengingat) |
 
 ## Rincian pekerjaan
@@ -68,6 +69,21 @@ Langkah:
 
 Bukti selesai: E2E impor `USH-04.csv` dari folder contoh API. E2E Rapikan teks memakai provider palsu dari H8.
 
+### FE-41 · Panduan form dan pengarahan
+
+Masalah sekarang: tidak ada komponen teks bantu di `src/components/ui/`. Placeholder dipakai untuk menjelaskan isian, sehingga petunjuk hilang begitu pengguna mengetik.
+
+Langkah:
+
+1. `FieldHint`, `FormSteps`, `ChoiceCard`, `TaskGuide`, `GettingStarted`, `InlineNotice`, dan `FileRedirectNotice` sesuai web doc 05.
+2. Terapkan `FieldHint` dan penanda opsional di semua form usaha, lalu di form dokumen yang sudah ada.
+3. `TaskGuide` di Beranda dan Ringkasan, `GettingStarted` dari `GET /getting-started`.
+4. Pengenal berkas salah tempat di dialog Impor Word, unggah template, dan Impor usaha, dengan tes Vitest.
+
+Bukti selesai: E2E tutup ajakan lalu muat ulang, dan E2E berkas `.xlsx` diarahkan ke Impor usaha.
+
+Hindari: tur produk berupa lapisan sorotan, konfeti, emoji, lencana "Baru", dan placeholder berisi data karangan.
+
 ### FE-29, FE-34, FE-37, FE-38
 
 Ikuti spesifikasi layar di web doc 03. Pemeriksaan utamanya: angka tidak dihitung di klien, enum punya cabang bawaan, dan setiap layar menangani keadaan kosong, memuat, dan error.
@@ -77,7 +93,8 @@ Ikuti spesifikasi layar di web doc 03. Pemeriksaan utamanya: angka tidak dihitun
 1. FE-33 dan FE-34 setelah H29.
 2. FE-35 setelah H24 dan H31, lalu FE-36.
 3. FE-29, FE-37, FE-38 setelah H32.
-4. Kirim [H34](../serah-terima/H34.md).
+4. FE-41 bersamaan dengan FE-29, karena `TaskGuide` dan `GettingStarted` tampil di Ringkasan.
+5. Kirim [H34](../serah-terima/H34.md).
 
 ## Serah terima masuk
 
