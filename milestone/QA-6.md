@@ -81,6 +81,7 @@ Tidak ada. QA-6 memakai doc 16, 20, dan 21 yang sudah ada.
 
 ## Selesai bila
 
+- [ ] Laporan QA dibuat dengan template 🔒 [web `docs/qa`](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/qa/README.md), dicetak ke PDF dengan `npm run qa:report`, dan PDF-nya dilampirkan di issue serah terima yang diuji
 - [ ] Semua kasus U01 sampai U17 cocok atau doc 21 sudah diperbaiki
 - [ ] Daftar berkas uji disetujui
 - [ ] Tabel isolasi dan rencana uji pengguna tercatat

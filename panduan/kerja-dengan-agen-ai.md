@@ -232,6 +232,7 @@ Contoh pemakaian per peran:
 - **Hamid:** "Kerjakan KF-AI-05 di AI-3. Prompt Engineer menulis prompt, Model QA Specialist menguji, Reality Checker memeriksa akhir."
 - **Alvira:** "Kerjakan layar kuota AI sesuai doc 03 web. Semua keadaan ditangani, cek di 360 px. Lalu UI Finish-Gate Reviewer."
 - **Louis:** "Test Automation Engineer: tulis E2E alur buat dokumen sampai unduh DOCX, profil desktop dan ponsel. Evidence Collector: catat setiap kegagalan dengan langkah ulang."
+- **Louis, setelah setiap uji:** "Pakai skill `draftaja-qa-report`: uji QA-2 per kategori (alur, basis data dan CRUD, kontrak API, otorisasi, keamanan, aksesibilitas, performa) dengan skill QA di `AGENTS.md`, isi laporan dari template `docs/qa`, lalu cetak PDF dengan `npm run qa:report`." Uji keamanan, beban, dan migrasi hanya ke SQLite atau PostgreSQL sekali pakai `draftaja_test_*`.
 
 ## Fitur lintas repo
 

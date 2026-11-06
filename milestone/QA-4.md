@@ -83,6 +83,7 @@ Tidak ada serah terima keluar. Hasilnya dipakai langsung di milestone berikutnya
 
 ## Selesai bila
 
+- [ ] Laporan QA dibuat dengan template 🔒 [web `docs/qa`](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/qa/README.md), dicetak ke PDF dengan `npm run qa:report`, dan PDF-nya dilampirkan di issue serah terima yang diuji
 - [ ] Lembar periksa 8 kategori terisi
 - [ ] Pemeriksaan manual regresi tercatat dengan nol temuan
 - [ ] Rencana uji pengguna disetujui Raja

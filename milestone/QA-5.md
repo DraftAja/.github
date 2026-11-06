@@ -71,6 +71,7 @@ Label sama persis dengan panah di diagram profil.
 
 ## Selesai bila
 
+- [ ] Laporan QA dibuat dengan template 🔒 [web `docs/qa`](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/qa/README.md), dicetak ke PDF dengan `npm run qa:report`, dan PDF-nya dilampirkan di issue serah terima yang diuji
 - [ ] Tujuh kriteria punya bukti atau penerimaan risiko tertulis
 - [ ] Hasil uji peramban tercatat di doc 10
 - [ ] H22 terkirim ke Raja

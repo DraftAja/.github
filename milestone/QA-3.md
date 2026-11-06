@@ -79,6 +79,7 @@ Tidak ada serah terima keluar. Hasilnya dipakai langsung di milestone berikutnya
 
 ## Selesai bila
 
+- [ ] Laporan QA dibuat dengan template 🔒 [web `docs/qa`](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/qa/README.md), dicetak ke PDF dengan `npm run qa:report`, dan PDF-nya dilampirkan di issue serah terima yang diuji
 - [ ] Semua kasus punya hasil tercatat
 - [ ] E2E kasus negatif merge dan hijau di CI web
 - [ ] Tidak ada bug `priority-high` terbuka untuk fase 1

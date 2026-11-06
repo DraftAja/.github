@@ -81,6 +81,7 @@ Hindari: memberi label untuk sebagian Fase U tanpa menyebut bagian yang tidak ik
 
 ## Selesai bila
 
+- [ ] Laporan QA dibuat dengan template 🔒 [web `docs/qa`](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/qa/README.md), dicetak ke PDF dengan `npm run qa:report`, dan PDF-nya dilampirkan di issue serah terima yang diuji
 - [ ] Hasil KN-10 sampai KN-15 tercatat di doc 10
 - [ ] Bug P0 dan P1 Fase U selesai atau diterima tertulis oleh PM
 - [ ] H35 terkirim

@@ -83,6 +83,7 @@ Tidak ada serah terima keluar. Hasilnya dipakai langsung di milestone berikutnya
 
 ## Selesai bila
 
+- [ ] Laporan QA dibuat dengan template 🔒 [web `docs/qa`](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/qa/README.md), dicetak ke PDF dengan `npm run qa:report`, dan PDF-nya dilampirkan di issue serah terima yang diuji
 - [ ] Semua kasus di atas punya hasil tercatat
 - [ ] Bug yang ditemukan sudah dilaporkan, tanpa bug `priority-high` terbuka
 - [ ] Hasil ringkas tercatat di rencana uji
