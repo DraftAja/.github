@@ -1,8 +1,8 @@
 [Profil organisasi](https://github.com/DraftAja) · [Semua milestone](../milestone/README.md) · [Serah terima](../serah-terima/README.md)
 
-# Panduan kerja dengan Claude Code dan tim agen
+# Panduan kerja dengan agen AI: Claude Code, Codex, dan Antigravity
 
-Halaman ini menjelaskan cara memakai Claude Code di kedua repo kode DraftAja: apa yang sudah disiapkan, persiapan sekali per anggota, alur satu tugas dari awal sampai PR, contoh prompt, tim agen per peran, dan cara merawat aturannya.
+Halaman ini menjelaskan cara memakai Claude Code, Codex, dan Antigravity di kedua repo kode DraftAja dengan aturan, tim agen, dan skill yang sama: apa yang sudah disiapkan, persiapan sekali per anggota, alur satu tugas dari awal sampai PR, contoh prompt, tim agen per peran, dan cara merawat aturannya.
 
 Susunan ini masuk lewat 🔒 [Backend-Laravel #14](https://github.com/DraftAja/Backend-Laravel/pull/14) dan 🔒 [Frontend-Nextjs #14](https://github.com/DraftAja/Frontend-Nextjs/pull/14), dan sudah ada di `develop` kedua repo.
 
@@ -14,21 +14,22 @@ Susunan ini masuk lewat 🔒 [Backend-Laravel #14](https://github.com/DraftAja/B
 1. [Prinsip](#prinsip)
 2. [Yang sudah disiapkan di repo](#yang-sudah-disiapkan-di-repo)
 3. [Persiapan sekali per anggota](#persiapan-sekali-per-anggota)
-4. [Alur satu tugas](#alur-satu-tugas)
-5. [Contoh prompt](#contoh-prompt)
-6. [Tim agen](#tim-agen)
-7. [Alur per peran](#alur-per-peran)
-8. [Fitur lintas repo](#fitur-lintas-repo)
-9. [Gerbang verifikasi dan bukti](#gerbang-verifikasi-dan-bukti)
-10. [Mengelola sesi](#mengelola-sesi)
-11. [Merawat aturan dan agen](#merawat-aturan-dan-agen)
-12. [Masalah umum](#masalah-umum)
-13. [Batasan](#batasan)
+4. [Memakai Codex dan Antigravity](#memakai-codex-dan-antigravity)
+5. [Alur satu tugas](#alur-satu-tugas)
+6. [Contoh prompt](#contoh-prompt)
+7. [Tim agen](#tim-agen)
+8. [Alur per peran](#alur-per-peran)
+9. [Fitur lintas repo](#fitur-lintas-repo)
+10. [Gerbang verifikasi dan bukti](#gerbang-verifikasi-dan-bukti)
+11. [Mengelola sesi](#mengelola-sesi)
+12. [Merawat aturan dan agen](#merawat-aturan-dan-agen)
+13. [Masalah umum](#masalah-umum)
+14. [Batasan](#batasan)
 
 ## Prinsip
 
 1. **Manusia memutuskan, agen mengerjakan.** Claude berhenti dan bertanya sebelum hal yang sulit dibatalkan: migration, perubahan kontrak v1, dependensi, berkas milik peran lain, commit, push.
-2. **Satu sumber aturan.** Aturan proyek ditulis sekali di `AGENTS.md`. Alat lain (Codex, Cursor, Copilot, Gemini CLI) membaca berkas yang sama.
+2. **Satu sumber untuk semua alat.** Aturan proyek, tim agen, tabel skill, dan cara melapor ditulis sekali di `AGENTS.md`. Claude Code, Codex, Antigravity, Cursor, Copilot, dan Gemini CLI membaca berkas yang sama. Agen tim ditulis sekali di `.claude/agents/`, lalu salinan untuk Codex dan Antigravity dibangkitkan skrip. Skill dipasang dari satu lockfile untuk ketiga alat.
 3. **Bukti, bukan klaim.** Pekerjaan baru dianggap selesai bila keluaran perintah verifikasi ada di laporan. "Sudah dites" tanpa keluaran tidak diterima.
 4. **Pembuat dan pemeriksa dipisah.** Setiap tim punya satu agen gerbang yang tidak memeriksa hasil tulisannya sendiri.
 5. **Satu tugas, satu sesi, satu branch.** Konteks yang bersih membuat Claude lebih patuh pada aturan.
@@ -37,10 +38,15 @@ Susunan ini masuk lewat 🔒 [Backend-Laravel #14](https://github.com/DraftAja/B
 
 | Berkas | Isi | Dibaca oleh | Diubah oleh |
 |---|---|---|---|
-| `AGENTS.md` | Proyek, perintah, hard rules, tempat mencari, alur kerja, gerbang verifikasi, aturan git, keputusan yang masih terbuka | Semua alat AI. Claude membacanya lewat impor | Siapa saja, lewat PR |
-| `CLAUDE.md` | Baris `@AGENTS.md`, lalu cara kerja khusus Claude: hal yang wajib ditanyakan, tim agen, aturan delegasi, skill, cara melapor | Claude Code | Siapa saja, lewat PR |
+| `AGENTS.md` | Proyek, perintah, hard rules, tempat mencari, alur kerja, gerbang verifikasi, git, keputusan terbuka, hal yang wajib ditanyakan, tim agen, aturan delegasi, tabel skill, penyiapan per alat, cara melapor | Semua alat AI. Claude membacanya lewat impor | Siapa saja, lewat PR |
+| `CLAUDE.md` | Baris `@AGENTS.md`, lalu beberapa hal khusus Claude Code: perintah `/code-review` dan `/security-review`, letak skill dan agen | Claude Code | Siapa saja, lewat PR |
 | `app/`, `database/`, `docs/CLAUDE.md` (API) | Satu baris `@AGENTS.md` agar aturan per folder ikut terbaca | Claude Code, saat bekerja di folder itu | Jarang diubah |
-| `.claude/agents/*.md` | 12 agen di API, 10 agen di web, dari [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents) (MIT) | Claude Code | Disalin apa adanya dari upstream |
+| `.claude/agents/*.md` | 12 agen di API, 10 agen di web, dari [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents) (MIT). Sumber untuk semua alat. | Claude Code | Disalin apa adanya dari upstream |
+| `.codex/agents/*.toml` | Salinan agen untuk Codex | Codex | Dibangkitkan `scripts/agents/sync-agents.mjs`, jangan diedit |
+| `.agents/agents/*.md` | Salinan agen untuk Antigravity | Antigravity | Dibangkitkan `scripts/agents/sync-agents.mjs`, jangan diedit |
+| `.agents/rules/*.md` (API) | Aturan glob yang menunjuk `AGENTS.md` di `app/`, `database/`, dan `docs/`, karena Antigravity tidak membaca `AGENTS.md` di subfolder | Antigravity | Jarang diubah |
+| `scripts/agents/skills.manifest.json`, `skills-lock.json` | Daftar skill per repo beserta sumbernya, dan versi yang dikunci | Skrip `install-skills.mjs` | Lewat PR. Lockfile diperbarui dengan `--update`. |
+| `.claude/skills/`, `.agents/skills/` | Skill terpasang untuk Claude Code, serta Codex dan Antigravity | Masing-masing alat | Di-ignore git, dipasang skrip |
 | `.claude/settings.local.json`, `CLAUDE.local.md` | Setelan dan catatan pribadi | Hanya di komputer masing-masing | Di-ignore git |
 
 Claude Code tidak membaca `AGENTS.md` bila ada `CLAUDE.md`. Karena itu setiap `CLAUDE.md` di repo ini dimulai dengan `@AGENTS.md`. Isi `CLAUDE.md` dimuat bersama dengan semua `CLAUDE.md` di folder induk, jadi jangan menaruh `CLAUDE.md` berisi aturan lain di folder `DraftAja-split/` atau folder induk lain tanpa dibicarakan.
@@ -50,18 +56,16 @@ Claude Code tidak membaca `AGENTS.md` bila ada `CLAUDE.md`. Karena itu setiap `C
 1. **Pasang atau perbarui Claude Code.** Susunan ini diuji dengan versi 2.1.318. Cek dengan `claude --version`.
 2. **Ambil `develop` terbaru** di kedua repo. Setelah itu langkah git dijalankan Claude lewat [prompt utama](prompt-siap-pakai.md#prompt-utama).
 3. **Atur PHP** untuk anggota yang menjalankan API: `session.upload_progress.enabled = Off` di `php.ini` dan PHP minimal 8.4.27 atau 8.5.12. Tanpa ini `composer verify` sengaja gagal.
-4. **Pasang skill tambahan (disarankan).** `CLAUDE.md` merujuk skill ini dengan syarat "bila terpasang", jadi alur tetap berjalan tanpanya. Skill dipasang per komputer:
+4. **Pasang skill proyek** di setiap repo, sekali per clone dan lagi setiap kali `skills-lock.json` berubah. Perintah ini memasang skill yang sama untuk Claude Code, Codex, dan Antigravity, termasuk `motion` (dulu Framer Motion), `tailwind-4-docs`, `playwright-best-practices`, `laravel-best-practices`, dan `remotion-best-practices`. Daftar lengkap dan kapan memakainya ada di bagian Skills `AGENTS.md` setiap repo.
 
    ```bash
-   npx skills add obra/superpowers@systematic-debugging -g -y
-   npx skills add obra/superpowers@verification-before-completion -g -y
-   npx skills add obra/superpowers@writing-plans -g -y
-   npx skills add mattpocock/skills@tdd -g -y
-   # khusus FE dan QA
-   npx skills add ueberdosis/tiptap@tiptap -g -y
-   npx skills add currents-dev/playwright-best-practices-skill@playwright-best-practices -g -y
-   npx skills add addyosmani/web-quality-skills@accessibility -g -y
+   # Backend-Laravel
+   node scripts/agents/install-skills.mjs
+   # Frontend-Nextjs
+   npm run agents:skills
    ```
+
+   Bila `skills-lock.json` belum ada di repo, perintah ini membuatnya. Commit berkas itu lewat PR supaya anggota lain memasang versi yang sama. Skill lama yang dipasang global dengan `-g` tidak perlu dihapus, tetapi skill proyek yang dipakai sebagai acuan.
 
 5. **Periksa susunannya.** Buka Claude Code dari dalam folder repo, bukan dari folder di atasnya, lalu:
    - Ketik `/memory`. Harus tampil `./CLAUDE.md` dan di bawahnya `AGENTS.md` bertanda `@-imported`.
@@ -75,6 +79,34 @@ Claude Code tidak membaca `AGENTS.md` bila ada `CLAUDE.md`. Karena itu setiap `C
      ```
 
    Menu `/agents` sudah dihapus dari Claude Code. Pesan "The /agents wizard has been removed" bukan tanda agen gagal dimuat.
+
+## Memakai Codex dan Antigravity
+
+Kedua alat membaca `AGENTS.md` langsung, tanpa `CLAUDE.md`. Isi yang dulu khusus di `CLAUDE.md` (hal yang wajib ditanyakan, tim agen, skill, cara melapor) sudah dipindah ke `AGENTS.md`, jadi ketiga alat menerima aturan yang sama.
+
+| Hal | Claude Code | Codex | Antigravity |
+|---|---|---|---|
+| Aturan proyek | `CLAUDE.md` yang mengimpor `AGENTS.md` | `AGENTS.md` di root, ditambah `AGENTS.md` bersarang di bawah folder kerja | `AGENTS.md` di root (selalu aktif) dan `.agents/rules/*.md` |
+| Skill | `.claude/skills/` | `.agents/skills/` | `.agents/skills/` |
+| Memanggil skill | Otomatis dari deskripsi, atau `/nama-skill` | Otomatis, atau `$nama-skill` dan `/skills` | Otomatis dari deskripsi |
+| Agen tim | `.claude/agents/` | `.codex/agents/*.toml` | `.agents/agents/*.md` |
+| Memanggil agen | Sebut nama agennya di prompt | "Pakai agen `engineering-code-reviewer` untuk ..."; `/subagents` untuk berpindah | Agen utama memakai `invoke_subagent`; di CLI `@nama-agen` |
+| Review sebelum PR | `/code-review`, `/security-review` | `/review` | Delegasikan ke agen gerbang |
+
+Nama agen di Codex sama dengan di Claude (misalnya "Code Reviewer"). Di Antigravity, nama agen memakai slug berkas (misalnya `engineering-code-reviewer`). Tabel slug ada di bagian Agent team `AGENTS.md`.
+
+Periksa susunannya sekali per alat, dari dalam folder repo:
+
+```text
+Tanpa memakai tool apa pun, jawab tiga hal:
+1. Berkas instruksi apa saja yang dimuat di sesi ini?
+2. Sebutkan 3 "Hard rules" pertama dari AGENTS.md.
+3. Sebutkan agen proyek per tim sesuai AGENTS.md, tandai agen gerbangnya, dan sebutkan skill yang terpasang.
+```
+
+Di Codex, buka sesi dari root repo. Codex hanya membaca `AGENTS.md` bersarang (misalnya `app/AGENTS.md` di API) bila folder kerjanya ada di dalam folder itu, jadi `AGENTS.md` root meminta agen membaca berkas bersarang sebelum menyunting folder itu.
+
+[Prompt siap pakai](prompt-siap-pakai.md) bisa dipakai di ketiga alat tanpa diubah. Bedanya hanya cara memanggil agen dan perintah review, seperti tabel di atas.
 
 ## Alur satu tugas
 
@@ -142,7 +174,7 @@ Buat rencana dulu, tunggu persetujuan saya.
 
 ## Tim agen
 
-Setiap repo punya dua tim. Agen pembangun mengerjakan, agen gerbang memeriksa. Sebut nama agen di prompt bila ingin agen tertentu yang bekerja.
+Setiap repo punya dua tim. Agen pembangun mengerjakan, agen gerbang memeriksa. Sebut nama agen di prompt bila ingin agen tertentu yang bekerja. Tim yang sama tersedia di Claude Code, Codex, dan Antigravity.
 
 ### Backend-Laravel
 
@@ -262,7 +294,7 @@ Laporan akhir Claude wajib memuat:
 
 **Menambah aturan.** Tambahkan aturan hanya setelah Claude membuat kesalahan yang bisa terulang. Tulis aturan yang bisa diperiksa: "Jalankan `npm test` sebelum commit", bukan "Pastikan kode teruji". Aturan untuk semua alat masuk `AGENTS.md`, aturan khusus Claude masuk `CLAUDE.md`. Ubah lewat PR dengan scope `docs`.
 
-**Ukuran.** `CLAUDE.md` di bawah 120 baris, `AGENTS.md` di bawah 200 baris. Aturan yang hanya berlaku di satu folder masuk ke `AGENTS.md` folder itu.
+**Ukuran.** `CLAUDE.md` tetap pendek, `AGENTS.md` di bawah 200 baris. Gabungan `AGENTS.md` yang dibaca Codex dibatasi 32 KiB, jadi jaga total semua `AGENTS.md` satu repo di bawah angka itu. Aturan yang hanya berlaku di satu folder masuk ke `AGENTS.md` folder itu, ditambah satu aturan glob di `.agents/rules/` untuk Antigravity.
 
 **Audit.** Jalankan `/doctor prompt-audit` sebulan sekali atau setelah perubahan besar. Perintah ini mencari aturan yang usang, rujukan ke berkas yang sudah tidak ada, dan aturan yang saling bertentangan.
 
@@ -270,8 +302,11 @@ Laporan akhir Claude wajib memuat:
 
 1. Pilih agen dari [daftar agency-agents](https://github.com/msitarzewski/agency-agents) dan jelaskan alasannya di PR.
 2. Salin berkasnya ke `.claude/agents/`.
-3. Tambahkan ke tabel tim di `CLAUDE.md` repo itu dan di halaman ini.
-4. Periksa dengan prompt daftar subagen di [persiapan](#persiapan-sekali-per-anggota).
+3. Jalankan `node scripts/agents/sync-agents.mjs` (di web: `npm run agents:sync`) supaya salinan Codex dan Antigravity ikut dibuat. `--check` memastikan salinannya tidak tertinggal.
+4. Tambahkan ke tabel tim di `AGENTS.md` repo itu dan di halaman ini.
+5. Periksa dengan prompt daftar agen di [persiapan](#persiapan-sekali-per-anggota) dan [Memakai Codex dan Antigravity](#memakai-codex-dan-antigravity).
+
+**Skill.** Menambah atau mengganti skill dilakukan di `scripts/agents/skills.manifest.json`, lalu `install-skills.mjs --update` dan commit `skills-lock.json`. Tambahkan juga barisnya di tabel Skills `AGENTS.md`. Skill buatan tim sendiri diberi awalan `draftaja-` di `.agents/skills/` supaya tetap di-commit.
 
 ## Masalah umum
 
@@ -285,6 +320,10 @@ Laporan akhir Claude wajib memuat:
 | `format:check` web gagal pada berkas agen | `.claude/agents` hilang dari `.prettierignore` | Tambahkan kembali |
 | Claude mengubah banyak berkas di luar tugas | Kartu tugas tanpa batasan | Tulis "Batasan" dan "Selesai bila" di kartu tugas, minta rencana dulu |
 | Aturan saling bertentangan | Aturan baru tidak dicek terhadap yang lama | `/doctor prompt-audit`, lalu satukan lewat PR |
+| Agen tim tidak muncul di Codex atau Antigravity | Salinan belum dibangkitkan atau tertinggal dari `.claude/agents/` | `node scripts/agents/sync-agents.mjs`, lalu buka sesi baru |
+| Skill tidak dikenali alat mana pun | Skill proyek belum dipasang di clone ini | Jalankan skrip instal skill di bagian persiapan |
+| Antigravity mengabaikan aturan di `.agents/rules/` | Frontmatter tanpa `trigger` yang sah (`always_on`, `model_decision`, `glob`, `manual`) | Perbaiki frontmatternya. Aturan tanpa `trigger` dibuang tanpa pesan. |
+| Codex tidak tahu aturan `app/AGENTS.md` | Sesi dibuka dari root, jadi berkas bersarang tidak dimuat | Minta agen membaca berkas itu, atau buka sesi dari folder tersebut |
 
 ## Batasan
 

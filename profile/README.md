@@ -28,7 +28,7 @@ Layanan web untuk sekretaris, admin instansi, dan panitia kegiatan. Pilih templa
 3. [Kolaborasi: milestone, alur paralel, dan serah terima](#kolaborasi-milestone-alur-paralel-dan-serah-terima)
 4. [Arsitektur sistem end-to-end](#arsitektur-sistem-end-to-end)
 5. [Teknologi dan versi](#teknologi-dan-versi)
-6. [Bekerja dengan Claude Code dan tim agen](#bekerja-dengan-claude-code-dan-tim-agen)
+6. [Bekerja dengan agen AI dan tim agen](#bekerja-dengan-agen-ai-dan-tim-agen)
 7. [Mulai di sini untuk anggota baru](#mulai-di-sini-untuk-anggota-baru)
 
 > [!NOTE]
@@ -495,9 +495,9 @@ Versi belum ditetapkan untuk teknologi yang belum masuk kode. Versinya dipilih d
 
 ---
 
-## Bekerja dengan Claude Code dan tim agen
+## Bekerja dengan agen AI dan tim agen
 
-Kedua repo kode menyiapkan aturan yang sama untuk agen AI. `AGENTS.md` berisi aturan proyek yang dibaca semua alat, `CLAUDE.md` mengimpornya lalu menambah cara kerja khusus Claude Code, dan `.claude/agents/` berisi dua tim agen per repo dari [agency-agents](https://github.com/msitarzewski/agency-agents).
+Kedua repo kode menyiapkan aturan, tim agen, dan skill yang sama untuk Claude Code, Codex, dan Antigravity. `AGENTS.md` berisi aturan proyek, tim agen, tabel skill, dan penyiapan per alat, dan dibaca semua alat. `CLAUDE.md` mengimpornya dan hanya menambah hal khusus Claude Code. `.claude/agents/` berisi dua tim agen per repo dari [agency-agents](https://github.com/msitarzewski/agency-agents), dan skrip membangkitkan salinannya untuk Codex (`.codex/agents/`) dan Antigravity (`.agents/agents/`). Skill seperti `motion`, `tailwind-4-docs`, `playwright-best-practices`, dan `laravel-best-practices` dipasang ke ketiga alat dari satu lockfile.
 
 | Repo | Tim 1 | Tim 2 |
 |---|---|---|
@@ -512,7 +512,7 @@ Satu tugas mengikuti urutan: kartu tugas, rencana yang disetujui, pengerjaan den
 2. Pahami produk: 🔒 [doc 01 Ringkasan produk](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/01-project-overview.md), lalu 🔒 [doc 11 Persona](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/11-persona-dan-perjalanan-pengguna.md).
 3. Ikuti urutan baca sesuai peran: 🔒 [indeks dokumentasi API](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/README.md#urutan-baca) atau 🔒 [indeks dokumentasi web](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/README.md#urutan-baca).
 4. Jalankan kedua aplikasi di lokal: 🔒 [setup API](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/09-setup-development.md) dan 🔒 [README web](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/README.md). Pastikan `session.upload_progress.enabled = Off` di `php.ini`.
-5. Ikuti [persiapan Claude Code](https://github.com/DraftAja/.github/blob/main/panduan/kerja-dengan-agen-ai.md#persiapan-sekali-per-anggota): periksa `/memory` dan daftar agen di kedua repo.
+5. Ikuti [persiapan agen AI](https://github.com/DraftAja/.github/blob/main/panduan/kerja-dengan-agen-ai.md#persiapan-sekali-per-anggota): pasang skill proyek, lalu periksa aturan dan daftar agen di alat yang kamu pakai (Claude Code, Codex, atau Antigravity).
 6. Ambil issue dari milestone milikmu, buat branch dari `develop`, dan buka PR dengan template yang tersedia.
 
 <div align="center">

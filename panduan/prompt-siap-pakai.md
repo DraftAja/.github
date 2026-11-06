@@ -1,6 +1,6 @@
 [Profil organisasi](https://github.com/DraftAja) · [Panduan kerja dengan agen AI](kerja-dengan-agen-ai.md) · [Semua milestone](../milestone/README.md) · [Serah terima](../serah-terima/README.md)
 
-# Prompt siap pakai untuk Claude Code
+# Prompt siap pakai untuk Claude Code, Codex, dan Antigravity
 
 Satu prompt utama untuk satu tugas, dari menyiapkan branch sampai PR. Kamu hanya mengganti tiga baris di atasnya: milestone, tugas, dan template branch. Nama branch ditentukan Claude dari template itu, dan rincian tugas diambil Claude sendiri dari [halaman milestone](../milestone/README.md).
 
@@ -9,7 +9,8 @@ Untuk keadaan di luar alur normal, misalnya bug, PR yang perlu diperbaiki, atau 
 ## Sebelum mulai
 
 - [Persiapan sekali per anggota](kerja-dengan-agen-ai.md#persiapan-sekali-per-anggota) sudah selesai, dan `gh auth status` menunjukkan sudah login.
-- Claude Code dibuka dari dalam folder repo yang dikerjakan.
+- Alat AI (Claude Code, Codex, atau Antigravity) dibuka dari dalam folder repo yang dikerjakan. Prompt di halaman ini berlaku untuk ketiganya. Perbedaan cara memanggil agen dan review ada di [panduan](kerja-dengan-agen-ai.md#memakai-codex-dan-antigravity).
+- Skill proyek sudah dipasang dengan skrip instal skill ([persiapan](kerja-dengan-agen-ai.md#persiapan-sekali-per-anggota)).
 - Satu tugas, satu sesi. Ketik `/clear` sebelum memulai tugas berikutnya.
 
 ## Prompt utama
