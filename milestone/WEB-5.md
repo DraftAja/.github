@@ -8,7 +8,7 @@
 | Fase | Fase 2 · Katalog 64 template |
 | Repo | Frontend-Nextjs |
 | Contoh branch | `test/fe-web5-e2e-mvp` |
-| Mulai setelah | [WEB-4](WEB-4.md) selesai, menerima H8 |
+| Saran urutan | [WEB-4](WEB-4.md) selesai, menerima H8. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | [WEB-6](WEB-6.md) bila Fase U dikerjakan, selain itu selesai |
 
 ## Tujuan
@@ -74,6 +74,9 @@ Kirim [H20](../serah-terima/H20.md) setelah job E2E hijau di `develop` dengan se
 
 ## Serah terima masuk
 
+Tidak ada yang perlu ditunggu. Mulai saja; serah terima yang belum dilaporkan diganti data contoh, tipe sementara, atau provider palsu, sesuai bagian "Selama belum dilaporkan" di halaman serah terimanya. Bila ada laporan masuk, kamu yang di-mention sebagai reviewer.
+
+
 Label sama persis dengan panah di diagram profil.
 
 | Label di diagram | Dari | Yang diterima | Dipakai untuk |
@@ -81,6 +84,9 @@ Label sama persis dengan panah di diagram profil.
 | [**H8 · AI-2 → WEB-5 · stub provider untuk E2E**](../serah-terima/H8.md) | Hamid (BE 2), [AI-2](AI-2.md) | Cara mengarahkan `AI_*` ke provider palsu lokal, tertulis di doc 09 API. Juga dipakai Louis. | E2E perapihan tanpa kunci sungguhan (FE-23) |
 
 ## Serah terima keluar
+
+Setelah butirnya selesai, laporkan di issue **Laporan selesai** dan mention penerima. Lanjut ke milestone berikutnya tanpa menunggu tanggapan. Bila penerima tidak setuju, perbaiki lalu laporkan ulang di issue yang sama.
+
 
 | Label di diagram | Ke | Yang diserahkan | Kanal |
 |---|---|---|---|
@@ -91,7 +97,7 @@ Label sama persis dengan panah di diagram profil.
 - [ ] FE-27 merge lebih dulu sebagai PR tersendiri
 - [ ] Job E2E hijau di `develop` dengan FE-22, FE-23, FE-24
 - [ ] Web doc 07 diperbarui untuk skenario baru
-- [ ] H20 terkirim ke Louis
+- [ ] H20 dilaporkan di issue dan reviewer di-mention ke Louis
 
 ## Dokumen rujukan lain
 

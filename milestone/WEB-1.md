@@ -8,7 +8,7 @@
 | Fase | Fase 0 · Keamanan dan stabilisasi pasca-split |
 | Repo | Frontend-Nextjs |
 | Contoh branch | `fix/fe-web1-status-bawaan` |
-| Mulai setelah | Repo dipisah, 3 November 2026 |
+| Saran urutan | Repo dipisah, 3 November 2026. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | [WEB-2](WEB-2.md) |
 
 ## Tujuan
@@ -110,6 +110,9 @@ Tidak ada. Milestone ini bisa dikerjakan tanpa menunggu anggota lain.
 
 ## Serah terima keluar
 
+Setelah butirnya selesai, laporkan di issue **Laporan selesai** dan mention penerima. Lanjut ke milestone berikutnya tanpa menunggu tanggapan. Bila penerima tidak setuju, perbaiki lalu laporkan ulang di issue yang sama.
+
+
 | Label di diagram | Ke | Yang diserahkan | Kanal |
 |---|---|---|---|
 | [**H5 · WEB-1 → QA-2 · fase 0 web siap uji**](../serah-terima/H5.md) | Louis (QA), [QA-2](QA-2.md) | Pasangan commit API dan web, tangkapan layar 360 px dan desktop | Daftar periksa serah terima QA di PR web |
@@ -119,7 +122,7 @@ Tidak ada. Milestone ini bisa dikerjakan tanpa menunggu anggota lain.
 - [ ] Tes Vitest untuk FE-01, FE-02, FE-05, FE-06, FE-16 lulus
 - [ ] Tangkapan layar 360 px dan desktop terlampir di PR yang mengubah tampilan
 - [ ] Baris FE terkait ditandai selesai di web doc 06
-- [ ] H5 terkirim ke Louis
+- [ ] H5 dilaporkan di issue dan reviewer di-mention ke Louis
 
 ## Dokumen rujukan lain
 

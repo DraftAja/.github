@@ -8,7 +8,7 @@
 | Fase | Fase U · Dashboard usaha (Lanjutan, bila kapasitas) |
 | Repo | Backend-Laravel (`docs/`), .github |
 | Contoh branch | `docs/pm-pm6-keputusan-usaha` |
-| Mulai setelah | [PM-3](PM-3.md) selesai. Berjalan berdampingan dengan fase 2, tidak menunggu PM-4. |
+| Saran urutan | [PM-3](PM-3.md) selesai. Berjalan berdampingan dengan fase 2, tidak menunggu PM-4. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | [PM-4](PM-4.md), yang memutuskan bagian Fase U mana yang ikut rilis |
 
 ## Tujuan
@@ -93,6 +93,9 @@ Tidak ada. PM-6 memakai dokumen Fase U yang sudah ada di `docs/`.
 
 ## Serah terima keluar
 
+Setelah butirnya selesai, laporkan di issue **Laporan selesai** dan mention penerima. Lanjut ke milestone berikutnya tanpa menunggu tanggapan. Bila penerima tidak setuju, perbaiki lalu laporkan ulang di issue yang sama.
+
+
 | Label di diagram | Ke | Yang diserahkan | Kanal |
 |---|---|---|---|
 | [**H23 · PM-6 → CORE-6 · ADR usaha dan batas add-on**](../serah-terima/H23.md) | Octaf (BE 1), [CORE-6](CORE-6.md) | ADR 0007 Diterima, angka batas uji coba, cara aktivasi admin | PR docs merge, pengumuman di grup |
@@ -103,7 +106,7 @@ Tidak ada. PM-6 memakai dokumen Fase U yang sudah ada di `docs/`.
 - [ ] ADR 0007 dan 0008 tidak lagi berstatus Diusulkan
 - [ ] Q1 sampai Q6 terjawab di doc 20
 - [ ] Angka batas uji coba tertulis di doc 14
-- [ ] H23 dan H24 terkirim
+- [ ] H23 dan H24 dilaporkan di issue dan reviewer di-mention
 
 ## Dokumen rujukan lain
 

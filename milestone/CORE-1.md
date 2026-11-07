@@ -8,7 +8,7 @@
 | Fase | Fase 0 · Keamanan dan stabilisasi pasca-split |
 | Repo | Backend-Laravel |
 | Contoh branch | `fix/be-core-core1-policy-ekspor` |
-| Mulai setelah | Repo dipisah, 3 November 2026 |
+| Saran urutan | Repo dipisah, 3 November 2026. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | [CORE-2](CORE-2.md) |
 
 ## Tujuan
@@ -108,6 +108,9 @@ Tidak ada. Milestone ini bisa dikerjakan tanpa menunggu anggota lain.
 
 ## Serah terima keluar
 
+Setelah butirnya selesai, laporkan di issue **Laporan selesai** dan mention penerima. Lanjut ke milestone berikutnya tanpa menunggu tanggapan. Bila penerima tidak setuju, perbaiki lalu laporkan ulang di issue yang sama.
+
+
 | Label di diagram | Ke | Yang diserahkan | Kanal |
 |---|---|---|---|
 | [**H4 · CORE-1 → QA-2 · fase 0 API siap uji**](../serah-terima/H4.md) | Louis (QA), [QA-2](QA-2.md) | PR BE-01, BE-02, BE-09, BE-17 yang sudah merge, beserta cara memicu setiap error | Daftar periksa serah terima QA di PR |
@@ -117,7 +120,7 @@ Tidak ada. Milestone ini bisa dikerjakan tanpa menunggu anggota lain.
 - [ ] Semua tes di kolom kriteria ada dan lulus
 - [ ] S-01, S-02, S-13, S-21 ditandai selesai di doc 18
 - [ ] `composer api:spec` dijalankan untuk BE-02 dan BE-09
-- [ ] H4 terkirim ke Louis
+- [ ] H4 dilaporkan di issue dan reviewer di-mention ke Louis
 
 ## Dokumen rujukan lain
 

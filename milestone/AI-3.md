@@ -8,7 +8,7 @@
 | Fase | Fase 1 · Penyelarasan persona |
 | Repo | Backend-Laravel |
 | Contoh branch | `feat/be-ai-ai3-persona-kuota` |
-| Mulai setelah | [AI-2](AI-2.md) selesai, menerima H10 |
+| Saran urutan | [AI-2](AI-2.md) selesai, menerima H10. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | [AI-4](AI-4.md) |
 
 ## Tujuan
@@ -73,6 +73,9 @@ Kirim [H13](../serah-terima/H13.md) setelah BE-06 dan BE-08 merge.
 
 ## Serah terima masuk
 
+Tidak ada yang perlu ditunggu. Mulai saja; serah terima yang belum dilaporkan diganti data contoh, tipe sementara, atau provider palsu, sesuai bagian "Selama belum dilaporkan" di halaman serah terimanya. Bila ada laporan masuk, kamu yang di-mention sebagai reviewer.
+
+
 Label sama persis dengan panah di diagram profil.
 
 | Label di diagram | Dari | Yang diterima | Dipakai untuk |
@@ -80,6 +83,9 @@ Label sama persis dengan panah di diagram profil.
 | [**H10 · PM-2 → AI-3 · persona asisten**](../serah-terima/H10.md) | Raja (PM), [PM-2](PM-2.md) | Persona dan batas asisten DraftAja | Mengganti prompt "LaporBot" (KF-AI-05) |
 
 ## Serah terima keluar
+
+Setelah butirnya selesai, laporkan di issue **Laporan selesai** dan mention penerima. Lanjut ke milestone berikutnya tanpa menunggu tanggapan. Bila penerima tidak setuju, perbaiki lalu laporkan ulang di issue yang sama.
+
 
 | Label di diagram | Ke | Yang diserahkan | Kanal |
 |---|---|---|---|
@@ -90,7 +96,7 @@ Label sama persis dengan panah di diagram profil.
 - [ ] Semua tes di kolom kriteria lulus
 - [ ] `composer api:spec` dijalankan
 - [ ] KF-AI-05 berlabel Sudah ada di doc 01, 10, dan 12
-- [ ] H13 terkirim ke Alvira
+- [ ] H13 dilaporkan di issue dan reviewer di-mention ke Alvira
 
 ## Dokumen rujukan lain
 

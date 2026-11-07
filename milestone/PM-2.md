@@ -8,7 +8,7 @@
 | Fase | Fase 1 · Penyelarasan persona |
 | Repo | Backend-Laravel (dokumentasi) |
 | Contoh branch | `docs/pm-pm2-keputusan-fase-1` |
-| Mulai setelah | [PM-1](PM-1.md) selesai |
+| Saran urutan | [PM-1](PM-1.md) selesai. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | [PM-3](PM-3.md) |
 
 ## Tujuan
@@ -81,6 +81,9 @@ Tidak ada. Milestone ini bisa dikerjakan tanpa menunggu anggota lain.
 
 ## Serah terima keluar
 
+Setelah butirnya selesai, laporkan di issue **Laporan selesai** dan mention penerima. Lanjut ke milestone berikutnya tanpa menunggu tanggapan. Bila penerima tidak setuju, perbaiki lalu laporkan ulang di issue yang sama.
+
+
 | Label di diagram | Ke | Yang diserahkan | Kanal |
 |---|---|---|---|
 | [**H9 · PM-2 → CORE-3 · kategori dan kolom identitas**](../serah-terima/H9.md) | Octaf (BE 1), [CORE-3](CORE-3.md) | Keputusan 8 kunci kategori, pemetaan nilai lama, dan kolom identitas pengganti kolom akademik | Issue keputusan ditutup, doc 12 diperbarui |
@@ -91,7 +94,7 @@ Tidak ada. Milestone ini bisa dikerjakan tanpa menunggu anggota lain.
 
 - [ ] Empat keputusan tercatat sebagai issue tertutup
 - [ ] Doc 01, 04, 11, dan 12 diperbarui
-- [ ] H9, H10, H11 terkirim
+- [ ] H9, H10, H11 dilaporkan di issue dan reviewer di-mention
 
 ## Dokumen rujukan lain
 

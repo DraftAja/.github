@@ -8,7 +8,7 @@
 | Fase | Fase U · Dashboard usaha (Lanjutan, bila kapasitas) |
 | Repo | Backend-Laravel dan Frontend-Nextjs (dokumen uji) |
 | Contoh branch | `docs/qa-qa6-lembar-hitung` |
-| Mulai setelah | [QA-4](QA-4.md) selesai. Dikerjakan berdampingan dengan QA-5, karena CORE-6 dan AI-6 butuh hasilnya sebelum menulis tes. |
+| Saran urutan | [QA-4](QA-4.md) selesai. Dikerjakan berdampingan dengan QA-5, karena CORE-6 dan AI-6 butuh hasilnya sebelum menulis tes. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | [QA-7](QA-7.md) |
 
 ## Tujuan
@@ -74,6 +74,9 @@ Tidak ada. QA-6 memakai doc 16, 20, dan 21 yang sudah ada.
 
 ## Serah terima keluar
 
+Setelah butirnya selesai, laporkan di issue **Laporan selesai** dan mention penerima. Lanjut ke milestone berikutnya tanpa menunggu tanggapan. Bila penerima tidak setuju, perbaiki lalu laporkan ulang di issue yang sama.
+
+
 | Label di diagram | Ke | Yang diserahkan | Kanal |
 |---|---|---|---|
 | [**H25 · QA-6 → CORE-6 · kasus uji rumus disetujui**](../serah-terima/H25.md) | Octaf (BE 1), [CORE-6](CORE-6.md) | Lembar hitung U01 sampai U17 | Komentar di issue `kontrak`, label `kontrak-disetujui` |
@@ -85,7 +88,7 @@ Tidak ada. QA-6 memakai doc 16, 20, dan 21 yang sudah ada.
 - [ ] Semua kasus U01 sampai U17 cocok atau doc 21 sudah diperbaiki
 - [ ] Daftar berkas uji disetujui
 - [ ] Tabel isolasi dan rencana uji pengguna tercatat
-- [ ] H25 dan H26 terkirim
+- [ ] H25 dan H26 dilaporkan di issue dan reviewer di-mention
 
 ## Dokumen rujukan lain
 

@@ -8,7 +8,7 @@
 | Fase | Fase 2 · Katalog 64 template |
 | Repo | uji terhadap pasangan commit `develop` |
 | Contoh branch | `test/qa-qa4-katalog-dan-regresi` |
-| Mulai setelah | [QA-3](QA-3.md) selesai, menerima H18, H19 |
+| Saran urutan | [QA-3](QA-3.md) selesai, menerima H18, H19. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | [QA-5](QA-5.md), dan [QA-6](QA-6.md) bila Fase U dikerjakan |
 
 ## Tujuan
@@ -69,6 +69,9 @@ Bersama Raja, tetapkan:
 Siapkan lembar tugas, akun uji untuk peserta, dan formulir pencatatan.
 
 ## Serah terima masuk
+
+Tidak ada yang perlu ditunggu. Mulai saja; serah terima yang belum dilaporkan diganti data contoh, tipe sementara, atau provider palsu, sesuai bagian "Selama belum dilaporkan" di halaman serah terimanya. Bila ada laporan masuk, kamu yang di-mention sebagai reviewer.
+
 
 Label sama persis dengan panah di diagram profil.
 

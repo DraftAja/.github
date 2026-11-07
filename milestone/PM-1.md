@@ -8,7 +8,7 @@
 | Fase | Fase 0 · Keamanan dan stabilisasi pasca-split |
 | Repo | Backend-Laravel, Frontend-Nextjs, DraftAja, .github |
 | Contoh branch | `docs/pm-pm1-kontrak-tim-v1.1` |
-| Mulai setelah | Repo dipisah, 3 November 2026 |
+| Saran urutan | Repo dipisah, 3 November 2026. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | [PM-2](PM-2.md) |
 
 ## Tujuan
@@ -21,8 +21,9 @@ Aturan main untuk dua repo berlaku sebelum kontrak API mulai berubah. Setelah mi
 |---|---|---|---|
 | BE-15 | Revisi `TEAM_CONTRACT.md` v1.1: struktur kepemilikan per repo, aturan PR lintas repo, Definition of Done tambahan, sesuai usulan di doc 17. Pemetaan BE 1 = `be-core` (Octaf) dan BE 2 = `be-ai` (Hamid) sudah diselaraskan di v1.0.1. | Disetujui minimal 4 dari 5 anggota (kontrak bagian 14) | 🔒 [doc 17, usulan revisi](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/17-kolaborasi-dan-serah-terima.md#usulan-revisi-team_contractmd-v11) |
 | BE-15 | Membuat `.github/CODEOWNERS` di Backend-Laravel dan Frontend-Nextjs. Di API, `docs/api/openapi.json` dimiliki bersama `be-core`, `be-ai`, dan `fe`. | PR yang mengubah `openapi.json` otomatis meminta review FE | 🔒 [Lampiran A](https://github.com/DraftAja/Backend-Laravel/blob/develop/TEAM_CONTRACT.md#lampiran-a-contoh-githubcodeowners) |
-| Lampiran B | Branch protection `main` dan `develop` di kedua repo, termasuk status check `api:check` di web. | Push langsung ke `develop` ditolak; approval 1 untuk `develop` dan 2 untuk `main`; review pemilik kode wajib | 🔒 [Lampiran B](https://github.com/DraftAja/Backend-Laravel/blob/develop/TEAM_CONTRACT.md#lampiran-b-pengaturan-branch-protection-github) |
-| Label | Membuat label dari kontrak bagian 12 dan doc 17 di ketiga repo: `be-core`, `be-ai`, `fe`, `qa`, `docs`, `bug`, `feature`, `blocked`, `priority-high`, `kontrak`, `kontrak-disetujui`, `memecah-kontrak`, `butuh-api`, `butuh-fe`, `siap-rilis`. | Semua label tersedia dan dipakai template issue | 🔒 [doc 17, label issue](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/17-kolaborasi-dan-serah-terima.md#label-issue) |
+| Lingkungan | GitHub Environment `development` (branch `develop`) dan `production` (branch `main`, persetujuan Raja) di kedua repo, rahasia dipisah per Environment. Workflow `Deploy` dan `Aturan branch` sudah ada di kedua repo. | Rahasia production tidak bisa dibaca job dari `develop`; PR ke `main` dari branch selain `develop` atau `hotfix/*` gagal | 🔒 [kontrak bagian 4](https://github.com/DraftAja/Backend-Laravel/blob/develop/TEAM_CONTRACT.md#4-strategi-branch-dan-lingkungan) |
+| Lampiran B | Branch protection `main` dan `develop` di kedua repo, termasuk status check `api:check` di web. Butuh paket GitHub Team atau repo publik; selama organisasi memakai paket Free, aturan dijaga workflow `Aturan branch` dan review. | Push langsung ke `develop` ditolak; approval 1 untuk `develop` dan 2 untuk `main`; review pemilik kode wajib | 🔒 [Lampiran B](https://github.com/DraftAja/Backend-Laravel/blob/develop/TEAM_CONTRACT.md#lampiran-b-pengaturan-branch-protection-github) |
+| Label | Membuat label dari kontrak bagian 12 dan doc 17 di ketiga repo: `be-core`, `be-ai`, `fe`, `qa`, `docs`, `bug`, `feature`, `priority-high`, `kontrak`, `kontrak-disetujui`, `memecah-kontrak`, `butuh-api`, `butuh-fe`, `siap-rilis`, serta label laporan `laporan`, `perlu-review`, `perlu-perbaikan`, `disetujui`. | Semua label tersedia dan dipakai template issue | 🔒 [doc 17, label issue](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/17-kolaborasi-dan-serah-terima.md#label-issue) |
 | Organisasi | Mengundang Alvira dan Louis ke organisasi DraftAja, lalu membuat GitHub Milestone atau Projects untuk 25 milestone ini dengan tanggal jatuh tempo. | Kelima anggota bisa di-assign ke issue dan menjadi pemilik kode | 🔒 [kontrak bagian 12](https://github.com/DraftAja/Backend-Laravel/blob/develop/TEAM_CONTRACT.md#12-issue-dan-pelacakan-pekerjaan) |
 | INF-01 | Audit server PostgreSQL dev bersama dengan perintah baca-saja di doc 19, lalu perbaiki firewall, TLS, lock, dan akun admin. Dikerjakan bersama Octaf. | Tabel audit di doc 19 terisi; tidak ada aturan firewall terbuka; lock `CanNotDelete` terpasang | 🔒 [doc 19, audit](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/19-infrastruktur-azure.md#audit-kondisi-sekarang) |
 | INF-02 | Budget di subscription Azure dengan peringatan 50, 80, dan 100 persen ke Raja dan Octaf. | Budget aktif | 🔒 [doc 19, biaya](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/19-infrastruktur-azure.md#biaya) |
@@ -83,11 +84,15 @@ Job "Tes (PostgreSQL 16)" saat ini hijau karena `continue-on-error`, meskipun te
 
 ### Label
 
-Buat 15 label di Backend-Laravel, Frontend-Nextjs, dan DraftAja. Template issue di repo `.github` sudah memakai `feature`, `kontrak`, dan `bug`, jadi label itu harus ada lebih dulu. Cara cepat dengan GitHub CLI, misalnya:
+Buat 18 label di Backend-Laravel, Frontend-Nextjs, dan DraftAja. Template issue di repo `.github` sudah memakai `feature`, `kontrak`, dan `bug`, jadi label itu harus ada lebih dulu. Cara cepat dengan GitHub CLI, misalnya:
 
 ```bash
 for repo in DraftAja/Backend-Laravel DraftAja/Frontend-Nextjs DraftAja/DraftAja; do
-  gh label create kontrak-disetujui --repo "$repo" --color 0E8A16 --description "Proposal kontrak final" --force
+  gh label create kontrak-disetujui --repo "$repo" --color 0E8A16 --description "Proposal kontrak sudah ditinjau" --force
+  gh label create laporan --repo "$repo" --color 1D76DB --description "Laporan selesai satu butir atau milestone" --force
+  gh label create perlu-review --repo "$repo" --color FBCA04 --description "Menunggu tanggapan reviewer yang di-mention" --force
+  gh label create perlu-perbaikan --repo "$repo" --color D93F0B --description "Reviewer tidak setuju, pengirim memperbaiki" --force
+  gh label create disetujui --repo "$repo" --color 0E8A16 --description "Reviewer setuju" --force
 done
 ```
 
@@ -131,6 +136,9 @@ Kirim [H1](../serah-terima/H1.md) setelah langkah 4.
 Tidak ada. Milestone ini bisa dikerjakan tanpa menunggu anggota lain.
 
 ## Serah terima keluar
+
+Setelah butirnya selesai, laporkan di issue **Laporan selesai** dan mention penerima. Lanjut ke milestone berikutnya tanpa menunggu tanggapan. Bila penerima tidak setuju, perbaiki lalu laporkan ulang di issue yang sama.
+
 
 | Label di diagram | Ke | Yang diserahkan | Kanal |
 |---|---|---|---|

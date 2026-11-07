@@ -33,7 +33,7 @@ Kerjakan tugas di atas dari awal sampai PR. Ikuti AGENTS.md dan CLAUDE.md repo i
 
 2. Baca tugas
    - Ambil halaman milestone: gh api repos/DraftAja/.github/contents/milestone/<Milestone>.md -H "Accept: application/vnd.github.raw"
-   - Rincian butir dan kriteria terimanya adalah definisi selesai. Periksa juga "Mulai setelah" dan serah terima yang masuk ke milestone ini.
+   - Rincian butir dan kriteria terimanya adalah definisi selesai. Periksa juga "Saran urutan" dan serah terima yang masuk ke milestone ini. Serah terima yang belum dilaporkan tidak menghentikan tugas: pakai data contoh atau tipe sementara, lalu catat asumsinya.
    - Baca doc dan tes terkait di repo ini (backend: docs/18, docs/12, docs/05, docs/17; web: docs/03, docs/04, docs/06). Bila kode sekarang berbeda dari yang ditulis di halaman milestone, laporkan dengan berkas:baris.
    - Di repo web, bila tugas butuh endpoint baru: pastikan PR API-nya sudah merge, ambil docs/api/openapi.json dari origin/develop checkout API di sebelah repo ini, jalankan npm run api:sync dengan OPENAPI_SOURCE ke berkas itu, lalu npm run api:types.
 
@@ -63,7 +63,7 @@ Kerjakan tugas di atas dari awal sampai PR. Ikuti AGENTS.md dan CLAUDE.md repo i
    - Bila openapi.json berubah, pasang label butuh-fe bila label itu ada.
    - Tunggu gh pr checks selesai.
 
-7. Laporkan URL PR, status CI, perintah yang dijalankan dan hasilnya, langkah yang belum dijalankan dan alasannya, doc yang berubah, dan serah terima yang perlu saya kirim.
+7. Laporkan URL PR, status CI, perintah yang dijalankan dan hasilnya, langkah yang belum dijalankan dan alasannya, doc yang berubah, dan draf issue Laporan selesai (milestone, serah terima H<n>, bukti, cara mereview, reviewer yang perlu di-mention).
 ```
 
 Claude berhenti di dua keadaan saja: setelah menulis rencana (langkah 3), dan bila ada sesuatu yang harus kamu putuskan. Balas "lanjut" bila rencana benar, atau tulis koreksinya.
@@ -109,11 +109,19 @@ Jangan menonaktifkan tes, menambah continue-on-error, atau force push. Jalankan 
 
 ```text
 PR #<nomor> sudah merge. Perbarui develop, hapus branch ini di lokal (git branch -d) dan di origin.
-Bila tugas ini membuka serah terima H<n>, tulis pesan serah terimanya sesuai halaman serah-terima/H<n>.md, tanpa kredensial. Bila openapi.json berubah, tulis pesan untuk pemilik FE.
+Tulis draf issue Laporan selesai sesuai template, tanpa kredensial. Bila tugas ini membuka serah terima H<n>, ambil cara mereview dan reviewer dari halaman serah-terima/H<n>.md. Bila openapi.json berubah, mention pemilik FE.
 Terakhir, tulis prompt utama yang sudah terisi untuk butir berikutnya di milestone ini.
 ```
 
 Setelah itu ketik `/clear`, lalu tempel prompt utama yang dihasilkan.
+
+### Laporan ditolak
+
+```text
+Laporan selesai #<nomor issue> diberi label perlu-perbaikan. Saya mengizinkan commit, push, dan PR ke develop.
+Baca semua komentar reviewer di issue itu. Buat branch baru dari develop, perbaiki hanya yang diminta, jalankan gerbang verifikasi, lalu buat PR.
+Setelah PR merge, tulis komentar laporan ulang untuk issue yang sama: apa yang diperbaiki, bukti, dan mention ulang reviewer. Jangan membuat issue laporan baru.
+```
 
 ### Audit
 
@@ -150,7 +158,7 @@ sequenceDiagram
     end
     R->>GH: Setujui dan merge
     A->>C: Prompt setelah merge
-    C-->>A: Pesan serah terima, prompt utama berikutnya
+    C-->>A: Draf Laporan selesai, prompt utama berikutnya
 ```
 
 ## Yang tetap perlu kamu lakukan

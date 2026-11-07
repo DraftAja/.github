@@ -8,7 +8,7 @@
 | Fase | Fase U · Dashboard usaha (Lanjutan, bila kapasitas) |
 | Repo | Frontend-Nextjs |
 | Contoh branch | `feat/fe-web7-lembar-kerja` |
-| Mulai setelah | [WEB-6](WEB-6.md) selesai, menerima H29, H31, H32. `@tanstack/react-table` boleh dipasang setelah H24. |
+| Saran urutan | [WEB-6](WEB-6.md) selesai, menerima H29, H31, H32. `@tanstack/react-table` boleh dipasang setelah H24. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | selesai |
 
 ## Tujuan
@@ -98,6 +98,9 @@ Ikuti spesifikasi layar di web doc 03. Pemeriksaan utamanya: angka tidak dihitun
 
 ## Serah terima masuk
 
+Tidak ada yang perlu ditunggu. Mulai saja; serah terima yang belum dilaporkan diganti data contoh, tipe sementara, atau provider palsu, sesuai bagian "Selama belum dilaporkan" di halaman serah terimanya. Bila ada laporan masuk, kamu yang di-mention sebagai reviewer.
+
+
 | Label di diagram | Dari | Yang diterima | Dipakai untuk |
 |---|---|---|---|
 | [**H29 · CORE-7 → WEB-7 · openapi mitra dan invoice**](../serah-terima/H29.md) | Octaf (BE 1), [CORE-7](CORE-7.md) | Endpoint BE-22 sampai BE-24 | FE-33, FE-34 |
@@ -105,6 +108,9 @@ Ikuti spesifikasi layar di web doc 03. Pemeriksaan utamanya: angka tidak dihitun
 | [**H32 · AI-7 → WEB-7 · openapi ringkasan, teks ke tabel, pengingat**](../serah-terima/H32.md) | Hamid (BE 2), [AI-7](AI-7.md) | Endpoint BE-28 sampai BE-30 | FE-29, FE-36, FE-37, FE-38 |
 
 ## Serah terima keluar
+
+Setelah butirnya selesai, laporkan di issue **Laporan selesai** dan mention penerima. Lanjut ke milestone berikutnya tanpa menunggu tanggapan. Bila penerima tidak setuju, perbaiki lalu laporkan ulang di issue yang sama.
+
 
 | Label di diagram | Ke | Yang diserahkan | Kanal |
 |---|---|---|---|
@@ -115,7 +121,7 @@ Ikuti spesifikasi layar di web doc 03. Pemeriksaan utamanya: angka tidak dihitun
 - [ ] Gerbang verifikasi web lulus
 - [ ] E2E Fase U di web doc 07 lulus di desktop dan ponsel
 - [ ] web doc 03 sampai 07 diperbarui
-- [ ] H34 terkirim
+- [ ] H34 dilaporkan di issue dan reviewer di-mention
 
 ## Dokumen rujukan lain
 

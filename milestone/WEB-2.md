@@ -8,7 +8,7 @@
 | Fase | Fase 0 · Keamanan dan stabilisasi pasca-split |
 | Repo | Frontend-Nextjs |
 | Contoh branch | `refactor/fe-web2-tipe-dari-kontrak` |
-| Mulai setelah | [WEB-1](WEB-1.md) selesai, menerima H6, H7 |
+| Saran urutan | [WEB-1](WEB-1.md) selesai, menerima H6, H7. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | [WEB-3](WEB-3.md) |
 
 ## Tujuan
@@ -71,6 +71,9 @@ Bukti selesai: tes Vitest `userMessage` untuk setiap kode baru; E2E akun belum t
 3. FE-03.
 
 ## Serah terima masuk
+
+Tidak ada yang perlu ditunggu. Mulai saja; serah terima yang belum dilaporkan diganti data contoh, tipe sementara, atau provider palsu, sesuai bagian "Selama belum dilaporkan" di halaman serah terimanya. Bila ada laporan masuk, kamu yang di-mention sebagai reviewer.
+
 
 Label sama persis dengan panah di diagram profil.
 

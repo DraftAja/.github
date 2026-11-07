@@ -8,7 +8,7 @@
 | Fase | Fase 2 · Katalog 64 template |
 | Repo | Backend-Laravel |
 | Contoh branch | `test/be-ai-ai5-regresi-prompt` |
-| Mulai setelah | [AI-4](AI-4.md) selesai |
+| Saran urutan | [AI-4](AI-4.md) selesai. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | [AI-6](AI-6.md) bila Fase U dikerjakan, selain itu selesai |
 
 ## Tujuan
@@ -68,6 +68,9 @@ Tidak ada. Milestone ini bisa dikerjakan tanpa menunggu anggota lain. Kunci prov
 
 ## Serah terima keluar
 
+Setelah butirnya selesai, laporkan di issue **Laporan selesai** dan mention penerima. Lanjut ke milestone berikutnya tanpa menunggu tanggapan. Bila penerima tidak setuju, perbaiki lalu laporkan ulang di issue yang sama.
+
+
 | Label di diagram | Ke | Yang diserahkan | Kanal |
 |---|---|---|---|
 | [**H19 · AI-5 → QA-4 · hasil regresi prompt**](../serah-terima/H19.md) | Louis (QA), [QA-4](QA-4.md) | Keluaran minimal 10 pasang catatan untuk Groq dan Gemini | Dicatat di doc 10 dan `docs-ai/07-testing.md` |
@@ -76,7 +79,7 @@ Tidak ada. Milestone ini bisa dikerjakan tanpa menunggu anggota lain. Kunci prov
 
 - [ ] Nol fakta tambahan untuk kedua provider
 - [ ] Hasil tercatat di doc 10 dan `docs-ai/07-testing.md`
-- [ ] H19 terkirim ke Louis
+- [ ] H19 dilaporkan di issue dan reviewer di-mention ke Louis
 
 ## Dokumen rujukan lain
 

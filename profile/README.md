@@ -36,14 +36,35 @@ Layanan web untuk sekretaris, admin instansi, dan panitia kegiatan. Pilih templa
 
 ## Repositori
 
-| Repo | Isi | Pemilik utama | Branch kerja |
+| Repo | Isi | Pemilik utama | Development · Production |
 |---|---|---|---|
-| 🔒 [Backend-Laravel](https://github.com/DraftAja/Backend-Laravel) (draftaja-api) | API JSON `/api/v1`, aturan bisnis, data, antrean, AI, ekspor. Juga sumber spesifikasi produk di `docs/`. | `be-core`, `be-ai` | `develop` |
-| 🔒 [Frontend-Nextjs](https://github.com/DraftAja/Frontend-Nextjs) (draftaja-web) | Semua halaman termasuk landing, proxy same-origin ke API, E2E Playwright. | `fe` | `develop` |
+| 🔒 [Backend-Laravel](https://github.com/DraftAja/Backend-Laravel) (draftaja-api) | API JSON `/api/v1`, aturan bisnis, data, antrean, AI, ekspor. Juga sumber spesifikasi produk di `docs/`. | `be-core`, `be-ai` | `develop` · `main` |
+| 🔒 [Frontend-Nextjs](https://github.com/DraftAja/Frontend-Nextjs) (draftaja-web) | Semua halaman termasuk landing, proxy same-origin ke API, E2E Playwright. | `fe` | `develop` · `main` |
 | 🔒 [DraftAja](https://github.com/DraftAja/DraftAja) | Repo gabungan. Mencatat pasangan commit `develop` kedua repo sebagai submodule. | `pm` | `main` |
 | [.github](https://github.com/DraftAja/.github) | Profil organisasi ini dan template issue bawaan untuk semua repo. | `pm` | `main` |
 
 Monolit Laravel + Inertia dipecah menjadi dua repo pada **3 November 2026**. Sejak itu backend dan frontend bisa dikerjakan paralel, dengan `openapi.json` sebagai kontrak di antara keduanya.
+
+### Development dan production
+
+Kedua repo kode punya dua lingkungan yang tidak pernah bercampur. Masing-masing punya branch, database, rahasia, dan templat konfigurasi sendiri.
+
+| Lingkungan | Branch | Database | Yang masuk | Rahasia dan konfigurasi |
+|---|---|---|---|---|
+| development | `develop` | `draftaja_dev` | Semua PR dari branch kerja, kapan saja. QA menguji di sini. | GitHub Environment `development`, `deploy/development.env.example` |
+| production | `main` | `draftaja_prod` | Hanya PR rilis dari `develop` oleh PM (setelah label `siap-rilis` dari QA) atau `hotfix/*` | GitHub Environment `production` dengan persetujuan Raja, `deploy/production.env.example` |
+
+```mermaid
+flowchart LR
+    W["Branch kerja<br/>feat/, fix/, docs/"] -->|"PR, 1 approval"| D["develop"]
+    D -->|"deploy otomatis"| DE[("development<br/>draftaja_dev")]
+    D -->|"PR rilis oleh PM, label siap-rilis"| M["main"]
+    M -->|"deploy, disetujui Raja"| PR[("production<br/>draftaja_prod")]
+    H["hotfix/* dari main"] -->|"PR"| M
+    H -->|"di-merge balik"| D
+```
+
+Workflow `Aturan branch` menolak PR ke `main` dari branch selain `develop` atau `hotfix/*`. API menolak start (`env:verify`) bila production menunjuk database development atau sebaliknya. Web development selalu memanggil API development, web production memanggil API production.
 
 ## Tim dan peran
 
@@ -61,7 +82,18 @@ BE 1 = `be-core` (Octaf) dan BE 2 = `be-ai` (Hamid), sesuai `TEAM_CONTRACT.md` v
 
 ## Kolaborasi: milestone, alur paralel, dan serah terima
 
-Semua pekerjaan kolaborasi berawal dari milestone. Setiap anggota memegang lima milestone yang membatasi apa yang menjadi tanggung jawabnya, dan setiap milestone merujuk butir backlog yang sudah ditulis di dokumentasi kedua repo:
+Semua pekerjaan kolaborasi berawal dari milestone. Setiap anggota memegang milestone di lajurnya sendiri, dan setiap milestone merujuk butir backlog yang sudah ditulis di dokumentasi kedua repo.
+
+> [!IMPORTANT]
+> **Kerja paralel, tanpa menunggu serah terima.**
+> 1. Kerjakan milestone milikmu kapan saja. Urutan di diagram hanya saran.
+> 2. Bila hasil anggota lain belum ada, pakai data contoh, tipe sementara, atau provider palsu.
+> 3. Setelah butir atau milestone selesai, laporkan di issue GitHub dengan template **Laporan selesai** dan mention siapa yang perlu mereview. Lalu langsung lanjut.
+> 4. Bila reviewer tidak setuju (label `perlu-perbaikan`), perbaiki lalu laporkan ulang di issue yang sama. Itu kembali ke langkah serah terima sebelumnya, bukan mulai dari awal.
+>
+> Rincian: [aturan serah terima](https://github.com/DraftAja/.github/blob/main/serah-terima/README.md#aturan-umum).
+
+Backlog yang dirujuk milestone:
 
 - Backlog backend `BE-01` sampai `BE-31` dan temuan `S-xx`: 🔒 [API doc 18](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/18-audit-pasca-split.md#backlog-backend)
 - Backlog frontend `FE-01` sampai `FE-41`: 🔒 [web doc 06](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/06-backlog-frontend.md)
@@ -78,18 +110,18 @@ MVP adalah **fase 0 sampai 2** dan harus selesai sebelum feature freeze minggu 1
 | 1 | Penyelarasan persona: kategori, final dan revisi, kuota | PM-2, CORE-3, AI-3, WEB-3, QA-3 | Sebelum fase 2 |
 | 2 | Katalog 64 template, kolom isian, regresi prompt | PM-3, CORE-4, CORE-5, AI-4, AI-5, WEB-4, WEB-5, QA-4, QA-5 | Feature freeze **minggu 14** |
 | Rilis | MVP dibekukan, `v1.0-final`, pameran | PM-4, PM-5 | Minggu 14, 15, 16 |
-| U | Dashboard usaha untuk UMKM: pencatatan, titip jual, invoice, lembar kerja, impor dan ekspor Excel, pengingat, add-on Multi-usaha, serta orientasi berdasarkan tujuan dengan menu sesuai pilihan | PM-6, CORE-6, CORE-7, AI-6, AI-7, WEB-6, WEB-7, QA-6, QA-7 | Bila kapasitas ada. Setiap anggota mulai setelah milestone fase 2 miliknya selesai. Sisa yang belum lulus di minggu 14 pindah ke fase 5. |
+| U | Dashboard usaha untuk UMKM: pencatatan, titip jual, invoice, lembar kerja, impor dan ekspor Excel, pengingat, add-on Multi-usaha, serta orientasi berdasarkan tujuan dengan menu sesuai pilihan | PM-6, CORE-6, CORE-7, AI-6, AI-7, WEB-6, WEB-7, QA-6, QA-7 | Bila kapasitas ada, boleh dimulai kapan saja. Sisa yang belum lulus di minggu 14 pindah ke fase 5. |
 | 3 dan 4 | Ruang kerja instansi, tinjau dan penomoran | Ditambahkan sebagai milestone baru bila kapasitas ada | Setelah MVP |
 
 ### Diagram alur paralel
 
-Lima kotak di atas adalah lima anggota yang bekerja beriringan. Garis yang turun dari setiap kotak adalah alur kerja orang itu, dibaca dari atas ke bawah.
+Lima kotak di atas adalah lima anggota yang bekerja beriringan. Garis yang turun dari setiap kotak adalah alur kerja orang itu, dibaca dari atas ke bawah. Urutan di garis adalah saran, bukan syarat: setiap orang boleh mengerjakan milestone di garisnya kapan saja.
 
 | Tanda | Arti |
 |---|---|
-| 🏁 di atas garis | Titik milestone. Setelah titik ini selesai, orang itu lanjut ke milestone berikutnya di garis yang sama. Isi setiap milestone ada di [peta milestone](#peta-milestone). |
+| 🏁 di atas garis | Titik milestone. Isi setiap milestone ada di [peta milestone](#peta-milestone). Milestone berikutnya boleh dimulai sebelum titik ini selesai. |
 | Bingkai `par` "Bekerja bersamaan" | Milestone di dalamnya dikerjakan pada waktu yang sama oleh orang yang berbeda |
-| Panah mendatar | Serah terima. Labelnya `H<nomor> · <milestone pengirim> → <milestone penerima> · <isi>`, dan label yang sama persis ada di [tabel serah terima](#titik-serah-terima) |
+| Panah putus-putus mendatar | Serah terima berupa laporan: pengirim melapor di issue dan mention penerima sebagai reviewer. Penerima tidak menunggu panah ini untuk mulai. Labelnya `H<nomor> · <milestone pengirim> → <milestone penerima> · <isi>`, dan label yang sama persis ada di [tabel serah terima](#titik-serah-terima) |
 | Blok berwarna | Fase roadmap. MVP adalah fase 0 sampai 2 |
 | 🚩 | Gerbang rilis |
 
@@ -113,11 +145,11 @@ sequenceDiagram
         and
             Note over QA: 🏁 QA-1<br/>Rencana uji dan tinjauan kontrak
         end
-        PM->>CORE: H1 · PM-1 → CORE-2 · kontrak tim v1.1, CODEOWNERS
-        QA->>CORE: H2 · QA-1 → CORE-2 · kasus error inti disetujui
-        QA->>AI: H3 · QA-1 → AI-1 · kasus error AI disetujui
-        CORE->>QA: H4 · CORE-1 → QA-2 · fase 0 API siap uji
-        WEB->>QA: H5 · WEB-1 → QA-2 · fase 0 web siap uji
+        PM--)CORE: H1 · PM-1 → CORE-2 · kontrak tim v1.1, CODEOWNERS
+        QA--)CORE: H2 · QA-1 → CORE-2 · kasus error inti disetujui
+        QA--)AI: H3 · QA-1 → AI-1 · kasus error AI disetujui
+        CORE--)QA: H4 · CORE-1 → QA-2 · fase 0 API siap uji
+        WEB--)QA: H5 · WEB-1 → QA-2 · fase 0 web siap uji
         par Bekerja bersamaan
             Note over CORE: 🏁 CORE-2<br/>Kontrak error dan tipe respons
         and
@@ -125,46 +157,46 @@ sequenceDiagram
         and
             Note over QA: 🏁 QA-2<br/>Uji fase 0
         end
-        CORE->>WEB: H6 · CORE-2 → WEB-2 · openapi.json inti baru
-        AI->>WEB: H7 · AI-1 → WEB-2 · tipe generate, tidy, chat
+        CORE--)WEB: H6 · CORE-2 → WEB-2 · openapi.json inti baru
+        AI--)WEB: H7 · AI-1 → WEB-2 · tipe generate, tidy, chat
         par Bekerja bersamaan
             Note over AI: 🏁 AI-2<br/>Provider palsu untuk E2E
         and
             Note over WEB: 🏁 WEB-2<br/>Sinkron kontrak baru
         end
-        AI->>WEB: H8 · AI-2 → WEB-5 · stub provider untuk E2E
+        AI--)WEB: H8 · AI-2 → WEB-5 · stub provider untuk E2E
     end
 
     rect rgba(59, 130, 246, 0.12)
         Note over PM,QA: FASE 1 · Penyelarasan persona
         Note over PM: 🏁 PM-2<br/>Keputusan produk fase 1
-        PM->>CORE: H9 · PM-2 → CORE-3 · kategori dan kolom identitas
-        PM->>AI: H10 · PM-2 → AI-3 · persona asisten
-        PM->>WEB: H11 · PM-2 → WEB-3 · teks kebijakan privasi
+        PM--)CORE: H9 · PM-2 → CORE-3 · kategori dan kolom identitas
+        PM--)AI: H10 · PM-2 → AI-3 · persona asisten
+        PM--)WEB: H11 · PM-2 → WEB-3 · teks kebijakan privasi
         par Bekerja bersamaan
             Note over CORE: 🏁 CORE-3<br/>Persona dan alur dokumen
         and
             Note over AI: 🏁 AI-3<br/>Persona asisten, kuota, proposal
         end
-        CORE->>WEB: H12 · CORE-3 → WEB-3 · final, revisi, konflik
-        AI->>WEB: H13 · AI-3 → WEB-3 · kuota dan proposal
+        CORE--)WEB: H12 · CORE-3 → WEB-3 · final, revisi, konflik
+        AI--)WEB: H13 · AI-3 → WEB-3 · kuota dan proposal
         Note over WEB: 🏁 WEB-3<br/>Final, revisi, kuota, konflik
-        WEB->>QA: H14 · WEB-3 → QA-3 · fase 1 siap uji
+        WEB--)QA: H14 · WEB-3 → QA-3 · fase 1 siap uji
         Note over QA: 🏁 QA-3<br/>Uji fase 1
     end
 
     rect rgba(34, 197, 94, 0.12)
         Note over PM,QA: FASE 2 · Katalog 64 template · batas feature freeze minggu 14
         Note over PM: 🏁 PM-3<br/>Lingkungan uji nyata
-        PM->>CORE: H15 · PM-3 → CORE-5 · PostgreSQL 16 sekali pakai
-        PM->>AI: H16 · PM-3 → AI-4 · kunci Groq dan Gemini
+        PM--)CORE: H15 · PM-3 → CORE-5 · PostgreSQL 16 sekali pakai
+        PM--)AI: H16 · PM-3 → AI-4 · kunci Groq dan Gemini
         par Bekerja bersamaan
             Note over CORE: 🏁 CORE-4<br/>Katalog 64 template
         and
             Note over AI: 🏁 AI-4<br/>Uji provider sungguhan
         end
-        CORE->>WEB: H17 · CORE-4 → WEB-4 · kategori dan kolom isian
-        CORE->>QA: H18 · CORE-4 → QA-4 · 64 template di seeder
+        CORE--)WEB: H17 · CORE-4 → WEB-4 · kategori dan kolom isian
+        CORE--)QA: H18 · CORE-4 → QA-4 · 64 template di seeder
         par Bekerja bersamaan
             Note over CORE: 🏁 CORE-5<br/>Verifikasi PostgreSQL 16
         and
@@ -172,16 +204,16 @@ sequenceDiagram
         and
             Note over WEB: 🏁 WEB-4<br/>Katalog 8 kategori dan kolom isian
         end
-        AI->>QA: H19 · AI-5 → QA-4 · hasil regresi prompt
+        AI--)QA: H19 · AI-5 → QA-4 · hasil regresi prompt
         par Bekerja bersamaan
             Note over WEB: 🏁 WEB-5<br/>E2E MVP dan aksesibilitas
         and
             Note over QA: 🏁 QA-4<br/>Uji katalog dan regresi prompt
         end
-        WEB->>QA: H20 · WEB-5 → QA-5 · E2E MVP hijau
-        CORE->>PM: H21 · CORE-5 → PM-4 · hasil tes PostgreSQL 16
+        WEB--)QA: H20 · WEB-5 → QA-5 · E2E MVP hijau
+        CORE--)PM: H21 · CORE-5 → PM-4 · hasil tes PostgreSQL 16
         Note over QA: 🏁 QA-5<br/>Gerbang rilis MVP
-        QA->>PM: H22 · QA-5 → PM-4 · label siap-rilis
+        QA--)PM: H22 · QA-5 → PM-4 · label siap-rilis
     end
 
     rect rgba(168, 85, 247, 0.12)
@@ -191,13 +223,13 @@ sequenceDiagram
         and
             Note over QA: 🏁 QA-6<br/>Rencana uji dan lembar hitung Fase U
         end
-        PM->>CORE: H23 · PM-6 → CORE-6 · ADR usaha dan batas add-on
-        PM->>AI: H24 · PM-6 → AI-6 · ADR 0008 dan dependensi disetujui
-        QA->>CORE: H25 · QA-6 → CORE-6 · kasus uji rumus disetujui
-        QA->>AI: H26 · QA-6 → AI-6 · kasus uji impor dan ekspor disetujui
+        PM--)CORE: H23 · PM-6 → CORE-6 · ADR usaha dan batas add-on
+        PM--)AI: H24 · PM-6 → AI-6 · ADR 0008 dan dependensi disetujui
+        QA--)CORE: H25 · QA-6 → CORE-6 · kasus uji rumus disetujui
+        QA--)AI: H26 · QA-6 → AI-6 · kasus uji impor dan ekspor disetujui
         Note over CORE: 🏁 CORE-6<br/>Usaha, uang, dan stok
-        CORE->>WEB: H27 · CORE-6 → WEB-6 · openapi usaha, uang, stok
-        CORE->>AI: H28 · CORE-6 → AI-6 · service uang dan stok
+        CORE--)WEB: H27 · CORE-6 → WEB-6 · openapi usaha, uang, stok
+        CORE--)AI: H28 · CORE-6 → AI-6 · service uang dan stok
         par Bekerja bersamaan
             Note over CORE: 🏁 CORE-7<br/>Mitra, titip jual, dan invoice
         and
@@ -205,16 +237,16 @@ sequenceDiagram
         and
             Note over WEB: 🏁 WEB-6<br/>Kerangka Dashboard Usaha
         end
-        CORE->>WEB: H29 · CORE-7 → WEB-7 · openapi mitra dan invoice
-        CORE->>AI: H30 · CORE-7 → AI-7 · data invoice untuk rekap dan pengingat
-        AI->>WEB: H31 · AI-6 → WEB-7 · openapi lembar kerja, impor, ekspor
+        CORE--)WEB: H29 · CORE-7 → WEB-7 · openapi mitra dan invoice
+        CORE--)AI: H30 · CORE-7 → AI-7 · data invoice untuk rekap dan pengingat
+        AI--)WEB: H31 · AI-6 → WEB-7 · openapi lembar kerja, impor, ekspor
         Note over AI: 🏁 AI-7<br/>Ringkasan, teks ke tabel, dan pengingat
-        AI->>WEB: H32 · AI-7 → WEB-7 · openapi ringkasan, teks ke tabel, pengingat
-        AI->>QA: H33 · AI-7 → QA-7 · hasil regresi prompt teks ke tabel
+        AI--)WEB: H32 · AI-7 → WEB-7 · openapi ringkasan, teks ke tabel, pengingat
+        AI--)QA: H33 · AI-7 → QA-7 · hasil regresi prompt teks ke tabel
         Note over WEB: 🏁 WEB-7<br/>Mitra, invoice, lembar kerja, dan impor
-        WEB->>QA: H34 · WEB-7 → QA-7 · Fase U siap uji
+        WEB--)QA: H34 · WEB-7 → QA-7 · Fase U siap uji
         Note over QA: 🏁 QA-7<br/>Uji dan gerbang Fase U
-        QA->>PM: H35 · QA-7 → PM-4 · label siap-rilis Fase U
+        QA--)PM: H35 · QA-7 → PM-4 · label siap-rilis Fase U
     end
 
     rect rgba(239, 68, 68, 0.12)
@@ -239,7 +271,7 @@ Tabel ini mengikuti lajur di diagram: satu kolom per anggota, satu baris per fas
 
 ### Titik serah terima
 
-Cara membaca: cari label panah di diagram, lalu cari label yang sama di tabel ini. Urutan baris sama dengan urutan panah dari atas ke bawah. Pengirim belum dianggap selesai sebelum penerima bisa memakai hasilnya. Klik label untuk membuka halaman serah terima: isi paket, syarat sebelum dikirim, cara penerima memeriksa, dan yang dilakukan bila terlambat. Aturan umumnya ada di [folder serah terima](https://github.com/DraftAja/.github/tree/main/serah-terima).
+Cara membaca: cari label panah di diagram, lalu cari label yang sama di tabel ini. Urutan baris sama dengan urutan panah dari atas ke bawah. Setiap serah terima adalah laporan di issue GitHub dengan mention ke penerima, bukan titik tunggu. Penerima mereview; bila tidak setuju, pengirim memperbaiki dan melapor ulang di issue yang sama. Klik label untuk membuka halaman serah terima: isi paket, syarat sebelum dikirim, cara melapor, cara penerima mereview, dan yang dikerjakan selama belum dilaporkan. Aturan umumnya ada di [folder serah terima](https://github.com/DraftAja/.github/tree/main/serah-terima).
 
 #### Fase 0 · Keamanan dan stabilisasi pasca-split
 
@@ -314,9 +346,11 @@ Nama branch memuat peran dan milestone yang sedang dikerjakan:
 | Alvira · FE | `fe` | [WEB-1](https://github.com/DraftAja/.github/blob/main/milestone/WEB-1.md) sampai [WEB-7](https://github.com/DraftAja/.github/blob/main/milestone/WEB-7.md) | `fix/fe-web1-status-bawaan` |
 | Louis · QA | `qa` | [QA-1](https://github.com/DraftAja/.github/blob/main/milestone/QA-1.md) sampai [QA-7](https://github.com/DraftAja/.github/blob/main/milestone/QA-7.md) | `docs/qa-qa1-rencana-uji` |
 
-- Branch dibuat dari `develop`, PR kembali ke `develop`. Judul PR menyebut ID milestone, misalnya `feat(ai): tambah endpoint kuota (AI-3)`.
+- Branch dibuat dari `develop`, PR kembali ke `develop` (development). Judul PR menyebut ID milestone, misalnya `feat(ai): tambah endpoint kuota (AI-3)`.
+- `main` (production) hanya menerima PR rilis dari `develop` oleh PM, atau `hotfix/*`.
+- Setelah PR merge, buka issue **Laporan selesai** dan mention reviewer. Jangan menunggu tanggapan untuk lanjut.
 - Satu branch untuk satu butir pekerjaan. Contoh branch untuk setiap milestone ada di halaman milestone-nya.
-- Template issue Tugas milestone, Proposal kontrak, dan Laporan bug tersedia otomatis di semua repo organisasi.
+- Template issue Tugas milestone, Proposal kontrak, Laporan bug, dan Laporan selesai tersedia otomatis di semua repo organisasi.
 
 Aturan lengkap ada di 🔒 [`TEAM_CONTRACT.md`](https://github.com/DraftAja/Backend-Laravel/blob/develop/TEAM_CONTRACT.md) dan 🔒 [doc 17](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/17-kolaborasi-dan-serah-terima.md).
 
@@ -451,7 +485,7 @@ Versi diambil dari `composer.lock`, `package-lock.json`, `Dockerfile`, dan workf
 
 | Teknologi | Versi | Fungsi |
 |---|---|---|
-| PostgreSQL | 16 (Azure Database for PostgreSQL Flexible Server; `postgres:16-alpine` di CI dan Docker Compose) | Basis data staging dan produksi |
+| PostgreSQL | 16 (Azure Database for PostgreSQL Flexible Server; `postgres:16-alpine` di CI dan Docker Compose) | Basis data development dan produksi |
 | SQLite | bawaan PHP | Basis data lokal dan tes |
 | Groq | API kompatibel OpenAI `v1`, model bawaan `openai/gpt-oss-120b` | Provider bawaan chat (`AI_CHAT_PROVIDER`) |
 | Google Gemini | API `v1beta`, model wajib diisi lewat `GEMINI_MODEL` | Provider bawaan untuk analisis pola, perapihan, dan generate (`AI_GENERATE_PROVIDER`) |
@@ -513,7 +547,7 @@ Satu tugas mengikuti urutan: kartu tugas, rencana yang disetujui, pengerjaan den
 3. Ikuti urutan baca sesuai peran: 🔒 [indeks dokumentasi API](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/README.md#urutan-baca) atau 🔒 [indeks dokumentasi web](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/README.md#urutan-baca).
 4. Jalankan kedua aplikasi di lokal: 🔒 [setup API](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/09-setup-development.md) dan 🔒 [README web](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/README.md). Pastikan `session.upload_progress.enabled = Off` di `php.ini`.
 5. Ikuti [persiapan agen AI](https://github.com/DraftAja/.github/blob/main/panduan/kerja-dengan-agen-ai.md#persiapan-sekali-per-anggota): pasang skill proyek, lalu periksa aturan dan daftar agen di alat yang kamu pakai (Claude Code, Codex, atau Antigravity).
-6. Ambil issue dari milestone milikmu, buat branch dari `develop`, dan buka PR dengan template yang tersedia.
+6. Ambil issue dari milestone milikmu kapan saja, buat branch dari `develop`, dan buka PR dengan template yang tersedia. Setelah merge, laporkan di issue **Laporan selesai** dan mention reviewer.
 
 <div align="center">
 

@@ -8,7 +8,7 @@
 | Fase | Fase 2 · Katalog 64 template |
 | Repo | Backend-Laravel |
 | Contoh branch | `test/be-core-core5-postgresql-16` |
-| Mulai setelah | [CORE-4](CORE-4.md) selesai, menerima H15 |
+| Saran urutan | [CORE-4](CORE-4.md) selesai, menerima H15. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | [CORE-6](CORE-6.md) bila Fase U dikerjakan, selain itu selesai |
 
 ## Tujuan
@@ -32,10 +32,10 @@ Karena itu milestone ini dimulai dengan memperbaiki migrate di PostgreSQL. Perba
 | Konkurensi | Menjalankan tes `*PostgresConcurrencyTest` yang selama ini dilewati di SQLite. | Tes konkurensi lulus | 🔒 [doc 16, lapisan uji](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/16-strategi-pengujian.md#lapisan-uji) |
 | BE-14 | Menyamakan aturan validasi buat dan ubah dokumen (bila kapasitas ada). | Tes: nilai yang diterima saat buat juga diterima saat ubah | 🔒 [S-18](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/18-audit-pasca-split.md#kebenaran-perilaku) |
 | BE-16 | Menghapus parser lama yang tidak dipakai (bila kapasitas ada). | `php artisan test` dan Larastan hijau; entri baseline terkait ikut dihapus | 🔒 [S-20](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/18-audit-pasca-split.md#kebenaran-perilaku) |
-| INF-04 | Role PostgreSQL `draftaja_migrator`, `draftaja_app`, `draftaja_readonly` per database staging. | `ca-api` berjalan dengan `draftaja_app`; migrate hanya lewat job | 🔒 [doc 19, role](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/19-infrastruktur-azure.md#role-dan-hak-akses) |
-| INF-05 | Mount Azure Files di `/var/www/html/storage/app` untuk `ca-api` dan `ca-worker`, lalu uji tulis-baca dari kedua peran. | Unggah template di staging dianalisis worker sampai pola siap | 🔒 [doc 19, penyimpanan](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/19-infrastruktur-azure.md#penyimpanan-berkas) |
-| INF-06 | `LOG_CHANNEL=stderr` dan variabel baru dari doc 19 masuk `ENV_CONTRACT.md`, serta aturan `EnvContract` bila perlu. | `env:verify` lolos di staging | 🔒 [doc 19, variabel](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/19-infrastruktur-azure.md#variabel-environment-per-app) |
-| INF-10 | Uji pemulihan: PITR ke server baru, staging diarahkan ke sana, buka dokumen dan ekspor PDF. | Hasil tercatat di doc 10 | 🔒 [doc 19, backup](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/19-infrastruktur-azure.md#backup-restore-dan-pemulihan-bencana) |
+| INF-04 | Role PostgreSQL `draftaja_migrator`, `draftaja_app`, `draftaja_readonly` per database development. | `ca-api` berjalan dengan `draftaja_app`; migrate hanya lewat job | 🔒 [doc 19, role](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/19-infrastruktur-azure.md#role-dan-hak-akses) |
+| INF-05 | Mount Azure Files di `/var/www/html/storage/app` untuk `ca-api` dan `ca-worker`, lalu uji tulis-baca dari kedua peran. | Unggah template di development dianalisis worker sampai pola siap | 🔒 [doc 19, penyimpanan](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/19-infrastruktur-azure.md#penyimpanan-berkas) |
+| INF-06 | `LOG_CHANNEL=stderr` dan variabel baru dari doc 19 masuk `ENV_CONTRACT.md`, serta aturan `EnvContract` bila perlu. | `env:verify` lolos di development | 🔒 [doc 19, variabel](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/19-infrastruktur-azure.md#variabel-environment-per-app) |
+| INF-10 | Uji pemulihan: PITR ke server baru, development diarahkan ke sana, buka dokumen dan ekspor PDF. | Hasil tercatat di doc 10 | 🔒 [doc 19, backup](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/19-infrastruktur-azure.md#backup-restore-dan-pemulihan-bencana) |
 
 ## Rincian pekerjaan
 
@@ -67,9 +67,9 @@ Setelah [H15](../serah-terima/H15.md):
 
 `AcceptDocumentPostgresConcurrencyTest` dan `PatternLearnerPostgresConcurrencyTest` menguji penguncian baris (`lockForUpdate`) saat dua permintaan menerima usulan atau memesan kuota bersamaan. SQLite tidak mendukung penguncian itu, jadi tes ini hanya bermakna di PostgreSQL. Di log CI terakhir keduanya ikut gagal karena migrate gagal. Setelah migrate diperbaiki, keduanya harus lulus tanpa diubah.
 
-### INF-04 sampai INF-06 · Aplikasi di staging
+### INF-04 sampai INF-06 · Aplikasi di development
 
-Tiga pekerjaan ini menyiapkan aplikasi untuk staging yang dibangun Raja di PM-3:
+Tiga pekerjaan ini menyiapkan aplikasi untuk development yang dibangun Raja di PM-3:
 
 1. INF-04: buat role per database dengan SQL contoh di doc 19. `ca-api`, `ca-worker`, dan job scheduler memakai `draftaja_app` (tanpa DDL); job migrate memakai `draftaja_migrator`.
 2. INF-05: mount Azure Files ke `storage/app`. Periksa izin berkas, karena image membuat direktori dengan pemilik `www-data`, sedangkan share SMB punya pemilik dan mode sendiri.
@@ -96,6 +96,9 @@ Kirim [H21](../serah-terima/H21.md) setelah langkah 3.
 
 ## Serah terima masuk
 
+Tidak ada yang perlu ditunggu. Mulai saja; serah terima yang belum dilaporkan diganti data contoh, tipe sementara, atau provider palsu, sesuai bagian "Selama belum dilaporkan" di halaman serah terimanya. Bila ada laporan masuk, kamu yang di-mention sebagai reviewer.
+
+
 Label sama persis dengan panah di diagram profil.
 
 | Label di diagram | Dari | Yang diterima | Dipakai untuk |
@@ -104,16 +107,19 @@ Label sama persis dengan panah di diagram profil.
 
 ## Serah terima keluar
 
+Setelah butirnya selesai, laporkan di issue **Laporan selesai** dan mention penerima. Lanjut ke milestone berikutnya tanpa menunggu tanggapan. Bila penerima tidak setuju, perbaiki lalu laporkan ulang di issue yang sama.
+
+
 | Label di diagram | Ke | Yang diserahkan | Kanal |
 |---|---|---|---|
 | [**H21 · CORE-5 → PM-4 · hasil tes PostgreSQL 16**](../serah-terima/H21.md) | Raja (PM), [PM-4](PM-4.md) | Hasil seluruh rangkaian tes di PostgreSQL 16 | Doc 10 bagian verifikasi |
 
 ## Selesai bila
 
-- [ ] INF-04, INF-05, INF-06 selesai di staging dan INF-10 tercatat di doc 10
+- [ ] INF-04, INF-05, INF-06 selesai di development dan INF-10 tercatat di doc 10
 - [ ] Job CI PostgreSQL hijau tanpa `continue-on-error`
 - [ ] Hasil PostgreSQL 16 tercatat di doc 10
-- [ ] H21 terkirim ke Raja
+- [ ] H21 dilaporkan di issue dan reviewer di-mention ke Raja
 
 ## Dokumen rujukan lain
 

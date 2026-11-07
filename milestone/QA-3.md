@@ -8,7 +8,7 @@
 | Fase | Fase 1 · Penyelarasan persona |
 | Repo | uji terhadap pasangan commit `develop` |
 | Contoh branch | `test/qa-qa3-fase-1` |
-| Mulai setelah | [QA-2](QA-2.md) selesai, menerima H14 |
+| Saran urutan | [QA-2](QA-2.md) selesai, menerima H14. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | [QA-4](QA-4.md) |
 
 ## Tujuan
@@ -66,6 +66,9 @@ Buat satu dokumen untuk setiap kategori yang sudah punya template, unduh DOCX da
 Tulis di `tests/e2e` repo web dengan aturan di web doc 07: akun baru per tes, pilih elemen dengan peran dan nama, berjalan di kedua profil. Minimal: dokumen final tidak menampilkan tombol sunting, dan revisi membuka dokumen baru. Branch dan PR di repo web, dengan Alvira sebagai reviewer.
 
 ## Serah terima masuk
+
+Tidak ada yang perlu ditunggu. Mulai saja; serah terima yang belum dilaporkan diganti data contoh, tipe sementara, atau provider palsu, sesuai bagian "Selama belum dilaporkan" di halaman serah terimanya. Bila ada laporan masuk, kamu yang di-mention sebagai reviewer.
+
 
 Label sama persis dengan panah di diagram profil.
 

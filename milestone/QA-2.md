@@ -8,7 +8,7 @@
 | Fase | Fase 0 · Keamanan dan stabilisasi pasca-split |
 | Repo | uji terhadap pasangan commit `develop` |
 | Contoh branch | `test/qa-qa2-fase-0` |
-| Mulai setelah | [QA-1](QA-1.md) selesai, menerima H4, H5 |
+| Saran urutan | [QA-1](QA-1.md) selesai, menerima H4, H5. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | [QA-3](QA-3.md) |
 
 ## Tujuan
@@ -69,6 +69,9 @@ Pakai cara memicu dari [H5](../serah-terima/H5.md): ubah status dokumen menjadi 
 Setiap kegagalan dilaporkan dengan template "Laporan bug", ditautkan ke PR asalnya. Hasil ringkas (tanggal, pasangan commit, lulus atau gagal per kasus) dicatat di rencana uji QA-1.
 
 ## Serah terima masuk
+
+Tidak ada yang perlu ditunggu. Mulai saja; serah terima yang belum dilaporkan diganti data contoh, tipe sementara, atau provider palsu, sesuai bagian "Selama belum dilaporkan" di halaman serah terimanya. Bila ada laporan masuk, kamu yang di-mention sebagai reviewer.
+
 
 Label sama persis dengan panah di diagram profil.
 

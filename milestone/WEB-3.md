@@ -8,7 +8,7 @@
 | Fase | Fase 1 · Penyelarasan persona |
 | Repo | Frontend-Nextjs |
 | Contoh branch | `feat/fe-web3-final-dan-revisi` |
-| Mulai setelah | [WEB-2](WEB-2.md) selesai, menerima H11, H12, H13 |
+| Saran urutan | [WEB-2](WEB-2.md) selesai, menerima H11, H12, H13. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | [WEB-4](WEB-4.md) |
 
 ## Tujuan
@@ -101,6 +101,9 @@ Kirim [H14](../serah-terima/H14.md) setelah semua merge.
 
 ## Serah terima masuk
 
+Tidak ada yang perlu ditunggu. Mulai saja; serah terima yang belum dilaporkan diganti data contoh, tipe sementara, atau provider palsu, sesuai bagian "Selama belum dilaporkan" di halaman serah terimanya. Bila ada laporan masuk, kamu yang di-mention sebagai reviewer.
+
+
 Label sama persis dengan panah di diagram profil.
 
 | Label di diagram | Dari | Yang diterima | Dipakai untuk |
@@ -111,6 +114,9 @@ Label sama persis dengan panah di diagram profil.
 
 ## Serah terima keluar
 
+Setelah butirnya selesai, laporkan di issue **Laporan selesai** dan mention penerima. Lanjut ke milestone berikutnya tanpa menunggu tanggapan. Bila penerima tidak setuju, perbaiki lalu laporkan ulang di issue yang sama.
+
+
 | Label di diagram | Ke | Yang diserahkan | Kanal |
 |---|---|---|---|
 | [**H14 · WEB-3 → QA-3 · fase 1 siap uji**](../serah-terima/H14.md) | Louis (QA), [QA-3](QA-3.md) | Fase 1 lengkap di kedua repo: PR web merujuk PR API yang sudah merge | Repo gabungan mencatat pasangan commit, daftar periksa serah terima QA |
@@ -119,7 +125,7 @@ Label sama persis dengan panah di diagram profil.
 
 - [ ] Semua kriteria terima lulus di profil desktop dan ponsel
 - [ ] Web doc 03 diperbarui untuk editor dan halaman baru
-- [ ] H14 terkirim ke Louis
+- [ ] H14 dilaporkan di issue dan reviewer di-mention ke Louis
 
 ## Dokumen rujukan lain
 

@@ -8,7 +8,7 @@
 | Fase | Rilis · minggu 14, 15, 16 |
 | Repo | Backend-Laravel, Frontend-Nextjs, DraftAja |
 | Contoh branch | `release/mvp` |
-| Mulai setelah | [PM-3](PM-3.md) selesai, menerima H21, H22 |
+| Saran urutan | [PM-3](PM-3.md) selesai, menerima H21, H22. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | [PM-5](PM-5.md) |
 
 ## Tujuan
@@ -24,7 +24,7 @@ MVP (fase 0 sampai 2) dibekukan dan dirilis sebagai pasangan versi API dan web y
 | Freeze | Mengumumkan feature freeze: setelah ini hanya perbaikan bug dan dokumentasi. | PR fitur baru ditahan sampai setelah rilis | 🔒 [kontrak bagian 11](https://github.com/DraftAja/Backend-Laravel/blob/develop/TEAM_CONTRACT.md#11-rilis-milestone-dan-code-freeze) |
 | Rilis | Membuat `release/*` dari `develop`, memberi tag dengan nama sama di kedua repo, dan mengisi tabel pasangan rilis di doc 17. | Tag ada di kedua repo; repo gabungan mencatat pasangan commit | 🔒 [doc 17, urutan merge dan deploy](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/17-kolaborasi-dan-serah-terima.md#urutan-merge-dan-deploy) |
 | INF-09 | Peringatan Azure Monitor dan action group: kesehatan API, restart berulang, job gagal, CPU, storage, dan koneksi PostgreSQL, biaya. | Semua peringatan di doc 19 aktif | 🔒 [doc 19, pemantauan](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/19-infrastruktur-azure.md#pemantauan-dan-peringatan) |
-| INF-11 | Produksi: server General Purpose dengan HA zone-redundant, retensi backup 35 hari, job `pg_dump` mingguan. Hanya bila anggaran cukup; bila tidak, staging dipakai untuk pameran dan risikonya dicatat. | Keputusan tercatat; bila dibangun, uji pemulihan lulus | 🔒 [doc 19, backup](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/19-infrastruktur-azure.md#backup-restore-dan-pemulihan-bencana) |
+| INF-11 | Produksi: server General Purpose dengan HA zone-redundant, retensi backup 35 hari, job `pg_dump` mingguan. Bila anggaran tidak cukup untuk HA, production tetap dibangun terpisah dengan ukuran Burstable dan risikonya dicatat. Development tidak dipakai untuk pameran. | Keputusan tercatat; bila dibangun, uji pemulihan lulus | 🔒 [doc 19, backup](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/19-infrastruktur-azure.md#backup-restore-dan-pemulihan-bencana) |
 
 ## Rincian pekerjaan
 
@@ -51,6 +51,9 @@ Umumkan di grup dan di issue rilis: mulai minggu 14, PR yang menambah fitur tida
 5. Pastikan repo gabungan DraftAja mencatat pasangan yang sama.
 
 ## Serah terima masuk
+
+Tidak ada yang perlu ditunggu. Mulai saja; serah terima yang belum dilaporkan diganti data contoh, tipe sementara, atau provider palsu, sesuai bagian "Selama belum dilaporkan" di halaman serah terimanya. Bila ada laporan masuk, kamu yang di-mention sebagai reviewer.
+
 
 Label sama persis dengan panah di diagram profil.
 

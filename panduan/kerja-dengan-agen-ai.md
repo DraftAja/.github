@@ -236,7 +236,7 @@ Contoh pemakaian per peran:
 
 ## Fitur lintas repo
 
-Fitur yang butuh endpoint baru atau berubah selalu mengikuti urutan ini. Detailnya ada di 🔒 [doc 17](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/17-kolaborasi-dan-serah-terima.md) dan halaman [serah terima](../serah-terima/README.md).
+Fitur yang butuh endpoint baru atau berubah mengikuti alur ini. BE, FE, dan QA mulai bersamaan; tidak ada yang menunggu label atau serah terima. Persetujuan dan penolakan terjadi lewat review di issue. Detailnya ada di 🔒 [doc 17](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/17-kolaborasi-dan-serah-terima.md) dan halaman [serah terima](../serah-terima/README.md).
 
 ```mermaid
 sequenceDiagram
@@ -245,13 +245,20 @@ sequenceDiagram
     participant QA as Louis (QA)
     participant FE as Anggota FE + Claude (web)
     BE->>BE: Proposal kontrak dengan template doc 17
-    BE->>QA: Minta tinjauan kasus error
-    QA-->>BE: Label kontrak-disetujui
-    BE->>BE: Kerjakan, composer api:spec, PR, merge ke develop
-    BE->>FE: openapi.json baru, label butuh-fe
-    FE->>FE: npm run api:sync, npm run api:types
-    FE->>FE: Kerjakan layar, PR merujuk PR API, merge
-    FE->>QA: Pasangan commit API dan web siap uji
+    BE--)QA: Mention untuk meninjau kasus error
+    BE--)FE: Mention untuk meninjau bentuk respons
+    par Bekerja bersamaan
+        BE->>BE: Kerjakan, composer api:spec, PR, merge ke develop
+    and
+        FE->>FE: Layar dengan tipe sementara
+    and
+        QA->>QA: Kasus uji dari proposal
+    end
+    QA--)BE: Review: kontrak-disetujui, atau perlu-perbaikan lalu BE menyesuaikan
+    BE--)FE: Laporan selesai, openapi.json baru, label butuh-fe
+    FE->>FE: npm run api:sync, npm run api:types, buang tipe sementara
+    FE->>FE: PR merujuk PR API, merge ke develop
+    FE--)QA: Laporan selesai, pasangan commit siap diuji di development
 ```
 
 Prompt pembuka di repo web setelah PR API merge:

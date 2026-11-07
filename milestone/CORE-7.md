@@ -8,7 +8,7 @@
 | Fase | Fase U · Dashboard usaha (Lanjutan, bila kapasitas) |
 | Repo | Backend-Laravel |
 | Contoh branch | `feat/be-core-core7-invoice-mitra` |
-| Mulai setelah | [CORE-6](CORE-6.md) selesai |
+| Saran urutan | [CORE-6](CORE-6.md) selesai. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | selesai |
 
 ## Tujuan
@@ -78,11 +78,17 @@ Bukti selesai: PDF U01 memuat "tiga ratus dua puluh ribu rupiah"; XLSX dua sheet
 
 ## Serah terima masuk
 
+Tidak ada yang perlu ditunggu. Mulai saja; serah terima yang belum dilaporkan diganti data contoh, tipe sementara, atau provider palsu, sesuai bagian "Selama belum dilaporkan" di halaman serah terimanya. Bila ada laporan masuk, kamu yang di-mention sebagai reviewer.
+
+
 | Label di diagram | Dari | Yang diterima | Dipakai untuk |
 |---|---|---|---|
 | [**H25 · QA-6 → CORE-6 · kasus uji rumus disetujui**](../serah-terima/H25.md) | Louis (QA), [QA-6](QA-6.md) | Lembar hitung manual U01 sampai U17 | Tes BE-22 dan BE-23. Diterima saat CORE-6. |
 
 ## Serah terima keluar
+
+Setelah butirnya selesai, laporkan di issue **Laporan selesai** dan mention penerima. Lanjut ke milestone berikutnya tanpa menunggu tanggapan. Bila penerima tidak setuju, perbaiki lalu laporkan ulang di issue yang sama.
+
 
 | Label di diagram | Ke | Yang diserahkan | Kanal |
 |---|---|---|---|
@@ -94,7 +100,7 @@ Bukti selesai: PDF U01 memuat "tiga ratus dua puluh ribu rupiah"; XLSX dua sheet
 - [ ] Tes U01 sampai U07, U13, U15 lulus di SQLite dan PostgreSQL 16
 - [ ] Tes konkurensi nomor invoice lulus di PostgreSQL 16
 - [ ] KF-USH-03 sampai 06 berlabel Sudah ada di doc 10, 12, dan 20
-- [ ] H29 dan H30 terkirim
+- [ ] H29 dan H30 dilaporkan di issue dan reviewer di-mention
 
 ## Dokumen rujukan lain
 

@@ -8,7 +8,7 @@
 | Fase | Fase 2 · Katalog 64 template |
 | Repo | Backend-Laravel |
 | Contoh branch | `feat/be-core-core4-katalog-template` |
-| Mulai setelah | [CORE-3](CORE-3.md) selesai |
+| Saran urutan | [CORE-3](CORE-3.md) selesai. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | [CORE-5](CORE-5.md) |
 
 ## Tujuan
@@ -93,6 +93,9 @@ Tidak ada. Milestone ini bisa dikerjakan tanpa menunggu anggota lain.
 
 ## Serah terima keluar
 
+Setelah butirnya selesai, laporkan di issue **Laporan selesai** dan mention penerima. Lanjut ke milestone berikutnya tanpa menunggu tanggapan. Bila penerima tidak setuju, perbaiki lalu laporkan ulang di issue yang sama.
+
+
 | Label di diagram | Ke | Yang diserahkan | Kanal |
 |---|---|---|---|
 | [**H17 · CORE-4 → WEB-4 · kategori dan kolom isian**](../serah-terima/H17.md) | Alvira (FE), [WEB-4](WEB-4.md) | `GET /categories`, `template_fields`, `laporans.field_values` di `openapi.json` | PR API merge, label `butuh-fe` di issue web |
@@ -102,7 +105,7 @@ Tidak ada. Milestone ini bisa dikerjakan tanpa menunggu anggota lain.
 
 - [ ] 64 template ter-seed dan tes kesesuaian lulus
 - [ ] `openapi.json` memuat endpoint dan field baru
-- [ ] H17 dan H18 terkirim
+- [ ] H17 dan H18 dilaporkan di issue dan reviewer di-mention
 
 ## Dokumen rujukan lain
 

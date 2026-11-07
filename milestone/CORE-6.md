@@ -8,7 +8,7 @@
 | Fase | Fase U · Dashboard usaha (Lanjutan, bila kapasitas) |
 | Repo | Backend-Laravel |
 | Contoh branch | `feat/be-core-core6-usaha-dan-stok` |
-| Mulai setelah | [CORE-5](CORE-5.md) selesai, menerima H23 dan H25 |
+| Saran urutan | [CORE-5](CORE-5.md) selesai, menerima H23 dan H25. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | [CORE-7](CORE-7.md) |
 
 ## Tujuan
@@ -100,12 +100,18 @@ Hindari: mengirim path halaman dari API. Web membangun tujuan dari `key` langkah
 
 ## Serah terima masuk
 
+Tidak ada yang perlu ditunggu. Mulai saja; serah terima yang belum dilaporkan diganti data contoh, tipe sementara, atau provider palsu, sesuai bagian "Selama belum dilaporkan" di halaman serah terimanya. Bila ada laporan masuk, kamu yang di-mention sebagai reviewer.
+
+
 | Label di diagram | Dari | Yang diterima | Dipakai untuk |
 |---|---|---|---|
 | [**H23 · PM-6 → CORE-6 · ADR usaha dan batas add-on**](../serah-terima/H23.md) | Raja (PM), [PM-6](PM-6.md) | ADR 0007 Diterima, angka batas uji coba | BE-19 |
 | [**H25 · QA-6 → CORE-6 · kasus uji rumus disetujui**](../serah-terima/H25.md) | Louis (QA), [QA-6](QA-6.md) | Lembar hitung manual U01 sampai U17 yang cocok dengan doc 21 | Tes BE-20, BE-21, dan CORE-7 |
 
 ## Serah terima keluar
+
+Setelah butirnya selesai, laporkan di issue **Laporan selesai** dan mention penerima. Lanjut ke milestone berikutnya tanpa menunggu tanggapan. Bila penerima tidak setuju, perbaiki lalu laporkan ulang di issue yang sama.
+
 
 | Label di diagram | Ke | Yang diserahkan | Kanal |
 |---|---|---|---|
@@ -117,7 +123,7 @@ Hindari: mengirim path halaman dari API. Web membangun tujuan dari `key` langkah
 - [ ] Tes U08 sampai U11 dan U17 lulus di SQLite dan PostgreSQL 16
 - [ ] `composer api:spec` dijalankan dan `openapi.json` di-commit
 - [ ] KF-USH-01, 02, 07, 08, 19 dan KF-ORI-01 sampai 06 berlabel Sudah ada di doc 10, 12, 20, dan 22
-- [ ] H27 dan H28 terkirim
+- [ ] H27 dan H28 dilaporkan di issue dan reviewer di-mention
 
 ## Dokumen rujukan lain
 

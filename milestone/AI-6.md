@@ -8,7 +8,7 @@
 | Fase | Fase U · Dashboard usaha (Lanjutan, bila kapasitas) |
 | Repo | Backend-Laravel |
 | Contoh branch | `feat/be-ai-ai6-impor-lembar-kerja` |
-| Mulai setelah | [AI-5](AI-5.md) selesai, menerima H24 dan H26. BE-25 untuk `USH-01`, `USH-02`, dan `USH-07` menunggu H28. |
+| Saran urutan | [AI-5](AI-5.md) selesai, menerima H24 dan H26. BE-25 untuk `USH-01`, `USH-02`, dan `USH-07` memakai service dari H28, sebelum itu service sementara. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | [AI-7](AI-7.md) |
 
 ## Tujuan
@@ -85,6 +85,9 @@ Hindari: menulis angka sebagai teks berformat ("Rp320.000") di sel.
 
 ## Serah terima masuk
 
+Tidak ada yang perlu ditunggu. Mulai saja; serah terima yang belum dilaporkan diganti data contoh, tipe sementara, atau provider palsu, sesuai bagian "Selama belum dilaporkan" di halaman serah terimanya. Bila ada laporan masuk, kamu yang di-mention sebagai reviewer.
+
+
 | Label di diagram | Dari | Yang diterima | Dipakai untuk |
 |---|---|---|---|
 | [**H24 · PM-6 → AI-6 · ADR 0008 dan dependensi disetujui**](../serah-terima/H24.md) | Raja (PM), [PM-6](PM-6.md) | Izin PhpSpreadsheet | BE-26, BE-27 |
@@ -92,6 +95,9 @@ Hindari: menulis angka sebagai teks berformat ("Rp320.000") di sel.
 | [**H28 · CORE-6 → AI-6 · service uang dan stok**](../serah-terima/H28.md) | Octaf (BE 1), [CORE-6](CORE-6.md) | Service uang dan mutasi | Lembar bertipe dan commit impor |
 
 ## Serah terima keluar
+
+Setelah butirnya selesai, laporkan di issue **Laporan selesai** dan mention penerima. Lanjut ke milestone berikutnya tanpa menunggu tanggapan. Bila penerima tidak setuju, perbaiki lalu laporkan ulang di issue yang sama.
+
 
 | Label di diagram | Ke | Yang diserahkan | Kanal |
 |---|---|---|---|
@@ -103,7 +109,7 @@ Hindari: menulis angka sebagai teks berformat ("Rp320.000") di sel.
 - [ ] Uji manual Excel dan LibreOffice tercatat di doc 10
 - [ ] `composer api:spec` dijalankan
 - [ ] KF-USH-11, 15, 17, 18 berlabel Sudah ada di doc 10, 12, dan 20
-- [ ] H31 terkirim
+- [ ] H31 dilaporkan di issue dan reviewer di-mention
 
 ## Dokumen rujukan lain
 

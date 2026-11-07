@@ -8,7 +8,7 @@
 | Fase | Rilis · minggu 14, 15, 16 |
 | Repo | Backend-Laravel, Frontend-Nextjs, DraftAja |
 | Branch | hotfix/* saja |
-| Mulai setelah | [PM-4](PM-4.md) selesai |
+| Saran urutan | [PM-4](PM-4.md) selesai. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | selesai |
 
 ## Tujuan

@@ -8,7 +8,7 @@
 | Fase | Fase 2 · Katalog 64 template |
 | Repo | uji terhadap pasangan commit `develop` |
 | Contoh branch | `test/qa-qa5-gerbang-rilis` |
-| Mulai setelah | [QA-4](QA-4.md) selesai, menerima H20 |
+| Saran urutan | [QA-4](QA-4.md) selesai, menerima H20. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | [QA-7](QA-7.md) bila Fase U dikerjakan, selain itu selesai |
 
 ## Tujuan
@@ -57,6 +57,9 @@ Bagian Chromium sudah dibuktikan E2E dari H20. Firefox dan WebKit diuji manual, 
 
 ## Serah terima masuk
 
+Tidak ada yang perlu ditunggu. Mulai saja; serah terima yang belum dilaporkan diganti data contoh, tipe sementara, atau provider palsu, sesuai bagian "Selama belum dilaporkan" di halaman serah terimanya. Bila ada laporan masuk, kamu yang di-mention sebagai reviewer.
+
+
 Label sama persis dengan panah di diagram profil.
 
 | Label di diagram | Dari | Yang diterima | Dipakai untuk |
@@ -64,6 +67,9 @@ Label sama persis dengan panah di diagram profil.
 | [**H20 · WEB-5 → QA-5 · E2E MVP hijau**](../serah-terima/H20.md) | Alvira (FE), [WEB-5](WEB-5.md) | E2E P1 dan "P2 bagian template" lulus di 360 px dan 1440 px | Kriteria rilis butir 5 |
 
 ## Serah terima keluar
+
+Setelah butirnya selesai, laporkan di issue **Laporan selesai** dan mention penerima. Lanjut ke milestone berikutnya tanpa menunggu tanggapan. Bila penerima tidak setuju, perbaiki lalu laporkan ulang di issue yang sama.
+
 
 | Label di diagram | Ke | Yang diserahkan | Kanal |
 |---|---|---|---|
@@ -74,7 +80,7 @@ Label sama persis dengan panah di diagram profil.
 - [ ] Laporan QA dibuat dengan template 🔒 [web `docs/qa`](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/qa/README.md), dicetak ke PDF dengan `npm run qa:report`, dan PDF-nya dilampirkan di issue serah terima yang diuji
 - [ ] Tujuh kriteria punya bukti atau penerimaan risiko tertulis
 - [ ] Hasil uji peramban tercatat di doc 10
-- [ ] H22 terkirim ke Raja
+- [ ] H22 dilaporkan di issue dan reviewer di-mention ke Raja
 
 ## Dokumen rujukan lain
 

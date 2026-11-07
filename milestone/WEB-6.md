@@ -8,7 +8,7 @@
 | Fase | Fase U · Dashboard usaha (Lanjutan, bila kapasitas) |
 | Repo | Frontend-Nextjs |
 | Contoh branch | `feat/fe-web6-kerangka-usaha` |
-| Mulai setelah | [WEB-5](WEB-5.md) selesai, menerima H27 |
+| Saran urutan | [WEB-5](WEB-5.md) selesai, menerima H27. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | [WEB-7](WEB-7.md) |
 
 ## Tujuan
@@ -112,6 +112,9 @@ Bukti selesai: tangkapan layar 360 px dan desktop.
 3. Setelah H27: `npm run api:sync && npm run api:types`, kosongkan kontrak manual, lalu FE-30 dan FE-31.
 
 ## Serah terima masuk
+
+Tidak ada yang perlu ditunggu. Mulai saja; serah terima yang belum dilaporkan diganti data contoh, tipe sementara, atau provider palsu, sesuai bagian "Selama belum dilaporkan" di halaman serah terimanya. Bila ada laporan masuk, kamu yang di-mention sebagai reviewer.
+
 
 | Label di diagram | Dari | Yang diterima | Dipakai untuk |
 |---|---|---|---|

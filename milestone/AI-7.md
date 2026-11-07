@@ -8,7 +8,7 @@
 | Fase | Fase U · Dashboard usaha (Lanjutan, bila kapasitas) |
 | Repo | Backend-Laravel |
 | Contoh branch | `feat/be-ai-ai7-teks-ke-tabel` |
-| Mulai setelah | [AI-6](AI-6.md) selesai, menerima H30 |
+| Saran urutan | [AI-6](AI-6.md) selesai, menerima H30. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | selesai |
 
 ## Tujuan
@@ -81,11 +81,17 @@ Bukti selesai: tes dengan `travelTo` untuk setiap aturan KN-15, dan U10 menghasi
 
 ## Serah terima masuk
 
+Tidak ada yang perlu ditunggu. Mulai saja; serah terima yang belum dilaporkan diganti data contoh, tipe sementara, atau provider palsu, sesuai bagian "Selama belum dilaporkan" di halaman serah terimanya. Bila ada laporan masuk, kamu yang di-mention sebagai reviewer.
+
+
 | Label di diagram | Dari | Yang diterima | Dipakai untuk |
 |---|---|---|---|
 | [**H30 · CORE-7 → AI-7 · data invoice untuk rekap dan pengingat**](../serah-terima/H30.md) | Octaf (BE 1), [CORE-7](CORE-7.md) | `BusinessFigures` dan status invoice | BE-28 dan pengingat invoice di BE-30 |
 
 ## Serah terima keluar
+
+Setelah butirnya selesai, laporkan di issue **Laporan selesai** dan mention penerima. Lanjut ke milestone berikutnya tanpa menunggu tanggapan. Bila penerima tidak setuju, perbaiki lalu laporkan ulang di issue yang sama.
+
 
 | Label di diagram | Ke | Yang diserahkan | Kanal |
 |---|---|---|---|
@@ -98,7 +104,7 @@ Bukti selesai: tes dengan `travelTo` untuk setiap aturan KN-15, dan U10 menghasi
 - [ ] Regresi prompt nol angka tambahan tercatat
 - [ ] Ukuran KN-11 dan KN-15 tercatat di doc 10
 - [ ] KF-USH-09, 10, 12, 13, 14, 16 berlabel Sudah ada di doc 10, 12, dan 20
-- [ ] H32 dan H33 terkirim
+- [ ] H32 dan H33 dilaporkan di issue dan reviewer di-mention
 
 ## Dokumen rujukan lain
 

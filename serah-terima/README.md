@@ -2,33 +2,62 @@
 
 # Serah terima
 
-Serah terima adalah titik ketika hasil kerja satu anggota menjadi bahan kerja anggota lain. Di diagram profil, setiap serah terima digambar sebagai panah mendatar dengan label `H<nomor> · <milestone pengirim> → <milestone penerima> · <isi>`. Setiap label punya halaman sendiri di folder ini, berisi isi paket, syarat sebelum dikirim, cara mengirim, cara penerima memeriksa, dan apa yang dilakukan bila terlambat.
+Serah terima adalah titik ketika hasil kerja satu anggota menjadi bahan kerja anggota lain. Di diagram profil, setiap serah terima digambar sebagai panah mendatar dengan label `H<nomor> · <milestone pengirim> → <milestone penerima> · <isi>`. Setiap label punya halaman sendiri di folder ini, berisi isi paket, syarat sebelum dikirim, cara mengirim dan melapor, cara penerima mereview, dan apa yang dikerjakan penerima selama serah terima belum dilaporkan.
+
+Serah terima **bukan gerbang**. Tidak ada anggota yang menunggu serah terima untuk mulai atau melanjutkan milestone-nya. Serah terima adalah laporan: pengirim memberi tahu bahwa hasilnya siap, dan penerima mereviewnya.
 
 ## Aturan umum
 
-1. **Pengirim belum selesai sebelum penerima bisa memakai hasilnya.** PR yang merge tetapi tidak bisa dipakai penerima, misalnya `openapi.json` lupa di-commit, berarti serah terima belum terjadi.
-2. **Setiap serah terima punya jejak tertulis**, berupa issue, PR, atau komentar. Pesan di grup hanya pemberitahuan, bukan bukti.
-3. **Penerima memeriksa dalam 1×24 jam hari kerja** sejak diberi tahu, lalu menulis "diterima" atau daftar kekurangan di issue yang sama.
-4. **Rahasia tidak pernah lewat repo atau chat grup terbuka.** Kunci provider AI dan kredensial basis data diserahkan lewat kanal aman yang disepakati PM (H15, H16).
-5. **Serah terima yang terlambat diberi label `blocked`** di issue penerima, dan diumumkan di grup pada hari yang sama (kontrak tim bagian 12). Setiap halaman di folder ini menyebut apa yang bisa dikerjakan penerima selama menunggu.
+1. **Kerja paralel, kapan saja.** Setiap anggota mengerjakan milestone di lajurnya sendiri tanpa menunggu milestone atau serah terima anggota lain. Bila hasil orang lain belum ada, pakai data contoh, tipe sementara, atau provider palsu seperti yang ditulis di bagian "Selama belum dilaporkan" di setiap halaman serah terima.
+2. **Selesai berarti dilaporkan di issue GitHub.** Pengirim membuka issue dengan template **Laporan selesai**: apa yang selesai, tautan PR dan bukti, label `H<n>` yang terkait, cara mereview, lalu mention reviewer. Pesan di grup hanya pemberitahuan, bukan bukti.
+3. **Pengirim tidak menunggu tanggapan.** Setelah melapor, pengirim langsung lanjut ke butir atau milestone berikutnya.
+4. **Reviewer menanggapi di issue yang sama**, sasaran 1×24 jam hari kerja sejak di-mention. Setuju: label `disetujui`. Tidak setuju: label `perlu-perbaikan` beserta daftar yang kurang.
+5. **Rahasia tidak pernah lewat repo, issue, atau chat grup terbuka.** Kunci provider AI dan kredensial basis data diserahkan lewat kanal aman yang disepakati PM (H15, H16). Issue laporannya hanya mencatat "akses sudah diserahkan" beserta tanggalnya.
+
+### Bila reviewer tidak setuju
+
+Penolakan tidak menghentikan siapa pun.
+
+1. Reviewer menulis alasan dan daftar perbaikan di issue laporan, lalu memasang label `perlu-perbaikan`.
+2. Pengirim memperbaiki di branch baru, lalu melapor ulang **di issue yang sama** dengan komentar baru dan mention ulang reviewer. Ini kembali ke langkah serah terima sebelumnya (Dilaporkan), bukan membuat serah terima baru.
+3. Selama perbaikan, penerima tetap bekerja memakai versi terakhir yang disetujui, atau data contoh bila belum pernah ada yang disetujui.
+4. Bila tidak sepakat setelah dua putaran, PM memutuskan (kontrak tim bagian 14).
+
+### Siapa yang di-mention
+
+| Hasil dari | Mention |
+|---|---|
+| Octaf · `be-core` | `@abdhaamed` untuk kode API, `@alvirarisky` bila kontrak berubah, `@LuiLuiLui886` bila siap diuji, ditambah penerima di halaman H<n> |
+| Hamid · `be-ai` | `@octafex` untuk kode API, `@alvirarisky` bila kontrak berubah, `@LuiLuiLui886` bila siap diuji, ditambah penerima di halaman H<n> |
+| Alvira · `fe` | `@octafex` atau `@abdhaamed` sesuai endpoint yang dipakai, `@LuiLuiLui886` bila siap diuji |
+| Louis · `qa` | Pemilik area temuan, `@rajafadhil` untuk tanda siap rilis |
+| Raja · `pm` | Anggota yang terdampak keputusan |
+
+Issue laporan dibuat di repo tempat pekerjaannya: Backend-Laravel untuk `be-core` dan `be-ai`, Frontend-Nextjs untuk `fe`. Laporan yang mencakup kedua repo, misalnya dari `pm` atau `qa`, dibuat di repo gabungan DraftAja.
 
 ## Siklus satu serah terima
 
 ```mermaid
 stateDiagram-v2
-    [*] --> Disiapkan: pengirim mengerjakan butir di milestone-nya
-    Disiapkan --> Dikirim: syarat pengirim terpenuhi, issue atau PR ditautkan
-    Dikirim --> Diperiksa: penerima diberi tahu
-    Diperiksa --> Dikirim: kurang, pengirim melengkapi
-    Diperiksa --> Diterima: penerima menulis diterima di issue
-    Diterima --> Dipakai: penerima memulai butir yang bergantung
-    Dipakai --> [*]
+    [*] --> Dikerjakan: pengirim mengerjakan butir di milestone-nya, kapan saja
+    Dikerjakan --> Dilaporkan: issue Laporan selesai, mention reviewer
+    Dilaporkan --> Direview: reviewer membaca dan mencoba
+    Direview --> Disetujui: label disetujui
+    Direview --> Diperbaiki: label perlu-perbaikan
+    Diperbaiki --> Dilaporkan: lapor ulang di issue yang sama
+    Disetujui --> [*]
+    note right of Dilaporkan
+        Pengirim sudah lanjut ke pekerjaan berikutnya.
+        Penerima tidak pernah menunggu: sebelum disetujui
+        ia memakai versi terakhir yang disetujui atau data contoh.
+    end note
 ```
 
 ## Kanal yang dipakai
 
 | Kanal | Dipakai untuk | Bukti serah terima |
 |---|---|---|
+| Issue **Laporan selesai** dengan mention reviewer | Semua serah terima (H1 sampai H35) | Issue berlabel `laporan`; ditutup dengan label `disetujui` |
 | PR API merge + label `butuh-fe` di issue web | Kontrak API baru yang dipakai FE (H6, H7, H12, H13, H17) | Issue web berlabel `butuh-fe` menautkan PR API yang sudah merge |
 | Daftar periksa serah terima QA di deskripsi PR | Fitur siap diuji QA (H4, H5, H14) | Kotak centang di PR terisi, Louis disebut di PR |
 | Komentar di issue `kontrak` + label `kontrak-disetujui` | Persetujuan kasus error (H2, H3) | Komentar persetujuan Louis, label dipasang Alvira |

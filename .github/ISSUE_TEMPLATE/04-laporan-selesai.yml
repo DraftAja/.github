@@ -1,0 +1,77 @@
+name: Laporan selesai
+description: Laporkan butir atau milestone yang selesai, lalu mention siapa yang perlu mereview. Tidak perlu menunggu tanggapan untuk lanjut.
+title: "Laporan: <ID milestone> <butir> selesai"
+labels: ["laporan", "perlu-review"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Buat di repo tempat pekerjaannya (Backend-Laravel atau Frontend-Nextjs). Laporan yang mencakup kedua repo dibuat di repo gabungan DraftAja.
+        Setelah issue ini dibuat, langsung lanjut ke pekerjaan berikutnya. Reviewer menanggapi di sini dengan label `disetujui` atau `perlu-perbaikan`.
+        Bila `perlu-perbaikan`: perbaiki di branch baru, lalu tulis komentar baru di issue ini dengan bukti perbaikan dan mention reviewer lagi. Jangan membuat issue baru.
+        Aturan lengkap: https://github.com/DraftAja/.github/blob/main/serah-terima/README.md
+  - type: input
+    id: milestone
+    attributes:
+      label: Milestone
+      placeholder: AI-3 Persona asisten, kuota, proposal
+    validations:
+      required: true
+  - type: dropdown
+    id: cakupan
+    attributes:
+      label: Yang dilaporkan
+      options:
+        - Satu butir pekerjaan
+        - Satu milestone lengkap
+    validations:
+      required: true
+  - type: input
+    id: serah-terima
+    attributes:
+      label: Serah terima terkait
+      description: Label H<n> yang terpenuhi oleh laporan ini. Kosongkan bila tidak ada.
+      placeholder: H13 · AI-3 → WEB-3 · kuota dan proposal
+  - type: textarea
+    id: selesai
+    attributes:
+      label: Yang selesai
+      description: Butir backlog yang ditutup dan perubahan utamanya.
+      placeholder: |
+        - BE-06: GET /ai/quota
+        - BE-08: field proposal berbentuk objek
+    validations:
+      required: true
+  - type: textarea
+    id: bukti
+    attributes:
+      label: Bukti
+      description: PR yang sudah merge ke develop, run CI, hasil tes, tangkapan layar. Tanpa rahasia atau data asli.
+      placeholder: |
+        - PR: DraftAja/Backend-Laravel#42 (merge ke develop)
+        - CI: <tautan run>
+        - php artisan test: 210 lolos
+    validations:
+      required: true
+  - type: textarea
+    id: cara-review
+    attributes:
+      label: Cara mereview
+      description: Langkah singkat yang dipakai reviewer. Salin dari bagian "Cara penerima mereview" di halaman H<n> bila ada.
+    validations:
+      required: true
+  - type: textarea
+    id: belum
+    attributes:
+      label: Yang belum atau sengaja tidak dikerjakan
+      description: Asumsi, data contoh yang masih dipakai, atau langkah yang tidak dijalankan.
+  - type: textarea
+    id: reviewer
+    attributes:
+      label: Reviewer
+      description: Mention siapa yang perlu mereview. Daftar per area ada di aturan serah terima.
+      value: |
+        Mohon review:
+        - [ ] @
+    validations:
+      required: true

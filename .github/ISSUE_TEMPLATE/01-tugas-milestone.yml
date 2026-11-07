@@ -78,8 +78,8 @@ body:
   - type: input
     id: menerima
     attributes:
-      label: Menunggu hasil dari
-      description: Titik serah terima yang masuk (H1 sampai H35) atau issue lain. Kosongkan bila tidak ada.
+      label: Memakai hasil dari
+      description: Serah terima yang masuk (H1 sampai H35) atau issue lain. Tidak perlu ditunggu; selama belum dilaporkan, pakai data contoh atau tipe sementara. Kosongkan bila tidak ada.
       placeholder: H11, DraftAja/Backend-Laravel#42
   - type: input
     id: menyerahkan

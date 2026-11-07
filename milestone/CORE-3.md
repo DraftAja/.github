@@ -8,7 +8,7 @@
 | Fase | Fase 1 · Penyelarasan persona |
 | Repo | Backend-Laravel |
 | Contoh branch | `feat/be-core-core3-kategori-dokumen` |
-| Mulai setelah | [CORE-2](CORE-2.md) selesai, menerima H9 |
+| Saran urutan | [CORE-2](CORE-2.md) selesai, menerima H9. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | [CORE-4](CORE-4.md) |
 
 ## Tujuan
@@ -26,7 +26,7 @@ Dokumen berhenti berpersona akademik: kategori memakai 8 kunci, identitas dokume
 | BE-07 | Konkurensi optimistis di `PUT /sections/{id}` dengan field opsional `base_updated_at`. | Tes: dua pembaruan dengan `base_updated_at` sama, yang kedua 409 `revision_changed`; tanpa field, perilaku lama tetap | 🔒 [S-12](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/18-audit-pasca-split.md#kebenaran-perilaku) |
 | BE-10 | `MustVerifyEmail` di `User`. | Tes: akun belum terverifikasi menerima 409 `email_unverified` di rute aplikasi | 🔒 [S-17](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/18-audit-pasca-split.md#keamanan-dan-data) |
 | KF-EKS-02, KF-EKS-03 | Tata letak ekspor per kategori: Surat dan Notula tanpa sampul dan daftar isi. | Tes: DOCX Surat tidak memuat sampul dan daftar isi; DOCX `PRP-01` memuat keduanya | 🔒 [doc 12, ekspor](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/12-kebutuhan-sistem.md#ekspor-eks) |
-| INF-08 | Azure Communication Services Email dan domain pengirim untuk staging, sebelum BE-10 mewajibkan verifikasi email. | Email atur ulang kata sandi diterima dari staging | 🔒 [doc 19, email](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/19-infrastruktur-azure.md#email) |
+| INF-08 | Azure Communication Services Email dan domain pengirim untuk development, sebelum BE-10 mewajibkan verifikasi email. | Email atur ulang kata sandi diterima dari development | 🔒 [doc 19, email](https://github.com/DraftAja/Backend-Laravel/blob/develop/docs/19-infrastruktur-azure.md#email) |
 
 ## Rincian pekerjaan
 
@@ -114,11 +114,11 @@ Bukti selesai: tes DOCX dokumen kategori Surat tidak memuat sampul dan daftar is
 
 ### INF-08 · Email keluar
 
-Masalah sekarang: `MAIL_MAILER=log`, jadi email verifikasi dan atur ulang kata sandi hanya tertulis di log. Begitu BE-10 mewajibkan verifikasi, pengguna staging tidak bisa masuk tanpa email yang benar-benar terkirim.
+Masalah sekarang: `MAIL_MAILER=log`, jadi email verifikasi dan atur ulang kata sandi hanya tertulis di log. Begitu BE-10 mewajibkan verifikasi, pengguna development tidak bisa masuk tanpa email yang benar-benar terkirim.
 
-Langkah: ikuti doc 19 bagian email. Buat resource Email Communication Services dengan domain Azure-managed untuk staging, tautkan ke Communication Services, lalu buat app Entra untuk kredensial SMTP. Isi `MAIL_MAILER=smtp`, `MAIL_HOST=smtp.azurecomm.net`, `MAIL_PORT=587`, dan `MAIL_USERNAME`, dengan `MAIL_PASSWORD` di Key Vault. Periksa dulu pemberitahuan pensiun layanan Azure Communication Services. Bila Email terdampak, pakai penyedia SMTP lain di port 587.
+Langkah: ikuti doc 19 bagian email. Buat resource Email Communication Services dengan domain Azure-managed untuk development, tautkan ke Communication Services, lalu buat app Entra untuk kredensial SMTP. Isi `MAIL_MAILER=smtp`, `MAIL_HOST=smtp.azurecomm.net`, `MAIL_PORT=587`, dan `MAIL_USERNAME`, dengan `MAIL_PASSWORD` di Key Vault. Periksa dulu pemberitahuan pensiun layanan Azure Communication Services. Bila Email terdampak, pakai penyedia SMTP lain di port 587.
 
-Bukti selesai: email atur ulang kata sandi dari staging diterima di kotak masuk sungguhan.
+Bukti selesai: email atur ulang kata sandi dari development diterima di kotak masuk sungguhan.
 
 ## Urutan kerja yang disarankan
 
@@ -131,6 +131,9 @@ Kirim [H12](../serah-terima/H12.md) setelah BE-05 dan BE-07 merge. Alvira bisa m
 
 ## Serah terima masuk
 
+Tidak ada yang perlu ditunggu. Mulai saja; serah terima yang belum dilaporkan diganti data contoh, tipe sementara, atau provider palsu, sesuai bagian "Selama belum dilaporkan" di halaman serah terimanya. Bila ada laporan masuk, kamu yang di-mention sebagai reviewer.
+
+
 Label sama persis dengan panah di diagram profil.
 
 | Label di diagram | Dari | Yang diterima | Dipakai untuk |
@@ -138,6 +141,9 @@ Label sama persis dengan panah di diagram profil.
 | [**H9 · PM-2 → CORE-3 · kategori dan kolom identitas**](../serah-terima/H9.md) | Raja (PM), [PM-2](PM-2.md) | Keputusan 8 kunci kategori, pemetaan nilai lama, dan kolom identitas pengganti kolom akademik | Enum `DocumentCategory` dan migrasi kolom (KF-DOK-04) |
 
 ## Serah terima keluar
+
+Setelah butirnya selesai, laporkan di issue **Laporan selesai** dan mention penerima. Lanjut ke milestone berikutnya tanpa menunggu tanggapan. Bila penerima tidak setuju, perbaiki lalu laporkan ulang di issue yang sama.
+
 
 | Label di diagram | Ke | Yang diserahkan | Kanal |
 |---|---|---|---|
@@ -147,7 +153,7 @@ Label sama persis dengan panah di diagram profil.
 
 - [ ] Semua tes di kolom kriteria lulus, termasuk di job CI PostgreSQL
 - [ ] Doc 04, 05, dan 06 diperbarui untuk kolom dan endpoint baru
-- [ ] H12 terkirim ke Alvira
+- [ ] H12 dilaporkan di issue dan reviewer di-mention ke Alvira
 
 ## Dokumen rujukan lain
 

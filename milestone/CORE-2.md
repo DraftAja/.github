@@ -8,7 +8,7 @@
 | Fase | Fase 0 · Keamanan dan stabilisasi pasca-split |
 | Repo | Backend-Laravel |
 | Contoh branch | `feat/be-core-core2-error-code` |
-| Mulai setelah | [CORE-1](CORE-1.md) selesai, menerima H1, H2 |
+| Saran urutan | [CORE-1](CORE-1.md) selesai, menerima H1, H2. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | [CORE-3](CORE-3.md) |
 
 ## Tujuan
@@ -31,7 +31,7 @@ Masalah sekarang: error dari controller alur dokumen sudah membawa `code` (misal
 
 Langkah:
 
-1. Tulis proposal kontrak dengan template "Proposal kontrak API". Kolom Error berisi semua `code` di bawah, lalu tunggu persetujuan Louis ([H2](../serah-terima/H2.md)) dan label `kontrak-disetujui`.
+1. Tulis proposal kontrak dengan template "Proposal kontrak API". Kolom Error berisi semua `code` di bawah, mention Louis dan Alvira, lalu langsung kerjakan. Persetujuan Louis ([H2](../serah-terima/H2.md)) dan label `kontrak-disetujui` boleh menyusul; bila ditolak, sesuaikan proposal dan kode.
 2. Di `bootstrap/app.php` bagian `withExceptions`, daftarkan callback `render` yang hanya berlaku untuk `api/*`. Callback ini menerima pengecualian yang sudah disiapkan Laravel: `AuthorizationException` sudah menjadi `AccessDeniedHttpException`, `ModelNotFoundException` menjadi `NotFoundHttpException`, `TokenMismatchException` menjadi `HttpException` 419. `AuthenticationException` dan `ValidationException` tetap utuh. Periksa urutan ini di tes, jangan hanya mengandalkan catatan ini.
 3. Pemetaan yang dipasang:
 
@@ -94,14 +94,17 @@ Bukti selesai: `openapi.json` memuat kedua skema, dan setiap rute di grup `auth:
 
 ## Urutan kerja yang disarankan
 
-1. Proposal kontrak BE-03, sambil menunggu H1 dan H2.
-2. BE-04 bagian inti, yang bisa dikerjakan sambil menunggu persetujuan karena bentuk JSON tidak berubah.
-3. BE-03 setelah label `kontrak-disetujui`.
+1. Proposal kontrak BE-03, mention reviewer.
+2. BE-04 bagian inti, karena bentuk JSON tidak berubah.
+3. BE-03. Bila proposal ditolak saat sedang dikerjakan, sesuaikan kodenya.
 4. BE-11.
 
 Kirim [H6](../serah-terima/H6.md) setelah ketiganya merge.
 
 ## Serah terima masuk
+
+Tidak ada yang perlu ditunggu. Mulai saja; serah terima yang belum dilaporkan diganti data contoh, tipe sementara, atau provider palsu, sesuai bagian "Selama belum dilaporkan" di halaman serah terimanya. Bila ada laporan masuk, kamu yang di-mention sebagai reviewer.
+
 
 Label sama persis dengan panah di diagram profil.
 
@@ -112,16 +115,19 @@ Label sama persis dengan panah di diagram profil.
 
 ## Serah terima keluar
 
+Setelah butirnya selesai, laporkan di issue **Laporan selesai** dan mention penerima. Lanjut ke milestone berikutnya tanpa menunggu tanggapan. Bila penerima tidak setuju, perbaiki lalu laporkan ulang di issue yang sama.
+
+
 | Label di diagram | Ke | Yang diserahkan | Kanal |
 |---|---|---|---|
 | [**H6 · CORE-2 → WEB-2 · openapi.json inti baru**](../serah-terima/H6.md) | Alvira (FE), [WEB-2](WEB-2.md) | `openapi.json` dengan skema `ErrorResponse` dan tipe respons dashboard, options, template | PR API merge, label `butuh-fe` di issue web |
 
 ## Selesai bila
 
-- [ ] Proposal kontrak berlabel `kontrak-disetujui` sebelum kode
+- [ ] Proposal kontrak berlabel `kontrak-disetujui` (boleh menyusul setelah kode, sebelum milestone dilaporkan selesai)
 - [ ] `composer api:spec` dijalankan dan `openapi.json` ikut di-commit
 - [ ] Doc 05 API diperbarui
-- [ ] H6 terkirim ke Alvira
+- [ ] H6 dilaporkan di issue dan reviewer di-mention ke Alvira
 
 ## Dokumen rujukan lain
 

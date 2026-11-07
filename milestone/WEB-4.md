@@ -8,7 +8,7 @@
 | Fase | Fase 2 · Katalog 64 template |
 | Repo | Frontend-Nextjs |
 | Contoh branch | `feat/fe-web4-katalog-template` |
-| Mulai setelah | [WEB-3](WEB-3.md) selesai, menerima H17 |
+| Saran urutan | [WEB-3](WEB-3.md) selesai, menerima H17. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | [WEB-5](WEB-5.md) |
 
 ## Tujuan
@@ -69,6 +69,9 @@ Langkah: ganti sumber pilihan jenis dokumen dari `report_types` ke `GET /categor
 4. FE-04 lanjutan, lalu FE-21.
 
 ## Serah terima masuk
+
+Tidak ada yang perlu ditunggu. Mulai saja; serah terima yang belum dilaporkan diganti data contoh, tipe sementara, atau provider palsu, sesuai bagian "Selama belum dilaporkan" di halaman serah terimanya. Bila ada laporan masuk, kamu yang di-mention sebagai reviewer.
+
 
 Label sama persis dengan panah di diagram profil.
 

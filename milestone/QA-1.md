@@ -8,7 +8,7 @@
 | Fase | Fase 0 · Keamanan dan stabilisasi pasca-split |
 | Repo | Backend-Laravel (dokumentasi), issue di kedua repo |
 | Contoh branch | `docs/qa-qa1-rencana-uji` |
-| Mulai setelah | Repo dipisah, 3 November 2026 |
+| Saran urutan | Repo dipisah, 3 November 2026. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | [QA-2](QA-2.md) |
 
 ## Tujuan
@@ -72,6 +72,9 @@ Tidak ada. Milestone ini bisa dikerjakan tanpa menunggu anggota lain.
 
 ## Serah terima keluar
 
+Setelah butirnya selesai, laporkan di issue **Laporan selesai** dan mention penerima. Lanjut ke milestone berikutnya tanpa menunggu tanggapan. Bila penerima tidak setuju, perbaiki lalu laporkan ulang di issue yang sama.
+
+
 | Label di diagram | Ke | Yang diserahkan | Kanal |
 |---|---|---|---|
 | [**H2 · QA-1 → CORE-2 · kasus error inti disetujui**](../serah-terima/H2.md) | Octaf (BE 1), [CORE-2](CORE-2.md) | Persetujuan daftar `code` error di proposal kontrak endpoint inti | Komentar di issue `kontrak`, label `kontrak-disetujui` |
@@ -80,7 +83,7 @@ Tidak ada. Milestone ini bisa dikerjakan tanpa menunggu anggota lain.
 ## Selesai bila
 
 - [ ] Rencana uji fase 0 sampai 2 merge dan disetujui Raja
-- [ ] H2 dan H3 terkirim
+- [ ] H2 dan H3 dilaporkan di issue dan reviewer di-mention
 - [ ] Template laporan bug dipakai untuk bug pertama
 
 ## Dokumen rujukan lain

@@ -8,7 +8,7 @@
 | Fase | Fase 2 · Katalog 64 template |
 | Repo | Backend-Laravel (dokumentasi) |
 | Contoh branch | `docs/be-ai-ai4-hasil-smoke-test` |
-| Mulai setelah | [AI-3](AI-3.md) selesai, menerima H16 |
+| Saran urutan | [AI-3](AI-3.md) selesai, menerima H16. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | [AI-5](AI-5.md) |
 
 ## Tujuan
@@ -55,6 +55,9 @@ Langkah: dari panggilan perapihan di atas, hitung rata-rata token masukan dan ke
 3. Catat hasil dan token dalam satu PR dokumentasi.
 
 ## Serah terima masuk
+
+Tidak ada yang perlu ditunggu. Mulai saja; serah terima yang belum dilaporkan diganti data contoh, tipe sementara, atau provider palsu, sesuai bagian "Selama belum dilaporkan" di halaman serah terimanya. Bila ada laporan masuk, kamu yang di-mention sebagai reviewer.
+
 
 Label sama persis dengan panah di diagram profil.
 

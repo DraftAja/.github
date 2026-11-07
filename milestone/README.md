@@ -2,7 +2,7 @@
 
 # Semua milestone
 
-Setiap anggota memegang milestone di lajurnya sendiri. Fase U (Dashboard usaha) dikerjakan bila kapasitas ada: setiap anggota memulai milestone Fase U setelah milestone fase 2 miliknya selesai, dan PM-4 memutuskan bagian yang ikut rilis minggu 14. Halaman setiap milestone berisi tujuan, ringkasan butir pekerjaan beserta kriteria terima, lalu rincian setiap butir: masalah yang ada di kode sekarang, langkah pengerjaan, bukti selesai, dan hal yang perlu dihindari. Halaman itu bisa dibaca tanpa membuka dokumentasi di repo privat. Di bagian akhir ada urutan kerja yang disarankan, serah terima masuk dan keluar, serta dokumen rujukan.
+Setiap anggota memegang milestone di lajurnya sendiri. Semua milestone boleh dikerjakan kapan saja dan paralel; urutan di halaman hanya saran. Tidak ada yang menunggu serah terima: bila hasil anggota lain belum ada, pakai data contoh atau tipe sementara. Butir yang selesai dilaporkan di issue **Laporan selesai** dengan mention reviewer, lalu langsung lanjut. Fase U (Dashboard usaha) dikerjakan bila kapasitas ada, dan PM-4 memutuskan bagian yang ikut rilis minggu 14. Halaman setiap milestone berisi tujuan, ringkasan butir pekerjaan beserta kriteria terima, lalu rincian setiap butir: masalah yang ada di kode sekarang, langkah pengerjaan, bukti selesai, dan hal yang perlu dihindari. Halaman itu bisa dibaca tanpa membuka dokumentasi di repo privat. Di bagian akhir ada urutan kerja yang disarankan, serah terima masuk dan keluar, serta dokumen rujukan.
 
 | Fase | Raja · PM | Octaf · BE 1 | Hamid · BE 2 | Alvira · FE | Louis · QA |
 |---|---|---|---|---|---|
@@ -14,7 +14,7 @@ Setiap anggota memegang milestone di lajurnya sendiri. Fase U (Dashboard usaha) 
 
 ## Serah terima
 
-Klik label untuk membuka halaman serah terimanya: isi paket, syarat sebelum dikirim, cara mengirim, cara penerima memeriksa, dan yang dilakukan bila terlambat. Aturan umum dan siklus serah terima ada di [folder serah terima](../serah-terima/README.md).
+Klik label untuk membuka halaman serah terimanya: isi paket, syarat sebelum dikirim, cara mengirim dan melapor, cara penerima mereview, dan yang dikerjakan selama belum dilaporkan. Aturan umum dan siklus serah terima ada di [folder serah terima](../serah-terima/README.md).
 
 #### Fase 0 · Keamanan dan stabilisasi pasca-split
 

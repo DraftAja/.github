@@ -8,7 +8,7 @@
 | Fase | Fase U · Dashboard usaha (Lanjutan, bila kapasitas) |
 | Repo | Backend-Laravel dan Frontend-Nextjs |
 | Contoh branch | `test/qa-qa7-uji-fase-u` |
-| Mulai setelah | [QA-6](QA-6.md) selesai, menerima H33 dan H34 |
+| Saran urutan | [QA-6](QA-6.md) selesai, menerima H33 dan H34. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | selesai |
 
 ## Tujuan
@@ -68,12 +68,18 @@ Hindari: memberi label untuk sebagian Fase U tanpa menyebut bagian yang tidak ik
 
 ## Serah terima masuk
 
+Tidak ada yang perlu ditunggu. Mulai saja; serah terima yang belum dilaporkan diganti data contoh, tipe sementara, atau provider palsu, sesuai bagian "Selama belum dilaporkan" di halaman serah terimanya. Bila ada laporan masuk, kamu yang di-mention sebagai reviewer.
+
+
 | Label di diagram | Dari | Yang diterima | Dipakai untuk |
 |---|---|---|---|
 | [**H33 · AI-7 → QA-7 · hasil regresi prompt teks ke tabel**](../serah-terima/H33.md) | Hamid (BE 2), [AI-7](AI-7.md) | Keluaran regresi Groq dan Gemini | Pemeriksaan manual angka tambahan |
 | [**H34 · WEB-7 → QA-7 · Fase U siap uji**](../serah-terima/H34.md) | Alvira (FE), [WEB-7](WEB-7.md) | Pasangan commit API dan web | Semua uji di halaman ini |
 
 ## Serah terima keluar
+
+Setelah butirnya selesai, laporkan di issue **Laporan selesai** dan mention penerima. Lanjut ke milestone berikutnya tanpa menunggu tanggapan. Bila penerima tidak setuju, perbaiki lalu laporkan ulang di issue yang sama.
+
 
 | Label di diagram | Ke | Yang diserahkan | Kanal |
 |---|---|---|---|
@@ -84,7 +90,7 @@ Hindari: memberi label untuk sebagian Fase U tanpa menyebut bagian yang tidak ik
 - [ ] Laporan QA dibuat dengan template 🔒 [web `docs/qa`](https://github.com/DraftAja/Frontend-Nextjs/blob/develop/docs/qa/README.md), dicetak ke PDF dengan `npm run qa:report`, dan PDF-nya dilampirkan di issue serah terima yang diuji
 - [ ] Hasil KN-10 sampai KN-15 tercatat di doc 10
 - [ ] Bug P0 dan P1 Fase U selesai atau diterima tertulis oleh PM
-- [ ] H35 terkirim
+- [ ] H35 dilaporkan di issue dan reviewer di-mention
 
 ## Dokumen rujukan lain
 

@@ -8,7 +8,7 @@
 | Fase | Fase 0 · Keamanan dan stabilisasi pasca-split |
 | Repo | Backend-Laravel |
 | Contoh branch | `test/be-ai-ai2-stub-provider` |
-| Mulai setelah | [AI-1](AI-1.md) selesai |
+| Saran urutan | [AI-1](AI-1.md) selesai. Tidak wajib: boleh dimulai kapan saja, serah terima yang belum dilaporkan diganti data contoh atau tipe sementara. |
 | Lanjut ke | [AI-3](AI-3.md) |
 
 ## Tujuan
@@ -45,7 +45,7 @@ Usulan: cara kedua. Langkah:
    - chat dan generate: kalimat tetap berbahasa Indonesia.
 4. Sediakan cara memicu kegagalan untuk kasus negatif, misalnya catatan yang memuat penanda khusus membuat `FakeAiClient` melempar pengecualian provider, sehingga API membalas `provider_failed`.
 5. `AiClientFactory::make()` mengembalikan `FakeAiClient` hanya bila flag menyala dan `app()->environment()` bernilai `local` atau `testing`.
-6. Tambah aturan di `app/Support/EnvContract.php`: flag ini ditolak di staging dan produksi, sehingga `env:verify` gagal dan container tidak mau start.
+6. Tambah aturan di `app/Support/EnvContract.php`: flag ini ditolak di development dan produksi, sehingga `env:verify` gagal dan container tidak mau start.
 7. Tambah variabel ke `.env.example` tanpa nilai dan ke `docs/ENV_CONTRACT.md`.
 
 Bukti selesai: tes unit `FakeAiClient` untuk ketiga jenis permintaan; tes `EnvContract` menolak flag di `production`; tes fitur perapihan sampai accept dengan flag menyala.
@@ -70,6 +70,9 @@ Tidak ada. Milestone ini bisa dikerjakan tanpa menunggu anggota lain.
 
 ## Serah terima keluar
 
+Setelah butirnya selesai, laporkan di issue **Laporan selesai** dan mention penerima. Lanjut ke milestone berikutnya tanpa menunggu tanggapan. Bila penerima tidak setuju, perbaiki lalu laporkan ulang di issue yang sama.
+
+
 | Label di diagram | Ke | Yang diserahkan | Kanal |
 |---|---|---|---|
 | [**H8 · AI-2 → WEB-5 · stub provider untuk E2E**](../serah-terima/H8.md) | Alvira (FE), [WEB-5](WEB-5.md) | Cara mengarahkan `AI_*` ke provider palsu lokal, tertulis di doc 09 API. Juga dipakai Louis. | Issue kesepakatan `be-ai` dan `fe` |
@@ -78,7 +81,7 @@ Tidak ada. Milestone ini bisa dikerjakan tanpa menunggu anggota lain.
 
 - [ ] Provider palsu aktif hanya di `local` dan `testing`, dibuktikan tes
 - [ ] Doc 09 API dan `docs/ENV_CONTRACT.md` diperbarui
-- [ ] H8 terkirim ke Alvira
+- [ ] H8 dilaporkan di issue dan reviewer di-mention ke Alvira
 
 ## Dokumen rujukan lain
 
